@@ -1,4 +1,4 @@
 export const getStyles = () => ({
-  view: "flex items-center justify-center bg-red-500",
+  view: "flex-1 items-center justify-center bg-red-500",
   text: "text-white",
 });
