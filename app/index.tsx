@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { GroupedMatches } from "@/types/groupedMatches";
-import { AllLeaguesMatches } from "@/components/all-league-matches";
-import { getFormattedDate, groupMatchesByDateAndLeague } from "@/hooks";
+import { Loading, AllLeaguesMatches } from "@/components";
+import {
+  scrollToMatchDay,
+  getFormattedDate,
+  groupMatchesByDateAndLeague,
+} from "@/hooks";
 import {
   WorldCup,
   EuroAllMatches,
@@ -20,6 +24,9 @@ import {
 const MainPage = () => {
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const matchRefs = useRef<number[]>([]);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     (async () => {
@@ -61,21 +68,35 @@ const MainPage = () => {
     })();
   }, []);
 
-  console.log(loading);
-  // console.log(matches);
+  useEffect(() => {
+    scrollToMatchDay(matches, matchRefs, scrollViewRef);
+  }, [matches, matchRefs]);
 
   return (
-    <ScrollView>
-      {matches.map((group) => (
-        <View key={group.date} className="m-auto w-[360px]">
-          <Text className="p-[10px_0_50px] text-Grey text-[18px] font-extralight text-center">
-            - {getFormattedDate(group.date)} -
-          </Text>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <ScrollView ref={scrollViewRef}>
+          {matches.map((group, index) => (
+            <View
+              key={group.date}
+              className="m-auto w-[360px]"
+              onLayout={(event) => {
+                const layout = event.nativeEvent.layout;
+                matchRefs.current[index] = layout.y;
+              }}
+            >
+              <Text className="p-[10px_0_50px] text-Grey text-[18px] font-extralight text-center">
+                - {getFormattedDate(group.date)} -
+              </Text>
 
-          <AllLeaguesMatches matches={group.matches} />
-        </View>
-      ))}
-    </ScrollView>
+              <AllLeaguesMatches matches={group.matches} />
+            </View>
+          ))}
+        </ScrollView>
+      )}
+    </>
   );
 };
 

@@ -4,9 +4,9 @@ import { Link } from "expo-router";
 
 import { Matches } from "@/types/groupedMatches";
 
+import { Match } from "../match";
 import { Wrapper } from "../wrapper";
 import { getStyles } from "./styles";
-import { Match } from "../match";
 
 export const AllLeaguesMatches = ({ matches }: { matches: Matches[] }) => {
   const styles = getStyles();
@@ -28,6 +28,7 @@ export const AllLeaguesMatches = ({ matches }: { matches: Matches[] }) => {
                 />
 
                 <Link
+                  asChild
                   className={styles.text}
                   href={{
                     pathname: "/league-page",

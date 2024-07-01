@@ -3,6 +3,7 @@ const balticSea = "#21202a";
 const balticSea2 = "#26242e";
 const charade = "#252535";
 const tune = "#1b1a22";
+const loading = "#0000ff";
 
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
@@ -11,6 +12,7 @@ module.exports = {
       colors: {
         Grey: casper,
         Black: tune,
+        Blue: loading,
         wrapper: {
           bg: balticSea2,
           bgTitle: charade,
