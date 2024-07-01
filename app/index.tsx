@@ -68,7 +68,7 @@ const MainPage = () => {
     <ScrollView>
       {matches.map((group) => (
         <View key={group.date} className="m-auto w-[360px]">
-          <Text className="p-[10px_0_50px] text-greyText text-[18px] font-extralight text-center">
+          <Text className="p-[10px_0_50px] text-Grey text-[18px] font-extralight text-center">
             - {getFormattedDate(group.date)} -
           </Text>
 

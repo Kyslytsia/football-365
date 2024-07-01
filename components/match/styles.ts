@@ -2,10 +2,10 @@ import clsx from "clsx";
 
 export const getStyles = (status?: string) => ({
   wrapper:
-    "relative flex-row justify-center gap-2 p-[12px] w-full border-t-black",
-  status: "absolute flex items-center justify-center pl-[6px]",
+    "relative flex-row justify-center p-[12px] w-[360px] border-t border-Black",
+  status: "absolute top-[4px] flex items-center justify-center",
   statusText: clsx("text-center text-[7px] text-red text-white", {
-    "text-greyText": status === "FT" || status === "NS" || status === "PEN",
+    "text-Grey": status === "FT" || status === "NS" || status === "PEN",
   }),
   homeTeamWrapper: "flex-row items-center justify-end pr-[10px] w-[35%]",
   awayTeamWrapper: "flex-row items-center justify-start pl-[10px] w-[35%]",
