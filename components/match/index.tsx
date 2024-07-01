@@ -6,8 +6,9 @@ import { MatchTime } from "@/hooks";
 import { MatchProps } from "@/types/match";
 
 import { getStyles } from "./styles";
+import { memo } from "react";
 
-export const Match = ({ match }: { match: MatchProps }) => {
+export const MatchComponent = ({ match }: { match: MatchProps }) => {
   const id = match.fixture.id;
   const time = match.fixture.status.elapsed;
   const matchStatusLong = match.fixture.status.long;
@@ -95,3 +96,5 @@ export const Match = ({ match }: { match: MatchProps }) => {
     </View>
   );
 };
+
+export const Match = memo(MatchComponent);

@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { View, Text, FlatList } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { GroupedMatches } from "@/types/groupedMatches";
-import { Loading, AllLeaguesMatches } from "@/components";
+import { AllLeaguesMatches, Loading } from "@/components";
 import {
   scrollToMatchDay,
   getFormattedDate,
@@ -25,76 +25,82 @@ const MainPage = () => {
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const matchRefs = useRef<number[]>([]);
-  const scrollViewRef = useRef<ScrollView>(null);
+  const flatListRef = useRef<FlatList<GroupedMatches>>(null);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const storageAllMatches = await AsyncStorage.getItem("allMatches");
-        const allMatches: any[] = [];
+  const loadMatches = useCallback(async () => {
+    try {
+      const storageAllMatches = await AsyncStorage.getItem("allMatches");
+      const allMatches: any[] = [];
 
-        if (!storageAllMatches || storageAllMatches === "[]") {
-          const allMatchesLeagues = await Promise.allSettled([
-            WorldCup(),
-            EuroAllMatches(),
-            LaLigaAllMatches(),
-            SerieAAllMatches(),
-            Ligue1AllMatches(),
-            BundesligaAllMatches(),
-            EuropaLeagueAllMatches(),
-            PremierLeagueAllMatches(),
-            ChampionsLeagueAllMatches(),
-          ]);
+      if (!storageAllMatches || storageAllMatches === "[]") {
+        const allMatchesLeagues = await Promise.allSettled([
+          WorldCup(),
+          EuroAllMatches(),
+          LaLigaAllMatches(),
+          SerieAAllMatches(),
+          Ligue1AllMatches(),
+          BundesligaAllMatches(),
+          EuropaLeagueAllMatches(),
+          PremierLeagueAllMatches(),
+          ChampionsLeagueAllMatches(),
+        ]);
 
-          allMatchesLeagues.forEach((league) => {
-            if (league.status === "fulfilled") allMatches.push(...league.value);
-          });
+        allMatchesLeagues.forEach((league) => {
+          if (league.status === "fulfilled") allMatches.push(...league.value);
+        });
 
-          await AsyncStorage.setItem("allMatches", JSON.stringify(allMatches));
-          const groupedMatches = groupMatchesByDateAndLeague(allMatches);
-          setMatches(groupedMatches);
-        } else {
-          const groupedMatches = groupMatchesByDateAndLeague(
-            JSON.parse(storageAllMatches)
-          );
-          setMatches(groupedMatches);
-        }
-      } catch (error: any) {
-        console.error(error.message);
-      } finally {
-        setLoading(false);
+        await AsyncStorage.setItem("allMatches", JSON.stringify(allMatches));
+        const groupedMatches = groupMatchesByDateAndLeague(allMatches);
+        setMatches(groupedMatches);
+      } else {
+        const groupedMatches = groupMatchesByDateAndLeague(
+          JSON.parse(storageAllMatches)
+        );
+        setMatches(groupedMatches);
       }
-    })();
+    } catch (error: any) {
+      console.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
-    scrollToMatchDay(matches, matchRefs, scrollViewRef);
-  }, [matches, matchRefs]);
+    loadMatches();
+  }, [loadMatches]);
+
+  useEffect(() => {
+    scrollToMatchDay(matches, flatListRef);
+  }, [matches, flatListRef]);
+
+  const onScrollToIndexFailed = (info: any) => {
+    const wait = new Promise((resolve) => setTimeout(resolve, 2000));
+    wait.then(() => {
+      flatListRef.current?.scrollToIndex({ index: info.index, animated: true });
+    });
+  };
 
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
-        <ScrollView ref={scrollViewRef}>
-          {matches.map((group, index) => (
-            <View
-              key={group.date}
-              className="m-auto w-[360px]"
-              onLayout={(event) => {
-                const layout = event.nativeEvent.layout;
-                matchRefs.current[index] = layout.y;
-              }}
-            >
+        <FlatList
+          data={matches}
+          ref={flatListRef}
+          keyExtractor={(item, index) => `${item.date}_${index}`}
+          onScrollToIndexFailed={onScrollToIndexFailed}
+          initialScrollIndex={259}
+          renderItem={({ item: group }) => (
+            <View className="m-auto w-[360px]">
               <Text className="p-[50px_0_10px] text-Grey text-[18px] font-extralight text-center">
                 - {getFormattedDate(group.date)} -
               </Text>
 
               <AllLeaguesMatches matches={group.matches} />
             </View>
-          ))}
-        </ScrollView>
+          )}
+        />
       )}
     </>
   );

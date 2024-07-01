@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Text, View } from "react-native";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
@@ -8,7 +9,11 @@ import { Match } from "../match";
 import { Wrapper } from "../wrapper";
 import { getStyles } from "./styles";
 
-export const AllLeaguesMatches = ({ matches }: { matches: Matches[] }) => {
+export const AllLeaguesMatchesComponent = ({
+  matches,
+}: {
+  matches: Matches[];
+}) => {
   const styles = getStyles();
 
   return (
@@ -54,3 +59,5 @@ export const AllLeaguesMatches = ({ matches }: { matches: Matches[] }) => {
     </>
   );
 };
+
+export const AllLeaguesMatches = memo(AllLeaguesMatchesComponent);
