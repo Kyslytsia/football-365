@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "expo-router";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { GroupedMatches } from "@/types/groupedMatches";
-import { groupMatchesByDateAndLeague } from "@/hooks/groupMatchesByDateAndLeague";
+import { AllLeaguesMatches } from "@/components/all-league-matches";
+import { getFormattedDate, groupMatchesByDateAndLeague } from "@/hooks";
 import {
   WorldCup,
   EuroAllMatches,
@@ -17,13 +17,9 @@ import {
   ChampionsLeagueAllMatches,
 } from "@/api/allMatchesLeague";
 
-import { getStyles } from "./styles";
-
 const MainPage = () => {
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const styles = getStyles();
 
   useEffect(() => {
     (async () => {
@@ -66,20 +62,20 @@ const MainPage = () => {
   }, []);
 
   console.log(loading);
-  console.log(matches);
+  // console.log(matches);
 
   return (
-    <View className={styles.view}>
-      <Text className={styles.text}>MainPage</Text>
+    <ScrollView>
+      {matches.map((group) => (
+        <View key={group.date} className="m-auto w-[360px]">
+          <Text className="p-[10px_0_50px] text-greyText text-[18px] font-extralight text-center">
+            - {getFormattedDate(group.date)} -
+          </Text>
 
-      <Link href="/league-page">
-        <Text className={styles.text}>League</Text>
-      </Link>
-
-      <Link href="/match-page">
-        <Text className={styles.text}>Match</Text>
-      </Link>
-    </View>
+          <AllLeaguesMatches matches={group.matches} />
+        </View>
+      ))}
+    </ScrollView>
   );
 };
 
