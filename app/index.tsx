@@ -87,7 +87,7 @@ const MainPage = () => {
                 matchRefs.current[index] = layout.y;
               }}
             >
-              <Text className="p-[10px_0_50px] text-Grey text-[18px] font-extralight text-center">
+              <Text className="p-[50px_0_10px] text-Grey text-[18px] font-extralight text-center">
                 - {getFormattedDate(group.date)} -
               </Text>
 
