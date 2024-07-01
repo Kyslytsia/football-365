@@ -37,14 +37,16 @@ export const AllLeaguesMatches = ({ matches }: { matches: Matches[] }) => {
                     },
                   }}
                 >
-                  <Text className="text-white">{league.leagueName}</Text>
+                  <Text className="w-full text-white">{league.leagueName}</Text>
                 </Link>
               </View>
             }
           >
-            {league.matches.map((match) => {
-              return <Match match={match} key={match.fixture.id} />;
-            })}
+            <View>
+              {league.matches.map((match) => {
+                return <Match match={match} key={match.fixture.id} />;
+              })}
+            </View>
           </Wrapper>
         );
       })}
