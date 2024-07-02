@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, ListRenderItemInfo } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { GroupedMatches } from "@/types/groupedMatches";
@@ -22,8 +22,8 @@ import {
 } from "@/api/allMatchesLeague";
 
 const MainPage = () => {
-  const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [matches, setMatches] = useState<GroupedMatches[]>([]);
 
   const flatListRef = useRef<FlatList<GroupedMatches>>(null);
 
@@ -73,10 +73,15 @@ const MainPage = () => {
     scrollToMatchDay(matches, flatListRef);
   }, [matches, flatListRef]);
 
-  const onScrollToIndexFailed = (info: any) => {
-    const wait = new Promise((resolve) => setTimeout(resolve, 2000));
-    wait.then(() => {
-      flatListRef.current?.scrollToIndex({ index: info.index, animated: true });
+  const onScrollToIndexFailed = async (info: any) => {
+    console.warn("Scroll to index failed", info);
+    console.log("Scroll to index failed", info);
+
+    const wait = new Promise((resolve) => setTimeout(resolve, 1000));
+    await wait;
+    flatListRef.current?.scrollToIndex({
+      index: info.index,
+      animated: true,
     });
   };
 
@@ -88,16 +93,15 @@ const MainPage = () => {
         <FlatList
           data={matches}
           ref={flatListRef}
-          keyExtractor={(item, index) => `${item.date}_${index}`}
           onScrollToIndexFailed={onScrollToIndexFailed}
-          initialScrollIndex={259}
-          renderItem={({ item: group }) => (
+          keyExtractor={(group, index) => `${group.date}_${index}`}
+          renderItem={({ item, index }: ListRenderItemInfo<GroupedMatches>) => (
             <View className="m-auto w-[360px]">
               <Text className="p-[50px_0_10px] text-Grey text-[18px] font-extralight text-center">
-                - {getFormattedDate(group.date)} -
+                - {getFormattedDate(item.date)} -
               </Text>
 
-              <AllLeaguesMatches matches={group.matches} />
+              <AllLeaguesMatches matches={item.matches} />
             </View>
           )}
         />
