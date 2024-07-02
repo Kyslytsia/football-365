@@ -73,16 +73,10 @@ const MainPage = () => {
     scrollToMatchDay(matches, flatListRef);
   }, [matches, flatListRef]);
 
-  const onScrollToIndexFailed = async (info: any) => {
-    console.warn("Scroll to index failed", info);
-    console.log("Scroll to index failed", info);
-
-    const wait = new Promise((resolve) => setTimeout(resolve, 1000));
-    await wait;
-    flatListRef.current?.scrollToIndex({
-      index: info.index,
-      animated: true,
-    });
+  const getItemLayout = (data: any, index: number) => {
+    const item = data[index];
+    const itemHeight = item.height || 500;
+    return { length: itemHeight, offset: itemHeight * index, index };
   };
 
   return (
@@ -93,9 +87,10 @@ const MainPage = () => {
         <FlatList
           data={matches}
           ref={flatListRef}
-          onScrollToIndexFailed={onScrollToIndexFailed}
+          initialScrollIndex={260}
           keyExtractor={(group, index) => `${group.date}_${index}`}
-          renderItem={({ item, index }: ListRenderItemInfo<GroupedMatches>) => (
+          getItemLayout={getItemLayout}
+          renderItem={({ item }: ListRenderItemInfo<GroupedMatches>) => (
             <View className="m-auto w-[360px]">
               <Text className="p-[50px_0_10px] text-Grey text-[18px] font-extralight text-center">
                 - {getFormattedDate(item.date)} -
