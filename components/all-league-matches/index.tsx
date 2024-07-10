@@ -7,13 +7,10 @@ import { Matches } from "@/types/groupedMatches";
 
 import { Match } from "../match";
 import { Wrapper } from "../wrapper";
+
 import { getStyles } from "./styles";
 
-export const AllLeaguesMatchesComponent = ({
-  matches,
-}: {
-  matches: Matches[];
-}) => {
+export const Component = ({ matches }: { matches: Matches[] }) => {
   const styles = getStyles();
 
   return (
@@ -21,7 +18,7 @@ export const AllLeaguesMatchesComponent = ({
       {matches.map((league) => {
         return (
           <Wrapper
-            margin="m-[15px_0_15px]"
+            margin="mb-[15px]"
             key={league.leagueName}
             title={
               <View className={styles.title}>
@@ -60,4 +57,4 @@ export const AllLeaguesMatchesComponent = ({
   );
 };
 
-export const AllLeaguesMatches = memo(AllLeaguesMatchesComponent);
+export const AllLeaguesMatches = memo(Component);

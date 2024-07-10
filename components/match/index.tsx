@@ -8,7 +8,7 @@ import { MatchProps } from "@/types/match";
 import { getStyles } from "./styles";
 import { memo } from "react";
 
-export const MatchComponent = ({ match }: { match: MatchProps }) => {
+export const Component = ({ match }: { match: MatchProps }) => {
   const id = match.fixture.id;
   const time = match.fixture.status.elapsed;
   const matchStatusLong = match.fixture.status.long;
@@ -30,7 +30,6 @@ export const MatchComponent = ({ match }: { match: MatchProps }) => {
           },
         }}
       />
-
       <View className={styles.wrapper}>
         <View className={styles.status}>
           <Text className={styles.statusText}>
@@ -97,4 +96,4 @@ export const MatchComponent = ({ match }: { match: MatchProps }) => {
   );
 };
 
-export const Match = memo(MatchComponent);
+export const Match = memo(Component);

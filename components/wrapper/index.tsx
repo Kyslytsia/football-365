@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { getStyles } from "./styles";
 import { WrapperProps } from "./types";
 
 import { View } from "react-native";
 
-export const Wrapper = ({ title, margin, children, padding }: WrapperProps) => {
+const Component = ({ title, margin, children, padding }: WrapperProps) => {
   const styles = getStyles({ margin, padding });
 
   return (
@@ -14,3 +15,5 @@ export const Wrapper = ({ title, margin, children, padding }: WrapperProps) => {
     </View>
   );
 };
+
+export const Wrapper = memo(Component);

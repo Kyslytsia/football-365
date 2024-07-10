@@ -1,12 +1,10 @@
-import { MutableRefObject } from "react";
-import { FlatList } from "react-native";
 import { isAfter, isToday, parseISO } from "date-fns";
 
 import { GroupedMatches } from "@/types/groupedMatches";
 
-export const scrollToMatchDay = (
+export const matchDayIndex = (
   matches: GroupedMatches[],
-  flatListRef: MutableRefObject<FlatList<GroupedMatches> | null>
+  setIndex: (num: number) => void
 ) => {
   let todayMatchIndex = -1;
   let nextMatchIndex = -1;
@@ -22,19 +20,12 @@ export const scrollToMatchDay = (
     }
   });
 
-  const scrollToIndex = (index: number) => {
-    flatListRef.current?.scrollToIndex({
-      index,
-      animated: true,
-    });
-  };
-
   if (todayMatchIndex !== -1) {
-    scrollToIndex(todayMatchIndex);
+    setIndex(todayMatchIndex);
   } else if (nextMatchIndex !== -1) {
-    scrollToIndex(nextMatchIndex);
+    setIndex(nextMatchIndex);
   } else {
     const lastMatchIndex = matches.length - 1;
-    scrollToIndex(lastMatchIndex);
+    setIndex(lastMatchIndex);
   }
 };

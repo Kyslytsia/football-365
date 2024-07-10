@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 export const getStyles = (status?: string) => ({
   wrapper:
-    "relative flex-row justify-center p-[12px] w-[360px] border-t border-Black",
+    "relative flex-row justify-center items-center h-[50px] p-[12px] w-[360px] border-t border-Black",
   status: "absolute top-[4px] flex items-center justify-center",
   statusText: clsx("text-center text-[7px] text-red text-white", {
     "text-Grey": status === "FT" || status === "NS" || status === "PEN",

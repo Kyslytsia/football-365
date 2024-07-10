@@ -1,14 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { View, Text, FlatList, ListRenderItemInfo } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { Loading } from "@/components";
 import { GroupedMatches } from "@/types/groupedMatches";
-import { AllLeaguesMatches, Loading } from "@/components";
-import {
-  scrollToMatchDay,
-  getFormattedDate,
-  groupMatchesByDateAndLeague,
-} from "@/hooks";
+import { groupMatchesByDateAndLeague, matchDayIndex } from "@/hooks";
 import {
   WorldCup,
   EuroAllMatches,
@@ -21,11 +17,15 @@ import {
   ChampionsLeagueAllMatches,
 } from "@/api/allMatchesLeague";
 
+import RenderList from "./RenderList";
+
 const MainPage = () => {
+  const flatListRef = useRef<FlashList<GroupedMatches>>(null);
+  const itemHeightsRef = useRef<{ [key: number]: number }>({});
+
+  const [index, setIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
-
-  const flatListRef = useRef<FlatList<GroupedMatches>>(null);
 
   const loadMatches = useCallback(async () => {
     try {
@@ -65,43 +65,45 @@ const MainPage = () => {
     }
   }, []);
 
+  const overrideItemLayout = useCallback(
+    (layout: any, item: any, index: number) => {
+      const height = itemHeightsRef.current[index];
+      layout.size = height;
+    },
+    [itemHeightsRef]
+  );
+
   useEffect(() => {
     loadMatches();
   }, [loadMatches]);
 
   useEffect(() => {
-    scrollToMatchDay(matches, flatListRef);
-  }, [matches, flatListRef]);
+    matches.map((el, index) => {
+      let leagues: number = el.matches.length;
+      let matchesPerLeague: number = 0;
 
-  const getItemLayout = (data: any, index: number) => {
-    const item = data[index];
-    const itemHeight = item.height || 500;
-    return { length: itemHeight, offset: itemHeight * index, index };
-  };
+      el.matches.map((el) => {
+        matchesPerLeague = matchesPerLeague + el.matches.length;
+      });
+      itemHeightsRef.current[index] = leagues * 45 + matchesPerLeague * 50 + 97;
+    });
+
+    matchDayIndex(matches, setIndex);
+  }, [matches]);
+
+  if (loading) return <Loading />;
 
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <FlatList
-          data={matches}
-          ref={flatListRef}
-          initialScrollIndex={260}
-          keyExtractor={(group, index) => `${group.date}_${index}`}
-          getItemLayout={getItemLayout}
-          renderItem={({ item }: ListRenderItemInfo<GroupedMatches>) => (
-            <View className="m-auto w-[360px]">
-              <Text className="p-[50px_0_10px] text-Grey text-[18px] font-extralight text-center">
-                - {getFormattedDate(item.date)} -
-              </Text>
-
-              <AllLeaguesMatches matches={item.matches} />
-            </View>
-          )}
-        />
-      )}
-    </>
+    <FlashList
+      data={matches}
+      ref={flatListRef}
+      estimatedItemSize={500}
+      initialScrollIndex={index}
+      removeClippedSubviews={false}
+      overrideItemLayout={overrideItemLayout}
+      keyExtractor={(group, index) => `${group.date}_${index}`}
+      renderItem={({ item }: any) => <RenderList item={item} />}
+    />
   );
 };
 
