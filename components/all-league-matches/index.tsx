@@ -14,10 +14,11 @@ export const Component = ({ matches }: { matches: Matches[] }) => {
   const styles = getStyles();
   const navigation = useNavigation<any>();
 
-  const handleNavigate = (leagueId: number, leagueName: string) => {
-    navigation.navigate("league-page/index", {
-      id: leagueId,
-      name: leagueName,
+  const handleNavigate = (id: number, name: string, icon: string) => {
+    navigation.navigate("(league-page)", {
+      id: id,
+      name: name,
+      icon: icon,
     });
   };
 
@@ -31,7 +32,11 @@ export const Component = ({ matches }: { matches: Matches[] }) => {
             title={
               <Pressable
                 onPress={() =>
-                  handleNavigate(league.leagueId, league.leagueName)
+                  handleNavigate(
+                    league.leagueId,
+                    league.leagueName,
+                    league.leagueLogo
+                  )
                 }
               >
                 <View className={styles.title}>

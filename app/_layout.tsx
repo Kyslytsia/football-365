@@ -7,7 +7,7 @@ export default function RootLayout() {
     <ThemeProvider value={DarkTheme}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
-        <Stack.Screen name="league-page/index" />
+        <Stack.Screen name="(league-page)" />
         <Stack.Screen name="match-page/index" />
       </Stack>
     </ThemeProvider>

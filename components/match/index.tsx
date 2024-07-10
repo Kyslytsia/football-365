@@ -21,7 +21,7 @@ export const Component = ({ match }: { match: MatchProps }) => {
   const navigation = useNavigation<any>();
 
   const handleNavigate = () => {
-    navigation.navigate("league-page/index", {
+    navigation.navigate("match-page/index", {
       id: id,
     });
   };

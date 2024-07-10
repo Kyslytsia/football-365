@@ -20,12 +20,12 @@ import {
 import RenderList from "./RenderList";
 
 const MainPage = () => {
-  const flatListRef = useRef<FlashList<GroupedMatches>>(null);
-  const itemHeightsRef = useRef<{ [key: number]: number }>({});
-
   const [index, setIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
+
+  const flatListRef = useRef<FlashList<GroupedMatches>>(null);
+  const itemHeightsRef = useRef<{ [key: number]: number }>({});
 
   const loadMatches = useCallback(async () => {
     try {
