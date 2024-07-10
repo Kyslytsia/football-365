@@ -54,7 +54,7 @@ export const Component = ({ matches }: { matches: Matches[] }) => {
           >
             <View>
               {league.matches.map((match) => {
-                return <Match match={match} key={match.fixture.id} />;
+                return <Match match={match} isBorder key={match.fixture.id} />;
               })}
             </View>
           </Wrapper>

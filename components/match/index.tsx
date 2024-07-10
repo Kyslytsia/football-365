@@ -4,11 +4,11 @@ import { useNavigation } from "expo-router";
 import { Image } from "expo-image";
 
 import { MatchTime } from "@/hooks";
-import { MatchProps } from "@/types/match";
 
+import { PropsMatch } from "./types";
 import { getStyles } from "./styles";
 
-export const Component = ({ match }: { match: MatchProps }) => {
+const Component = ({ match, isBorder }: PropsMatch) => {
   const id = match.fixture.id;
   const time = match.fixture.status.elapsed;
   const matchStatusLong = match.fixture.status.long;
@@ -17,7 +17,7 @@ export const Component = ({ match }: { match: MatchProps }) => {
   const matchNotStarted = match.fixture.status.short === "NS";
   const matchEndedOnPenalties = match.fixture.status.short === "PEN";
 
-  const styles = getStyles(matchStatusShort);
+  const styles = getStyles({ isBorder, status: matchStatusShort });
   const navigation = useNavigation<any>();
 
   const handleNavigate = () => {

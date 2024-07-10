@@ -1,6 +1,8 @@
 import clsx from "clsx";
 
-export const getStyles = (status?: string) => ({
+import { StylesProps } from "./types";
+
+export const getStyles = ({ status, isBorder }: StylesProps) => ({
   wrapper:
     "relative flex-row justify-center items-center h-[50px] p-[12px] w-[360px] border-t border-Black",
   status: "absolute top-[4px] flex items-center justify-center",

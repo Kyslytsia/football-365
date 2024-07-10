@@ -24,7 +24,6 @@ const MainPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
 
-  const flatListRef = useRef<FlashList<GroupedMatches>>(null);
   const itemHeightsRef = useRef<{ [key: number]: number }>({});
 
   const loadMatches = useCallback(async () => {
@@ -96,7 +95,6 @@ const MainPage = () => {
   return (
     <FlashList
       data={matches}
-      ref={flatListRef}
       estimatedItemSize={500}
       initialScrollIndex={index}
       removeClippedSubviews={false}
