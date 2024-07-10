@@ -1,12 +1,12 @@
-import { Text, View } from "react-native";
-import { Link } from "expo-router";
+import { memo } from "react";
+import { Pressable, Text, View } from "react-native";
+import { useNavigation } from "expo-router";
 import { Image } from "expo-image";
 
 import { MatchTime } from "@/hooks";
 import { MatchProps } from "@/types/match";
 
 import { getStyles } from "./styles";
-import { memo } from "react";
 
 export const Component = ({ match }: { match: MatchProps }) => {
   const id = match.fixture.id;
@@ -18,18 +18,16 @@ export const Component = ({ match }: { match: MatchProps }) => {
   const matchEndedOnPenalties = match.fixture.status.short === "PEN";
 
   const styles = getStyles(matchStatusShort);
+  const navigation = useNavigation<any>();
+
+  const handleNavigate = () => {
+    navigation.navigate("league-page/index", {
+      id: id,
+    });
+  };
 
   return (
-    <View className="relative">
-      <Link
-        className="absolute w-full min-h-full z-10"
-        href={{
-          pathname: "/match-page",
-          params: {
-            id: `${id}`,
-          },
-        }}
-      />
+    <Pressable onPress={handleNavigate}>
       <View className={styles.wrapper}>
         <View className={styles.status}>
           <Text className={styles.statusText}>
@@ -92,7 +90,7 @@ export const Component = ({ match }: { match: MatchProps }) => {
           </Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

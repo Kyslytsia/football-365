@@ -1,7 +1,7 @@
 import { memo } from "react";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { Image } from "expo-image";
-import { Link } from "expo-router";
+import { useNavigation } from "expo-router";
 
 import { Matches } from "@/types/groupedMatches";
 
@@ -12,6 +12,14 @@ import { getStyles } from "./styles";
 
 export const Component = ({ matches }: { matches: Matches[] }) => {
   const styles = getStyles();
+  const navigation = useNavigation<any>();
+
+  const handleNavigate = (leagueId: number, leagueName: string) => {
+    navigation.navigate("league-page/index", {
+      id: leagueId,
+      name: leagueName,
+    });
+  };
 
   return (
     <>
@@ -21,28 +29,22 @@ export const Component = ({ matches }: { matches: Matches[] }) => {
             margin="mb-[15px]"
             key={league.leagueName}
             title={
-              <View className={styles.title}>
-                <Image
-                  contentFit="contain"
-                  alt={league.leagueLogo}
-                  className={styles.logo}
-                  source={league.leagueLogo}
-                />
+              <Pressable
+                onPress={() =>
+                  handleNavigate(league.leagueId, league.leagueName)
+                }
+              >
+                <View className={styles.title}>
+                  <Image
+                    contentFit="contain"
+                    alt={league.leagueLogo}
+                    className={styles.logo}
+                    source={league.leagueLogo}
+                  />
 
-                <Link
-                  asChild
-                  className={styles.text}
-                  href={{
-                    pathname: "/league-page",
-                    params: {
-                      id: `${league.leagueId}`,
-                      name: `${league.leagueName}`,
-                    },
-                  }}
-                >
                   <Text className="w-full text-white">{league.leagueName}</Text>
-                </Link>
-              </View>
+                </View>
+              </Pressable>
             }
           >
             <View>
