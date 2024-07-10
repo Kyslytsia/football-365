@@ -1,17 +1,20 @@
-import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
+import { View, Text } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import { GroupedMatches } from "@/types/groupedMatches";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { FlashList } from "@shopify/flash-list";
+
+import { getAllMatchesForSeasonByLeagueId } from "@/api/allMatchesLeague";
 import {
   getCurrentSeason,
+  getFormattedDate,
   groupedMatchesByRound,
   groupMatchesByDateAndLeague,
 } from "@/hooks";
-import { getAllMatchesForSeasonByLeagueId } from "@/api/allMatchesLeague";
 
 const LeagueMatches = () => {
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>("all matches");
   const [loading, setLoading] = useState<boolean>(false);
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [roundMatches, setRoundMatches] = useState<GroupedMatches[]>([]);
@@ -63,10 +66,22 @@ const LeagueMatches = () => {
   }, [value]);
 
   return (
-    <View>
-      <Text>League ID: {params.id}</Text>
-      <Text>League Name: {params.name}</Text>
-    </View>
+    <FlashList
+      data={matches}
+      // ref={flatListRef}
+      estimatedItemSize={500}
+      // initialScrollIndex={index}
+      removeClippedSubviews={false}
+      // overrideItemLayout={overrideItemLayout}
+      keyExtractor={(group, index) => `${group.date}_${index}`}
+      renderItem={({ item }: any) => (
+        <View>
+          <Text>- {getFormattedDate(item.date)} -</Text>
+
+          {/* <Matches matches={group.matches} /> */}
+        </View>
+      )}
+    />
   );
 };
 

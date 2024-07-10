@@ -5,7 +5,6 @@ const Table = () => {
   return (
     <View>
       <Text>table</Text>
-      <Text>table</Text>
     </View>
   );
 };
