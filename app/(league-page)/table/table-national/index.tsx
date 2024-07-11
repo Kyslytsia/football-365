@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -7,9 +6,8 @@ import { getRounds } from "@/api/rounds";
 import { getCurrentSeason } from "@/hooks";
 import { getStandings } from "@/api/standings";
 import { StandingProps } from "@/types/standings";
-import RankLogoTable from "@/components/table/rank-logo-table";
-import TeamNameTable from "@/components/table/team-name-table";
-import StatisticsTable from "@/components/table/statistics-table";
+
+import { Table } from "@/components/table";
 
 export const NationalTable = () => {
   const [standings, setStandings] = useState<StandingProps[]>([]);
@@ -81,17 +79,6 @@ export const NationalTable = () => {
   }, [round]);
 
   return (
-    <ScrollView
-      className="mx-auto w-[360px]"
-      showsVerticalScrollIndicator={false}
-    >
-      <View className="relative mx-auto w-[360px] bg-wrapper-bg rounded-[12px] overflow-hidden">
-        <RankLogoTable standings={standings} isChampion={isChampion} />
-
-        <TeamNameTable standings={standings} />
-
-        <StatisticsTable standings={standings} />
-      </View>
-    </ScrollView>
+    <Table navValue={navValue} standings={standings} isChampion={isChampion} />
   );
 };
