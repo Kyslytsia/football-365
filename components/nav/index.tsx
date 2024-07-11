@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
+import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 
 import { NavProps } from "./typex";
@@ -7,6 +8,8 @@ import { getStyles } from "./styles";
 
 export const Nav = ({ leftRout, leftText, rightRout, rightText }: NavProps) => {
   const [selectedTab, setSelectedTab] = useState(leftText);
+
+  const rout = useRoute();
 
   const isLeftRuot = selectedTab === leftText;
   const isRightRuot = selectedTab === rightText;
@@ -18,6 +21,8 @@ export const Nav = ({ leftRout, leftText, rightRout, rightText }: NavProps) => {
     setSelectedTab(text);
     navigation.navigate(`${path}`);
   };
+
+  console.log({ rout });
 
   return (
     <View className="flex-row justify-center items-center gap-[20px] p-4">

@@ -6,11 +6,11 @@ import { Nav } from "@/components/nav";
 import Header from "./header";
 
 export default function Layout() {
-  const params = useGlobalSearchParams();
+  const { name, icon } = useGlobalSearchParams();
 
   return (
     <>
-      <Header icon={params.icon as string} leagueName={params.name as string} />
+      <Header icon={icon as string} leagueName={name as string} />
       <Nav
         rightText="table"
         leftText="matches"
