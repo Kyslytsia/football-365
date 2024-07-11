@@ -1,12 +1,16 @@
-import { View, Text } from "react-native";
-import React from "react";
+import "react-native-reanimated";
+import { Stack, useGlobalSearchParams } from "expo-router";
+import { Text, View } from "react-native";
+import { NationalTable } from "./table-national";
 
-const Table = () => {
+export default function Layout() {
+  const { name } = useGlobalSearchParams();
+
   return (
-    <View>
-      <Text>table</Text>
-    </View>
+    <>
+      <View>
+        <NationalTable />
+      </View>
+    </>
   );
-};
-
-export default Table;
+}

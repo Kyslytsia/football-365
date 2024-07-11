@@ -14,7 +14,6 @@ import {
 } from "@/hooks";
 
 import RenderList from "./RenderList";
-import { TouchableWithoutFeedback } from "react-native";
 
 const LeagueMatches = () => {
   const [index, setIndex] = useState<number>(0);
