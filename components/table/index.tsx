@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { View, ScrollView } from "react-native";
 
 import { TableProps } from "./types";
-import RankLogoTable from "./rank-logo-table";
+import { RankLogoTable } from "./rank-logo-table";
 import TeamNameTable from "./team-name-table";
 import StatisticsTable from "./statistics-table";
 
