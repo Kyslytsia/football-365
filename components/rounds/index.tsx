@@ -4,9 +4,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useGlobalSearchParams } from "expo-router";
 import Animated, {
   withSpring,
-  useSharedValue,
-  useAnimatedStyle,
   withTiming,
+  useSharedValue,
 } from "react-native-reanimated";
 
 import { getRounds } from "@/api/rounds";
