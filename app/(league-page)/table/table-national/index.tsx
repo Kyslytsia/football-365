@@ -82,14 +82,16 @@ export const NationalTable = () => {
 
   return (
     <ScrollView
+      className="mx-auto w-[360px]"
       showsVerticalScrollIndicator={false}
-      className="relative mx-auto w-[360px] bg-wrapper-bg rounded-[12px] overflow-hidden"
     >
-      <RankLogoTable standings={standings} isChampion={isChampion} />
+      <View className="relative mx-auto w-[360px] bg-wrapper-bg rounded-[12px] overflow-hidden">
+        <RankLogoTable standings={standings} isChampion={isChampion} />
 
-      <TeamNameTable standings={standings} />
+        <TeamNameTable standings={standings} />
 
-      <StatisticsTable standings={standings} />
+        <StatisticsTable standings={standings} />
+      </View>
     </ScrollView>
   );
 };
