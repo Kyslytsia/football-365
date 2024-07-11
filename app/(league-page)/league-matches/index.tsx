@@ -4,14 +4,17 @@ import { GroupedMatches } from "@/types/groupedMatches";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FlashList } from "@shopify/flash-list";
 
+import { Loading, Rounds } from "@/components";
 import { getAllMatchesForSeasonByLeagueId } from "@/api/allMatchesLeague";
 import {
+  matchDayIndex,
   getCurrentSeason,
   groupedMatchesByRound,
   groupMatchesByDateAndLeague,
-  matchDayIndex,
 } from "@/hooks";
+
 import RenderList from "./RenderList";
+import { TouchableWithoutFeedback } from "react-native";
 
 const LeagueMatches = () => {
   const [index, setIndex] = useState<number>(0);
@@ -83,19 +86,22 @@ const LeagueMatches = () => {
     });
   }, [matches]);
 
-  console.log({ itemHeightsRef });
-  console.log(index);
+  if (loading) return <Loading />;
 
   return (
-    <FlashList
-      data={matches}
-      estimatedItemSize={500}
-      initialScrollIndex={index}
-      removeClippedSubviews={false}
-      overrideItemLayout={overrideItemLayout}
-      keyExtractor={(group, index) => `${group.date}_${index}`}
-      renderItem={({ item }: any) => <RenderList item={item} />}
-    />
+    <>
+      <Rounds value={value} setValue={setValue} />
+
+      <FlashList
+        data={isMatches}
+        estimatedItemSize={500}
+        removeClippedSubviews={false}
+        overrideItemLayout={overrideItemLayout}
+        initialScrollIndex={value === "all matches" ? index : 0}
+        keyExtractor={(group, index) => `${group.date}_${index}`}
+        renderItem={({ item }: any) => <RenderList item={item} />}
+      />
+    </>
   );
 };
 

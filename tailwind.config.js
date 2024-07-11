@@ -22,6 +22,9 @@ module.exports = {
         nav: {
           active: cornflowerBlue,
         },
+        round: {
+          bg: balticSea2,
+        },
       },
     },
   },
