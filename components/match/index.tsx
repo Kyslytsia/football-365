@@ -21,7 +21,7 @@ const Component = ({ match, isBorder }: PropsMatch) => {
   const navigation = useNavigation<any>();
 
   const handleNavigate = () => {
-    navigation.navigate("match-page/index", {
+    navigation.push("match-page/index", {
       id: id,
     });
   };

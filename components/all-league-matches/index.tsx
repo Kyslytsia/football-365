@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Pressable, Text, View } from "react-native";
 import { Image } from "expo-image";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 
 import { Matches } from "@/types/groupedMatches";
 
@@ -12,10 +12,11 @@ import { getStyles } from "./styles";
 
 export const Component = ({ matches }: { matches: Matches[] }) => {
   const styles = getStyles();
+  const route = useRouter();
   const navigation = useNavigation<any>();
 
   const handleNavigate = (id: number, name: string, icon: string) => {
-    navigation.navigate("(league-page)", {
+    navigation.push("(league-page)", {
       id: id,
       name: name,
       icon: icon,

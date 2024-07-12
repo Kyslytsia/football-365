@@ -5,6 +5,7 @@ import { Text, View } from "react-native";
 import { modifyDescription } from "@/hooks";
 
 import { RankLogoTableProps } from "./types";
+import { Crown } from "@/assets/icon";
 
 export const RankLogoTable = memo(
   ({ isChampion, standings }: RankLogoTableProps) => {
@@ -41,7 +42,9 @@ export const RankLogoTable = memo(
             />
 
             {isChampion && el.rank === 1 && (
-              <View className="absolute top-[-12px] left-3"></View>
+              <View className="absolute top-[-12px] left-3">
+                {/* <Crown /> */}
+              </View>
             )}
 
             <View className="flex items-center justify-center w-5 h-5">

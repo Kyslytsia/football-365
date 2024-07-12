@@ -7,6 +7,25 @@ import { TeamNameTableProps } from "./types";
 
 export const TeamNameTable = memo(
   ({ standings, isChampion, championship }: TeamNameTableProps) => {
+    const getStatusStyle = (status: string) => {
+      switch (status) {
+        case "Champions League":
+        case "Won title":
+          return "text-[#1ee119]";
+        case "Europa League":
+          return "text-[#637ff8]";
+        case "Conference League":
+        case "Europa Conference League":
+          return "text-[#d3c9f2]";
+        case "Relegation":
+          return "text-[#e92020]";
+        default:
+          return {};
+      }
+    };
+
+    console.log(standings);
+
     return (
       <View className="ml-12">
         <View className="flex-row h-8">
@@ -40,21 +59,5 @@ export const TeamNameTable = memo(
     );
   }
 );
-
-const getStatusStyle = (status: string) => {
-  switch (status) {
-    case "Champions League":
-    case "Won title":
-      return "text-[#1ee119]";
-    case "Europa League":
-      return "text-[#637ff8]";
-    case "Europa Conference League":
-      return "text-[#d3c9f2]";
-    case "Relegation":
-      return "text-[#e92020]";
-    default:
-      return {};
-  }
-};
 
 export default TeamNameTable;

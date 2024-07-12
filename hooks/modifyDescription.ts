@@ -5,6 +5,7 @@ export const modifyDescription = (el: StandingProps, isChampion?: boolean) => {
     let modifiedDescription = el.description
       .replace("Promotion -", "")
       .replace("(Group Stage: )", "")
+      .replace("(League phase: )", "")
       .replace("(Qualification: )", "")
       .replace("(Play Offs: 1/8-finals)", "")
       .replace("(Play Offs: 1/16-finals)", "")

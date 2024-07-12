@@ -14,8 +14,8 @@ export default function Layout() {
       <Nav
         rightText="table"
         leftText="matches"
-        rightRout="table/index"
-        leftRout="league-matches/index"
+        rightRout="/table"
+        leftRout="/league-matches"
       />
 
       <Stack screenOptions={{ headerShown: false }}>
