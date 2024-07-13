@@ -37,7 +37,7 @@ export const TeamNameTable = memo(
         {standings.map((team, index) => (
           <View
             key={index + "teamName"}
-            className="flex-row pl-2 h-8 border-t border-[#1b1a22]"
+            className="flex-row pl-2 h-8 border-t border-table-border"
           >
             <View className="flex-col items-start justify-center">
               <Text className="text-xs text-white leading-3">

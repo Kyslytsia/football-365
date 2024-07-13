@@ -25,6 +25,9 @@ module.exports = {
         round: {
           bg: balticSea2,
         },
+        table: {
+          border: tune,
+        },
       },
     },
   },

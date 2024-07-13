@@ -55,6 +55,7 @@ export const RankLogoTable = memo(
               <Image
                 alt={el.team.name}
                 className="w-5 h-5"
+                contentFit="contain"
                 source={el.team.logo}
               />
             </View>
