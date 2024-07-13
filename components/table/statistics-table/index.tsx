@@ -109,7 +109,9 @@ export const StatisticsTable = memo(
                       ${getFormStyle(letter)}
                     `}
                     >
-                      <Text className="text-xs text-white">{letter}</Text>
+                      <Text className="text-[12px] text-white text-center">
+                        {letter}
+                      </Text>
                     </View>
                   ))}
                   {!team.form &&
@@ -120,7 +122,9 @@ export const StatisticsTable = memo(
                         ${getFormStyle(letter)}
                       `}
                       >
-                        <Text className="text-xs text-white">{letter}</Text>
+                        <Text className="text-[12px] text-white text-center">
+                          {letter}
+                        </Text>
                       </View>
                     ))}
                 </View>
