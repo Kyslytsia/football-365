@@ -27,6 +27,17 @@ module.exports = {
         },
         table: {
           border: tune,
+          status: {
+            ucl: "#1ee119",
+            uel: "#637ff8",
+            ecl: "#d3c9f2",
+            rl: "#e92020",
+          },
+          form: {
+            win: "#1ee11e",
+            draw: "#f2ec2c",
+            lose: "#f66731",
+          },
         },
       },
     },

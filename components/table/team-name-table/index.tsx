@@ -11,14 +11,14 @@ export const TeamNameTable = memo(
       switch (status) {
         case "Champions League":
         case "Won title":
-          return "text-[#1ee119]";
+          return "text-table-status-ucl";
         case "Europa League":
-          return "text-[#637ff8]";
+          return "text-table-status-uel";
         case "Conference League":
         case "Europa Conference League":
-          return "text-[#d3c9f2]";
+          return "text-table-status-ecl";
         case "Relegation":
-          return "text-[#e92020]";
+          return "text-table-status-rl";
         default:
           return {};
       }

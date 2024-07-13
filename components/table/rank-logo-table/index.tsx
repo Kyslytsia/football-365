@@ -12,13 +12,13 @@ export const RankLogoTable = memo(
     const getStatusStyle = (status: string) => {
       switch (status) {
         case "Champions League":
-          return `bg-[#1ee119]`;
+          return `bg-table-status-ucl`;
         case "Europa League":
-          return `bg-[#637ff8]`;
+          return `bg-table-status-uel`;
         case "Europa Conference League":
-          return `bg-[#d3c9f2]`;
+          return `bg-table-status-ecl`;
         case "Relegation":
-          return `bg-[#e92020]`;
+          return `bg-table-status-rl`;
         default:
           return {};
       }

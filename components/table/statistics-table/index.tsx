@@ -17,6 +17,21 @@ export const StatisticsTable = memo(
       return el?.all;
     };
 
+    const getFormStyle = (letter: string) => {
+      switch (letter) {
+        case "W":
+          return "bg-table-form-win";
+        case "D":
+          return "bg-table-form-draw";
+        case "L":
+          return "bg-table-form-lose";
+        case "N":
+          return "bg-gray-500";
+        default:
+          return {};
+      }
+    };
+
     return (
       <ScrollView
         horizontal
@@ -117,20 +132,5 @@ export const StatisticsTable = memo(
     );
   }
 );
-
-const getFormStyle = (letter: string) => {
-  switch (letter) {
-    case "W":
-      return "bg-[#1ee11e]";
-    case "D":
-      return "bg-[#f2ec2c]";
-    case "L":
-      return "bg-[#f66731]";
-    case "N":
-      return "bg-gray-500";
-    default:
-      return {};
-  }
-};
 
 export default StatisticsTable;
