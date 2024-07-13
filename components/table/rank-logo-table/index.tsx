@@ -12,8 +12,10 @@ export const RankLogoTable = memo(
     const getStatusStyle = (status: string) => {
       switch (status) {
         case "Champions League":
+        case "Euro":
           return `bg-table-status-ucl`;
         case "Europa League":
+        case "Ranking of third-placed teams":
           return `bg-table-status-uel`;
         case "Conference League":
         case "Europa Conference League":
@@ -24,6 +26,8 @@ export const RankLogoTable = memo(
           return {};
       }
     };
+
+    console.log(standings);
 
     return (
       <View className="absolute top-0 left-0 z-30 bg-table-bg">

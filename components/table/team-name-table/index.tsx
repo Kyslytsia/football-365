@@ -11,8 +11,10 @@ export const TeamNameTable = memo(
       switch (status) {
         case "Champions League":
         case "Won title":
+        case "Euro":
           return "text-table-status-ucl";
         case "Europa League":
+        case "Ranking of third-placed teams":
           return "text-table-status-uel";
         case "Conference League":
         case "Europa Conference League":
