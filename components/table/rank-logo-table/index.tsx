@@ -42,8 +42,8 @@ export const RankLogoTable = memo(
             />
 
             {isChampion && el.rank === 1 && (
-              <View className="absolute top-[-12px] left-3">
-                <Crown />
+              <View className="absolute top-0.5 left-[15px]">
+                <Crown width={4} height={4} />
               </View>
             )}
 
@@ -55,7 +55,7 @@ export const RankLogoTable = memo(
               <Image
                 alt={el.team.name}
                 className="w-5 h-5"
-                source={{ uri: el.team.logo }}
+                source={el.team.logo}
               />
             </View>
           </View>
