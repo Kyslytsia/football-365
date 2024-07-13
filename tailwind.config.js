@@ -5,6 +5,11 @@ const charade = "#252535";
 const tune = "#1b1a22";
 const loading = "#0000ff";
 const cornflowerBlue = "#6a75f1";
+const malachite = "#1ee119";
+const moonRaker = "#d3c9f2";
+const alizarinCrimson = "#e92020";
+const goldenDream = "#f2ec2c";
+const flamingo = "#f66731";
 
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
@@ -28,15 +33,15 @@ module.exports = {
         table: {
           border: tune,
           status: {
-            ucl: "#1ee119",
-            uel: "#637ff8",
-            ecl: "#d3c9f2",
-            rl: "#e92020",
+            ucl: malachite,
+            uel: cornflowerBlue,
+            ecl: moonRaker,
+            rl: alizarinCrimson,
           },
           form: {
-            win: "#1ee11e",
-            draw: "#f2ec2c",
-            lose: "#f66731",
+            win: malachite,
+            draw: goldenDream,
+            lose: flamingo,
           },
         },
       },
