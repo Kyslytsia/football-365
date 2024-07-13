@@ -59,7 +59,7 @@ export const StatisticsTable = memo(
             {standings.map((team, index) => (
               <View
                 key={index + "statistics"}
-                className="flex-row h-8 bg-[#26242e] border-l border-t border-table-border"
+                className="flex-row h-8 bg-table-bg border-l border-t border-table-border"
               >
                 <View className="flex justify-center items-center w-8">
                   <Text className="text-white text-xs">{team.points}</Text>

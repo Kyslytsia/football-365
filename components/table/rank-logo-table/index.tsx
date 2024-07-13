@@ -15,6 +15,7 @@ export const RankLogoTable = memo(
           return `bg-table-status-ucl`;
         case "Europa League":
           return `bg-table-status-uel`;
+        case "Conference League":
         case "Europa Conference League":
           return `bg-table-status-ecl`;
         case "Relegation":
@@ -25,7 +26,7 @@ export const RankLogoTable = memo(
     };
 
     return (
-      <View className="absolute top-0 left-0 z-30 bg-wrapper-bg">
+      <View className="absolute top-0 left-0 z-30 bg-table-bg">
         <View className="flex-row justify-center h-8">
           <Text className="w-5 text-xs"></Text>
           <Text className="w-5 text-xs"></Text>

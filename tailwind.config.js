@@ -10,6 +10,7 @@ const moonRaker = "#d3c9f2";
 const alizarinCrimson = "#e92020";
 const goldenDream = "#f2ec2c";
 const flamingo = "#f66731";
+export const mainTheme = "rgb(31, 33, 43)";
 
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
@@ -31,6 +32,7 @@ module.exports = {
           bg: balticSea2,
         },
         table: {
+          bg: balticSea2,
           border: tune,
           status: {
             ucl: malachite,
