@@ -57,5 +57,3 @@ export const TeamNameTable = memo(
     );
   }
 );
-
-export default TeamNameTable;

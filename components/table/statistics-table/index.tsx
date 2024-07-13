@@ -136,5 +136,3 @@ export const StatisticsTable = memo(
     );
   }
 );
-
-export default StatisticsTable;
