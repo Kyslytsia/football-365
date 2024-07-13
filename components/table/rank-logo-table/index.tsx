@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo } from "react";
 import { Image } from "expo-image";
 import { Text, View } from "react-native";
 
@@ -43,7 +43,7 @@ export const RankLogoTable = memo(
 
             {isChampion && el.rank === 1 && (
               <View className="absolute top-[-12px] left-3">
-                {/* <Crown /> */}
+                <Crown />
               </View>
             )}
 
