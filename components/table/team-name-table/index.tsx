@@ -24,8 +24,6 @@ export const TeamNameTable = memo(
       }
     };
 
-    console.log(standings);
-
     return (
       <View className="ml-12">
         <View className="flex-row h-8">
