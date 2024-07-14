@@ -28,8 +28,6 @@ export const Nav = ({
     }
   };
 
-  console.log(underline, rightText);
-
   return (
     <View className={styles.wrapper}>
       <Pressable

@@ -4,7 +4,7 @@ import React from "react";
 const Knockout = () => {
   return (
     <View>
-      <Text>Knockout</Text>
+      <Text className="text-center text-white">Knockout</Text>
     </View>
   );
 };
