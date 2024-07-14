@@ -115,6 +115,7 @@ export const StatisticsTable = memo(
                       <Text className={styles.formText}>{letter}</Text>
                     </View>
                   ))}
+
                   {!team.form &&
                     ["N", "N", "N", "N", "N"].map((letter, index) => (
                       <View
