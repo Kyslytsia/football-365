@@ -1,16 +1,22 @@
 import "react-native-reanimated";
-import { useGlobalSearchParams } from "expo-router";
-import { View } from "react-native";
+import { useRouter, useGlobalSearchParams } from "expo-router";
+
 import { NationalTable } from "./table-national";
 
-export default function Layout() {
+const Table = () => {
   const { name } = useGlobalSearchParams();
+  const route = useRouter();
 
-  return (
-    <>
-      <View>
-        <NationalTable />
-      </View>
-    </>
-  );
-}
+  if (
+    name === "Euro Championship" ||
+    name === "UEFA Europa League" ||
+    name === "UEFA Champions League" ||
+    name === "World Cup"
+  ) {
+    route.replace("/table/(table-championship)");
+  } else {
+    return <NationalTable />;
+  }
+};
+
+export default Table;

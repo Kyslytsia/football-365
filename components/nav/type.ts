@@ -1,6 +1,7 @@
 export interface NavProps {
   leftText: string;
   rightText: string;
-  leftRout: string;
-  rightRout: string;
+  leftRoute: string;
+  rightRoute: string;
+  className?: string;
 }

@@ -27,8 +27,6 @@ export const RankLogoTable = memo(
       }
     };
 
-    console.log(standings);
-
     return (
       <View className="absolute top-0 left-0 z-30 bg-table-bg">
         <View className="flex-row justify-center h-8">

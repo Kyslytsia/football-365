@@ -96,7 +96,7 @@ const MainPage = () => {
     <FlashList
       data={matches}
       estimatedItemSize={500}
-      initialScrollIndex={190}
+      initialScrollIndex={index}
       removeClippedSubviews={false}
       overrideItemLayout={overrideItemLayout}
       keyExtractor={(group, index) => `${group.date}_${index}`}

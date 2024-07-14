@@ -1,36 +1,44 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View, Text, Pressable } from "react-native";
-import { useNavigation, useRouter, usePathname } from "expo-router";
+import { useRouter } from "expo-router";
 
-import { NavProps } from "./typex";
+import { NavProps } from "./type";
 import { getStyles } from "./styles";
 
-export const Nav = ({ leftRout, leftText, rightRout, rightText }: NavProps) => {
-  const pathname = usePathname();
+export const Nav = ({
+  leftText,
+  rightText,
+  className,
+  leftRoute,
+  rightRoute,
+}: NavProps) => {
+  const [selectedTab, setSelectedTab] = useState(leftText);
   const route = useRouter();
 
-  const isLeftRuot = pathname === leftRout || pathname === "/";
-  const isRightRuot = pathname === rightRout;
+  const isLeftRoute = selectedTab === leftText;
+  const isRightRoute = selectedTab === rightText;
 
-  const styles = getStyles();
+  const styles = getStyles(className ?? "");
 
-  const navigation = useNavigation<any>();
   const handleNavigate = (path: string, text: string) => {
+    setSelectedTab(text);
     route.replace(path);
   };
 
+  console.log(className);
+
   return (
-    <View className="flex-row justify-center items-center gap-[20px] p-4">
+    <View className={styles.wrapper}>
       <Pressable
-        className={`${styles.nav} ${isLeftRuot ? styles.active : ""}`}
-        onPress={() => handleNavigate(leftRout, leftText)}
+        className={`${styles.nav} ${isLeftRoute ? styles.active : ""}`}
+        onPress={() => handleNavigate(leftRoute, leftText)}
       >
         <Text className="text-white">{leftText}</Text>
       </Pressable>
 
       <Pressable
-        className={`${styles.nav} ${isRightRuot ? styles.active : ""}`}
-        onPress={() => handleNavigate(rightRout, rightText)}
+        className={`${styles.nav} ${isRightRoute ? styles.active : ""}`}
+        onPress={() => handleNavigate(rightRoute, rightText)}
       >
         <Text className="text-white">{rightText}</Text>
       </Pressable>
