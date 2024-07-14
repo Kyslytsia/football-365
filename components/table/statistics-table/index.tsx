@@ -109,7 +109,7 @@ export const StatisticsTable = memo(
                       key={index + "form"}
                       className={`
                      ${styles.formWrapper}
-                      ${getFormStyle(letter)}
+                      ${() => getFormStyle(letter)}
                     `}
                     >
                       <Text className={styles.formText}>{letter}</Text>
@@ -120,7 +120,7 @@ export const StatisticsTable = memo(
                       <View
                         key={index + "form"}
                         className={`${styles.formWrapper}
-                        ${getFormStyle(letter)}
+                        ${() => getFormStyle(letter)}
                       `}
                       >
                         <Text className={styles.formText}>{letter}</Text>
