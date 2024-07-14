@@ -3,12 +3,13 @@ import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getRounds } from "@/api/rounds";
+import { Table } from "@/components/table";
 import { getCurrentSeason } from "@/hooks";
 import { getStandings } from "@/api/standings";
 import { StandingProps } from "@/types/standings";
 
-import { Table } from "@/components/table";
 import { Nav } from "./nav";
+import { TableInfo } from "@/components/table-info";
 
 export const NationalTable = () => {
   const [standings, setStandings] = useState<StandingProps[]>([]);
@@ -87,6 +88,7 @@ export const NationalTable = () => {
         navValue={navValue}
         standings={standings}
         isChampion={isChampion}
+        component={<TableInfo />}
       />
     </>
   );

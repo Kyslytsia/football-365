@@ -7,7 +7,13 @@ import { TeamNameTable } from "./team-name-table";
 import { StatisticsTable } from "./statistics-table";
 
 export const Table = memo(
-  ({ navValue, standings, isChampion, championship }: TableProps) => {
+  ({
+    navValue,
+    standings,
+    isChampion,
+    championship,
+    component,
+  }: TableProps) => {
     return (
       <ScrollView
         className="mx-auto w-[360px]"
@@ -28,6 +34,8 @@ export const Table = memo(
 
           <StatisticsTable navValue={navValue} standings={standings} />
         </View>
+
+        {component}
       </ScrollView>
     );
   }
