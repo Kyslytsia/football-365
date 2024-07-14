@@ -7,8 +7,10 @@ export default function Layout() {
   return (
     <>
       <Nav
+        underline
         leftText="group"
         rightText="knockout"
+        classNameWrapper="pb-4"
         leftRoute="/table/group"
         rightRoute="/table/knockout"
       />

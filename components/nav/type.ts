@@ -3,5 +3,6 @@ export interface NavProps {
   rightText: string;
   leftRoute: string;
   rightRoute: string;
-  className?: string;
+  underline?: boolean;
+  classNameWrapper?: string;
 }

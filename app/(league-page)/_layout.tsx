@@ -13,10 +13,10 @@ export default function Layout() {
       <Header icon={icon as string} leagueName={name as string} />
 
       <Nav
-        className="p-4"
         rightText="table"
         leftText="matches"
         rightRoute="/table"
+        classNameWrapper="p-2"
         leftRoute="/league-matches"
       />
 

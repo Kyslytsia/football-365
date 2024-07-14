@@ -8,9 +8,10 @@ import { getStyles } from "./styles";
 export const Nav = ({
   leftText,
   rightText,
-  className,
   leftRoute,
   rightRoute,
+  underline = false,
+  classNameWrapper = "",
 }: NavProps) => {
   const [selectedTab, setSelectedTab] = useState(leftText);
   const route = useRouter();
@@ -18,14 +19,16 @@ export const Nav = ({
   const isLeftRoute = selectedTab === leftText;
   const isRightRoute = selectedTab === rightText;
 
-  const styles = getStyles(className ?? "");
+  const styles = getStyles(underline, classNameWrapper);
 
   const handleNavigate = (path: string, text: string) => {
-    setSelectedTab(text);
-    route.replace(path);
+    if (text !== selectedTab) {
+      setSelectedTab(text);
+      route.replace(path);
+    }
   };
 
-  console.log(className, rightText);
+  console.log(underline, rightText);
 
   return (
     <View className={styles.wrapper}>
