@@ -62,7 +62,7 @@ export const KnockoutMatches = ({
         onRequestClose={() => setIsModalActive(false)}
       >
         <View>
-          {/* Add your modal content here */}
+          Add your modal content here
           {/* {matches} */}
         </View>
       </Modal>
