@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { View, Text, Image } from "react-native";
 import { DefaultClub, Star } from "@/assets/icon";
 
 import { Final } from "./final";
 import { KnockoutMatchProps } from "./types";
 
-export const KnockoutMatch = ({ match, isFinal }: KnockoutMatchProps) => {
+export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
   const [winner, setWinner] = useState<string>("");
 
   const game = match.length > 0 ? match[0] : null;
@@ -132,4 +132,4 @@ export const KnockoutMatch = ({ match, isFinal }: KnockoutMatchProps) => {
       )}
     </>
   );
-};
+});
