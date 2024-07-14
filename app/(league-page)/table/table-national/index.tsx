@@ -8,6 +8,7 @@ import { getStandings } from "@/api/standings";
 import { StandingProps } from "@/types/standings";
 
 import { Table } from "@/components/table";
+import { Nav } from "./nav";
 
 export const NationalTable = () => {
   const [standings, setStandings] = useState<StandingProps[]>([]);
@@ -79,6 +80,14 @@ export const NationalTable = () => {
   }, [round]);
 
   return (
-    <Table navValue={navValue} standings={standings} isChampion={isChampion} />
+    <>
+      <Nav setValue={setNavValue} />
+
+      <Table
+        navValue={navValue}
+        standings={standings}
+        isChampion={isChampion}
+      />
+    </>
   );
 };
