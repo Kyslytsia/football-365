@@ -25,7 +25,7 @@ export const Nav = ({
     route.replace(path);
   };
 
-  console.log(className);
+  console.log(className, rightText);
 
   return (
     <View className={styles.wrapper}>
