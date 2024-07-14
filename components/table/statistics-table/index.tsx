@@ -4,9 +4,12 @@ import { ScrollView, Text, View } from "react-native";
 import { StandingProps } from "@/types/standings";
 
 import { StatisticsTableProps } from "./types";
+import { getStyles } from "./styles";
 
 export const StatisticsTable = memo(
   ({ navValue, standings }: StatisticsTableProps) => {
+    const styles = getStyles();
+
     const change = (el?: StandingProps) => {
       if (navValue && navValue === "home" && el) {
         return el.home;
@@ -61,41 +64,41 @@ export const StatisticsTable = memo(
                 key={index + "statistics"}
                 className="flex-row h-8 bg-table-bg border-l border-t border-table-border"
               >
-                <View className="flex justify-center items-center w-8">
-                  <Text className="text-white text-xs">{team.points}</Text>
+                <View className={styles.statWrapper}>
+                  <Text className={styles.statText}>{team.points}</Text>
                 </View>
 
-                <View className="flex justify-center items-center w-8">
-                  <Text className="text-white text-xs">
+                <View className={styles.statWrapper}>
+                  <Text className={styles.statText}>
                     {change(team)?.played ?? 0}
                   </Text>
                 </View>
 
-                <View className="flex justify-center items-center w-8">
-                  <Text className="text-white text-xs">
+                <View className={styles.statWrapper}>
+                  <Text className={styles.statText}>
                     {change(team)?.goals.for ?? 0}:
                     {change(team)?.goals.against ?? 0}
                   </Text>
                 </View>
 
-                <View className="flex justify-center items-center w-8">
-                  <Text className="text-white text-xs">{team.goalsDiff}</Text>
+                <View className={styles.statWrapper}>
+                  <Text className={styles.statText}>{team.goalsDiff}</Text>
                 </View>
 
-                <View className="flex justify-center items-center w-8">
-                  <Text className="text-white text-xs">
+                <View className={styles.statWrapper}>
+                  <Text className={styles.statText}>
                     {change(team)?.win ?? 0}
                   </Text>
                 </View>
 
-                <View className="flex justify-center items-center w-8">
-                  <Text className="text-white text-xs">
+                <View className={styles.statWrapper}>
+                  <Text className={styles.statText}>
                     {change(team)?.draw ?? 0}
                   </Text>
                 </View>
 
-                <View className="flex justify-center items-center w-8">
-                  <Text className="text-white text-xs">
+                <View className={styles.statWrapper}>
+                  <Text className={styles.statText}>
                     {change(team)?.lose ?? 0}
                   </Text>
                 </View>
@@ -105,26 +108,22 @@ export const StatisticsTable = memo(
                     <View
                       key={index + "form"}
                       className={`
-                     flex justify-center items-center w-[18px] h-[18px] rounded-full
+                     ${styles.formWrapper}
                       ${getFormStyle(letter)}
                     `}
                     >
-                      <Text className="text-[12px] text-white text-center">
-                        {letter}
-                      </Text>
+                      <Text className={styles.formText}>{letter}</Text>
                     </View>
                   ))}
                   {!team.form &&
                     ["N", "N", "N", "N", "N"].map((letter, index) => (
                       <View
                         key={index + "form"}
-                        className={`flex justify-center items-center w-[18px] h-[18px] rounded-full
+                        className={`${styles.formWrapper}
                         ${getFormStyle(letter)}
                       `}
                       >
-                        <Text className="text-[12px] text-white text-center">
-                          {letter}
-                        </Text>
+                        <Text className={styles.formText}>{letter}</Text>
                       </View>
                     ))}
                 </View>
