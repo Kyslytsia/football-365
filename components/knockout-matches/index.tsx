@@ -58,10 +58,7 @@ export const KnockoutMatches = memo(
           visible={isModalActive}
           onRequestClose={() => setIsModalActive(false)}
         >
-          <View>
-            Add your modal content here
-            {/* {matches} */}
-          </View>
+          <View>Add your modal content here</View>
         </Modal>
 
         <TouchableOpacity onPress={() => setIsModalActive(matches.length > 0)}>
