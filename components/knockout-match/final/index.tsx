@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 
 import { FinalProps } from "./types";
-import { DefaultClub, Star } from "@/assets/icon";
+import { DefaultClub } from "@/assets/icon";
 
 export const Final = memo(
   ({
