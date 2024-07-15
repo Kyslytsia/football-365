@@ -1,15 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { KnockoutTable } from "@/components";
 
 import { getMatches } from "../helpers";
-import { UCLKnockoutProps } from "./types";
+import { KnockoutProps } from "../types";
 
 export const UCLKnockout = ({
   final,
   roundOf16,
   semiFinals,
   quarterFinals,
-}: UCLKnockoutProps) => {
+}: KnockoutProps) => {
   const matches = getMatches(roundOf16, quarterFinals);
 
   return (

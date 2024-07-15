@@ -1,6 +1,6 @@
 import { MatchProps } from "@/types/match";
 
-export interface UCLKnockoutProps {
+export interface KnockoutProps {
   final: MatchProps[] | [];
   roundOf16: MatchProps[] | [];
   semiFinals: MatchProps[] | [];

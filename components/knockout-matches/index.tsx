@@ -69,12 +69,12 @@ export const KnockoutMatches = memo(
               </Text>
             )}
             {firstMatchEnded && secondMatchNotStarted && (
-              <Text className="absolute top-0.5 text-xs text-Grey">
+              <Text className="absolute bottom-0.5 text-[10px] text-Grey">
                 1 match
               </Text>
             )}
             {firstMatchNotStarted && (
-              <Text className="absolute top-0.5 text-xs text-Grey">
+              <Text className="absolute bottom-0.5 text-[10px] text-Grey">
                 not started
               </Text>
             )}
@@ -89,15 +89,17 @@ export const KnockoutMatches = memo(
                 />
               )}
 
-              <View
-                className={`absolute top-0 ${
-                  winner === "1"
-                    ? "left-[-2px] top-[-2px] opacity-100"
-                    : "right-[-2px] top-[-2px] opacity-100"
-                }`}
-              >
-                <Star width="7px" height="7px" />
-              </View>
+              {winner.length > 0 && (
+                <View
+                  className={`absolute top-0 ${
+                    winner === "1"
+                      ? "left-[-2px] top-[-2px] opacity-100"
+                      : "right-[-2px] top-[-2px] opacity-100"
+                  }`}
+                >
+                  <Star width="7px" height="7px" />
+                </View>
+              )}
 
               {!secondMatch ? (
                 <DefaultClub width="25px" height="25px" />

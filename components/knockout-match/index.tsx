@@ -50,6 +50,8 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
     game?.fixture.status.short,
   ]);
 
+  console.log(winner.length);
+
   return (
     <>
       {isFinal ? (
@@ -68,20 +70,20 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
           finalEndedOnPenalties={matchEndedOnPenalties}
         />
       ) : (
-        <View className="relative flex flex-col items-center justify-center p-1 w-[30px] h-[30px] bg-gray-800 rounded-lg border border-gray-400">
+        <View className="relative flex flex-col items-center justify-center gap-y-0.5 p-1 w-[70px] h-[70px] bg-gray-800 rounded-lg border border-Grey">
           {matchEndedOnPenalties && (
-            <Text className="absolute top-0.5 text-xs text-Grey">
+            <Text className="absolute bottom-0.5 text-[10px] text-Grey">
               after pen
             </Text>
           )}
 
           {matchNotStarted && (
-            <Text className="absolute top-0.5 text-xs text-gray-400">
+            <Text className="absolute bottom-0.5 text-[10px] text-Grey">
               not started
             </Text>
           )}
 
-          <View className="relative flex justify-around items-center px-1 w-full h-full">
+          <View className="relative flex-row justify-around items-center gap-1 px-1">
             {!game ? (
               <DefaultClub width="25px" height="25px" />
             ) : (
@@ -91,13 +93,17 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
               />
             )}
 
-            <View
-              className={`absolute top-0 ${
-                winner === "1" ? "left-1.5 opacity-100" : "left-0 opacity-0"
-              }`}
-            >
-              <Star width="7px" height="7px" />
-            </View>
+            {winner.length > 0 && (
+              <View
+                className={`absolute top-0 ${
+                  winner === "1"
+                    ? "left-[-2px] top-[-2px] opacity-100"
+                    : "right-[-2px] top-[-2px] opacity-100"
+                }`}
+              >
+                <Star width="7px" height="7px" />
+              </View>
+            )}
 
             {!game ? (
               <DefaultClub width="25px" height="25px" />
@@ -112,7 +118,7 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
           {!matchNotStarted && match.length > 0 && (
             <View className="flex items-center pb-1.5 h-4.5">
               {matchEndedOnPenalties && (
-                <Text className="text-xs text-Grey">
+                <Text className="text-[10px] text-Grey">
                   ({game?.score?.penalty?.away})
                 </Text>
               )}
@@ -122,7 +128,7 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
               </Text>
 
               {matchEndedOnPenalties && (
-                <Text className="text-xs text-Grey">
+                <Text className="text-[10px] text-Grey">
                   ({game?.score?.penalty?.home})
                 </Text>
               )}
