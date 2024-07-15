@@ -55,14 +55,6 @@ export const Final = memo(
             </Text>
           </View>
 
-          <View
-            className={`absolute top-0 ${
-              winner === "1" ? "left-6.5 opacity-100" : "left-0 opacity-0"
-            }`}
-          >
-            <Star width="7px" height="7px" />
-          </View>
-
           {!finalNotStarted && final !== null && (
             <View className="flex justify-center items-center flex-14% pb-1.5 h-4.5 w-[15%] text-sm text-gray-400">
               {finalEndedOnPenalties && (

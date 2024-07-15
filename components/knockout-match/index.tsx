@@ -93,6 +93,18 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
               />
             )}
 
+            {winner.length > 0 && (
+              <View
+                className={`absolute top-0 ${
+                  winner === "1"
+                    ? "left-[-2px] top-[-2px] opacity-100"
+                    : "right-[-2px] top-[-2px] opacity-100"
+                }`}
+              >
+                <Star width="7px" height="7px" />
+              </View>
+            )}
+
             {!game ? (
               <DefaultClub width="25px" height="25px" />
             ) : (
