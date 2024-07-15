@@ -82,11 +82,6 @@ const Knockout = () => {
     })();
   }, []);
 
-  // console.log("round of 16", roundOf16);
-  // console.log("quarterFinals", quarterFinals);
-  // console.log("semiFinals", semiFinals);
-  // console.log("final", final);
-
   return (
     <>
       {loading && <Loading />}
