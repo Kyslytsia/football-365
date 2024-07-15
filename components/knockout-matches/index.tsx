@@ -1,9 +1,17 @@
 import React, { memo, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Modal } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+  Pressable,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { Image } from "expo-image";
 
 import { MatchProps } from "@/types/match";
 import { DefaultClub, Star } from "@/assets/icon";
+import { Match } from "../match";
 
 export const KnockoutMatches = memo(
   ({ matches }: { matches: MatchProps[] | [] }) => {
@@ -55,17 +63,24 @@ export const KnockoutMatches = memo(
 
     return (
       <>
-        {/* <Modal
+        <Modal
+          transparent={true}
+          animationType="fade"
           visible={isModalActive}
           onRequestClose={() => setIsModalActive(false)}
         >
-          <View>
-            <Image
-              source={{ uri: matches[0]?.teams.home.logo }}
-              style={{ width: 25, height: 25 }}
-            />
-          </View>
-        </Modal> */}
+          <TouchableWithoutFeedback
+            onPress={() => setIsModalActive(!isModalActive)}
+          >
+            <View className="flex-1 items-center justify-center bg-[rgba(0, 0, 0, 0.5)]">
+              <View className="w-[350px] bg-gray-800 rounded-lg overflow-hidden">
+                {matches?.map((el, index) => (
+                  <Match key={index} match={el} />
+                ))}
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
 
         <TouchableOpacity onPress={() => setIsModalActive(matches.length > 0)}>
           <View className="relative flex-col items-center justify-center gap-y-0.5 p-1 w-[70px] h-[70px] bg-gray-800 rounded-lg border border-Grey">
