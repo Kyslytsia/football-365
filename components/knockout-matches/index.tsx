@@ -62,24 +62,24 @@ export const KnockoutMatches = memo(
         </Modal> */}
 
         <TouchableOpacity onPress={() => setIsModalActive(matches.length > 0)}>
-          <View className="relative flex flex-col items-center justify-center p-1 my-5 w-20 h-20 bg-gray-800 rounded-lg border border-gray-400">
+          <View className="relative flex flex-col items-center justify-center gap-y-0.5 p-1 my-5 w-[70px] h-[70px] bg-gray-800 rounded-lg border border-Grey">
             {matchEndedOnPenalties && (
-              <Text className="absolute top-0.5 text-xs text-gray-400">
+              <Text className="absolute bottom-0.5 text-[10px] text-Grey">
                 after pen
               </Text>
             )}
             {firstMatchEnded && secondMatchNotStarted && (
-              <Text className="absolute top-0.5 text-xs text-gray-400">
+              <Text className="absolute top-0.5 text-xs text-Grey">
                 1 match
               </Text>
             )}
             {firstMatchNotStarted && (
-              <Text className="absolute top-0.5 text-xs text-gray-400">
+              <Text className="absolute top-0.5 text-xs text-Grey">
                 not started
               </Text>
             )}
 
-            <View className="relative flex-row justify-around items-center px-1">
+            <View className="relative flex-row justify-around items-center gap-1 px-1">
               {!firstMatch ? (
                 <DefaultClub width="25px" height="25px" />
               ) : (
@@ -91,7 +91,9 @@ export const KnockoutMatches = memo(
 
               <View
                 className={`absolute top-0 ${
-                  winner === "1" ? "left-1.5 opacity-100" : "left-0 opacity-0"
+                  winner === "1"
+                    ? "left-[-2px] top-[-2px] opacity-100"
+                    : "right-[-2px] top-[-2px] opacity-100"
                 }`}
               >
                 <Star width="7px" height="7px" />
@@ -108,17 +110,19 @@ export const KnockoutMatches = memo(
             </View>
 
             {!firstMatchNotStarted && matches.length > 0 && (
-              <View className="flex-row items-center pb-1.5 h-4.5 text-sm text-gray-400">
+              <View className="flex-row items-center pb-1.5 h-4.5">
                 {matchEndedOnPenalties && (
-                  <Text className="text-xs text-gray-400">
+                  <Text className="text-[10px] text-Grey">
                     ({secondMatch?.score?.penalty?.away})
                   </Text>
                 )}
-                <Text>
+
+                <Text className="text-Grey">
                   {firstTeamGoals} - {secondTeamGoals}
                 </Text>
+
                 {matchEndedOnPenalties && (
-                  <Text className="text-xs text-gray-400">
+                  <Text className="text-[10px] text-Grey">
                     ({secondMatch?.score?.penalty?.home})
                   </Text>
                 )}

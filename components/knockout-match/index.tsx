@@ -68,9 +68,9 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
           finalEndedOnPenalties={matchEndedOnPenalties}
         />
       ) : (
-        <View className="relative flex flex-col items-center justify-center p-1 my-5 w-17.5 h-17.5 bg-gray-800 rounded-lg border border-gray-400">
+        <View className="relative flex flex-col items-center justify-center p-1 w-[30px] h-[30px] bg-gray-800 rounded-lg border border-gray-400">
           {matchEndedOnPenalties && (
-            <Text className="absolute top-0.5 text-xs text-gray-400">
+            <Text className="absolute top-0.5 text-xs text-Grey">
               after pen
             </Text>
           )}
@@ -110,19 +110,19 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
           </View>
 
           {!matchNotStarted && match.length > 0 && (
-            <View className="flex items-center pb-1.5 h-4.5 text-sm text-gray-400">
+            <View className="flex items-center pb-1.5 h-4.5">
               {matchEndedOnPenalties && (
-                <Text className="text-xs text-gray-400">
+                <Text className="text-xs text-Grey">
                   ({game?.score?.penalty?.away})
                 </Text>
               )}
 
-              <Text>
+              <Text className="text-Grey">
                 {goalsFirstTeam} - {goalsSecondTeam}
               </Text>
 
               {matchEndedOnPenalties && (
-                <Text className="text-xs text-gray-400">
+                <Text className="text-xs text-Grey">
                   ({game?.score?.penalty?.home})
                 </Text>
               )}
