@@ -5,7 +5,7 @@ import { getFormattedDate } from "@/hooks";
 import { Matches, Wrapper } from "@/components";
 import { GroupedMatches } from "@/types/groupedMatches";
 
-const RenderList = ({ item }: { item: GroupedMatches }) => {
+export const RenderList = memo(({ item }: { item: GroupedMatches }) => {
   return (
     <View className="m-auto w-[360px]">
       <Wrapper
@@ -18,6 +18,4 @@ const RenderList = ({ item }: { item: GroupedMatches }) => {
       </Wrapper>
     </View>
   );
-};
-
-export default memo(RenderList);
+});

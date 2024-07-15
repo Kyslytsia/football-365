@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Pressable, Text, View } from "react-native";
 import { Image } from "expo-image";
-import { useNavigation, useRouter } from "expo-router";
+import { useNavigation } from "expo-router";
 
 import { Matches } from "@/types/groupedMatches";
 
@@ -10,9 +10,8 @@ import { Wrapper } from "../wrapper";
 
 import { getStyles } from "./styles";
 
-export const Component = ({ matches }: { matches: Matches[] }) => {
+export const AllLeaguesMatches = memo(({ matches }: { matches: Matches[] }) => {
   const styles = getStyles();
-  const route = useRouter();
   const navigation = useNavigation<any>();
 
   const handleNavigate = (id: number, name: string, icon: string) => {
@@ -63,6 +62,4 @@ export const Component = ({ matches }: { matches: Matches[] }) => {
       })}
     </>
   );
-};
-
-export const AllLeaguesMatches = memo(Component);
+});

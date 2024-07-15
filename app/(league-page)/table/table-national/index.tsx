@@ -11,7 +11,7 @@ import { StandingProps } from "@/types/standings";
 import { Nav } from "./nav";
 import { TableInfo } from "@/components/table-info";
 
-export const NationalTable = () => {
+const NationalTable = () => {
   const [standings, setStandings] = useState<StandingProps[]>([]);
   const [navValue, setNavValue] = useState<string>("overall");
   const [round, setRound] = useState<string[]>([""]);
@@ -93,3 +93,5 @@ export const NationalTable = () => {
     </>
   );
 };
+
+export default NationalTable;

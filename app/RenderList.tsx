@@ -5,7 +5,7 @@ import { getFormattedDate } from "@/hooks";
 import { AllLeaguesMatches } from "@/components";
 import { GroupedMatches } from "@/types/groupedMatches";
 
-const RenderList = ({ item }: { item: GroupedMatches }) => (
+export const RenderList = memo(({ item }: { item: GroupedMatches }) => (
   <View key={item.date + "date"} className="m-auto w-[360px]">
     <Text className="p-[50px_0_25px] text-Grey text-[18px] font-extralight text-center">
       - {getFormattedDate(item.date)} -
@@ -13,6 +13,4 @@ const RenderList = ({ item }: { item: GroupedMatches }) => (
 
     <AllLeaguesMatches matches={item.matches} />
   </View>
-);
-
-export default memo(RenderList);
+));

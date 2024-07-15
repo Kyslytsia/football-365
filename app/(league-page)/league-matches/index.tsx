@@ -13,7 +13,7 @@ import {
   groupMatchesByDateAndLeague,
 } from "@/hooks";
 
-import RenderList from "./RenderList";
+import { RenderList } from "./RenderList";
 
 const LeagueMatches = () => {
   const [index, setIndex] = useState<number>(0);

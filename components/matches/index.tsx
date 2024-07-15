@@ -5,7 +5,7 @@ import { Matches as MatchesProps } from "@/types/groupedMatches";
 
 import { Match } from "../match";
 
-const Component = ({ matches }: { matches: MatchesProps[] }) => {
+export const Matches = memo(({ matches }: { matches: MatchesProps[] }) => {
   return (
     <>
       {matches.map((league) => {
@@ -22,6 +22,4 @@ const Component = ({ matches }: { matches: MatchesProps[] }) => {
       })}
     </>
   );
-};
-
-export const Matches = memo(Component);
+});

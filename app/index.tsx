@@ -17,7 +17,7 @@ import {
   ChampionsLeagueAllMatches,
 } from "@/api/allMatchesLeague";
 
-import RenderList from "./RenderList";
+import { RenderList } from "./RenderList";
 
 const MainPage = () => {
   const [index, setIndex] = useState<number>(0);

@@ -8,6 +8,8 @@ import Header from "./header";
 export default function Layout() {
   const { name, icon } = useGlobalSearchParams();
 
+  console.log(name);
+
   return (
     <>
       <Header icon={icon as string} leagueName={name as string} />

@@ -8,7 +8,7 @@ import { MatchTime } from "@/hooks";
 import { PropsMatch } from "./types";
 import { getStyles } from "./styles";
 
-const Component = ({ match, isBorder }: PropsMatch) => {
+export const Match = memo(({ match, isBorder }: PropsMatch) => {
   const id = match.fixture.id;
   const time = match.fixture.status.elapsed;
   const matchStatusLong = match.fixture.status.long;
@@ -92,6 +92,4 @@ const Component = ({ match, isBorder }: PropsMatch) => {
       </View>
     </Pressable>
   );
-};
-
-export const Match = memo(Component);
+});
