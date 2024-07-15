@@ -120,7 +120,7 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
             <View className="flex-row items-center pb-1.5 h-4.5">
               {matchEndedOnPenalties && (
                 <Text className="text-[10px] text-Grey">
-                  ({game?.score?.penalty?.away})
+                  ({game?.score?.penalty?.home})
                 </Text>
               )}
 
@@ -130,7 +130,7 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
 
               {matchEndedOnPenalties && (
                 <Text className="text-[10px] text-Grey">
-                  ({game?.score?.penalty?.home})
+                  ({game?.score?.penalty?.away})
                 </Text>
               )}
             </View>
