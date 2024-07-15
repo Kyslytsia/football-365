@@ -84,33 +84,37 @@ const Knockout = () => {
 
   return (
     <>
-      {loading && <Loading />}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {name === "UEFA Champions League" && (
+            <UCLKnockout
+              final={final}
+              roundOf16={roundOf16}
+              semiFinals={semiFinals}
+              quarterFinals={quarterFinals}
+            />
+          )}
 
-      {name === "UEFA Champions League" && (
-        <UCLKnockout
-          final={final}
-          roundOf16={roundOf16}
-          semiFinals={semiFinals}
-          quarterFinals={quarterFinals}
-        />
-      )}
+          {name === "UEFA Europa League" && (
+            <UELKnockout
+              final={final}
+              roundOf16={roundOf16}
+              semiFinals={semiFinals}
+              quarterFinals={quarterFinals}
+            />
+          )}
 
-      {name === "UEFA Europa League" && (
-        <UELKnockout
-          final={final}
-          roundOf16={roundOf16}
-          semiFinals={semiFinals}
-          quarterFinals={quarterFinals}
-        />
-      )}
-
-      {name === "Euro Championship" && (
-        <UEROKnockout
-          final={final}
-          roundOf16={roundOf16}
-          semiFinals={semiFinals}
-          quarterFinals={quarterFinals}
-        />
+          {name === "Euro Championship" && (
+            <UEROKnockout
+              final={final}
+              roundOf16={roundOf16}
+              semiFinals={semiFinals}
+              quarterFinals={quarterFinals}
+            />
+          )}
+        </>
       )}
     </>
   );
