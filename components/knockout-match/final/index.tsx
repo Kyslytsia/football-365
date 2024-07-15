@@ -23,21 +23,19 @@ export const Final = memo(
     const { name } = useGlobalSearchParams();
 
     return (
-      <View className="relative flex flex-col items-center justify-center my-5 w-55 h-25 bg-gray-800 rounded-lg border border-gray-400">
+      <View className="relative flex flex-col items-center justify-between p-4 my-5 w-[330px] h-[120px] bg-gray-800 rounded-lg border border-Grey">
         {finalEndedOnPenalties && (
-          <Text className="absolute top-0.5 text-xs text-gray-400">
-            after pen
-          </Text>
+          <Text className="absolute top-0.5 text-xs text-Grey">after pen</Text>
         )}
 
         {finalNotStarted && (
-          <Text className="absolute top-0.5 text-xs text-gray-400">
+          <Text className="absolute top-0.5 text-xs text-Grey">
             not started
           </Text>
         )}
 
-        <View className="relative flex justify-around items-center px-1 w-full h-3/4">
-          <View className="flex flex-col justify-center items-center flex-42% px-1 w-full h-full">
+        <View className="relative flex-row justify-around items-center px-1 ">
+          <View className="flex flex-col justify-center items-center px-1 w-[42%]">
             {!final ? (
               <DefaultClub width="45px" height="45px" />
             ) : (
@@ -48,10 +46,10 @@ export const Final = memo(
             )}
             <Text
               className={`text-xs ${
-                winner === "1" ? "text-yellow-400" : "text-gray-400"
+                winner === "1" ? "text-yellow-400" : "text-Grey"
               } whitespace-nowrap`}
             >
-              {scorePenaltyHome}
+              {homeTeamName}
             </Text>
           </View>
 
@@ -64,24 +62,20 @@ export const Final = memo(
           </View>
 
           {!finalNotStarted && final !== null && (
-            <View className="flex justify-center items-center flex-14% pb-1.5 h-4.5 text-sm text-gray-400">
+            <View className="flex justify-center items-center flex-14% pb-1.5 h-4.5 w-[15%] text-sm text-gray-400">
               {finalEndedOnPenalties && (
-                <Text className="text-xs text-gray-400">
-                  ({scorePenaltyHome})
-                </Text>
+                <Text className="text-xs text-Grey">({scorePenaltyHome})</Text>
               )}
-              <Text>
+              <Text className="text-Grey">
                 {goalsFirstTeam} - {goalsSecondTeam}
               </Text>
               {finalEndedOnPenalties && (
-                <Text className="text-xs text-gray-400">
-                  ({scorePenaltyAway})
-                </Text>
+                <Text className="text-xs text-Grey">({scorePenaltyAway})</Text>
               )}
             </View>
           )}
 
-          <View className="flex flex-col justify-center items-center flex-42% px-1 w-full h-full">
+          <View className="flex flex-col justify-center items-center px-1  w-[42%]">
             {!final ? (
               <DefaultClub width="45px" height="45px" />
             ) : (
@@ -92,7 +86,7 @@ export const Final = memo(
             )}
             <Text
               className={`text-xs ${
-                winner === "2" ? "text-yellow-400" : "text-gray-400"
+                winner === "2" ? "text-yellow-400" : "text-Grey"
               } whitespace-nowrap`}
             >
               {awayTeamName}

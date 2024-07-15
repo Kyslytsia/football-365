@@ -54,15 +54,15 @@ export const KnockoutMatches = memo(
 
     return (
       <>
-        <Modal
+        {/* <Modal
           visible={isModalActive}
           onRequestClose={() => setIsModalActive(false)}
         >
           <View>Add your modal content here</View>
-        </Modal>
+        </Modal> */}
 
         <TouchableOpacity onPress={() => setIsModalActive(matches.length > 0)}>
-          <View className="relative flex flex-col items-center justify-center p-1 my-5 w-17.5 h-17.5 bg-gray-800 rounded-lg border border-gray-400">
+          <View className="relative flex flex-col items-center justify-center p-1 my-5 w-20 h-20 bg-gray-800 rounded-lg border border-gray-400">
             {matchEndedOnPenalties && (
               <Text className="absolute top-0.5 text-xs text-gray-400">
                 after pen
@@ -79,7 +79,7 @@ export const KnockoutMatches = memo(
               </Text>
             )}
 
-            <View className="relative flex justify-around items-center px-1 w-full h-full">
+            <View className="relative flex-row justify-around items-center px-1">
               {!firstMatch ? (
                 <DefaultClub width="25px" height="25px" />
               ) : (
@@ -108,7 +108,7 @@ export const KnockoutMatches = memo(
             </View>
 
             {!firstMatchNotStarted && matches.length > 0 && (
-              <View className="flex items-center pb-1.5 h-4.5 text-sm text-gray-400">
+              <View className="flex-row items-center pb-1.5 h-4.5 text-sm text-gray-400">
                 {matchEndedOnPenalties && (
                   <Text className="text-xs text-gray-400">
                     ({secondMatch?.score?.penalty?.away})

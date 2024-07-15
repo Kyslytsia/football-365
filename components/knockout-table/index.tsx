@@ -19,17 +19,18 @@ export const KnockoutTable = memo(
   ({ isNational, ...props }: KnockoutTableProps) => {
     return (
       <ScrollView
-        contentContainerStyle={{
-          flexDirection: "column",
-          justifyContent: "space-around",
-        }}
+        contentContainerStyle={
+          {
+            // justifyContent: "space-around",
+          }
+        }
       >
         <View className="relative mx-auto w-[90%]">
           {renderLines(roundOf16Lines)}
           {renderLines(quarterFinalsLines)}
           {renderLines(semiFinalsAndFinalLines)}
 
-          <View className="flex gap-3 mx-auto">
+          <View className="flex-row gap-3 mx-auto">
             {isNational ? (
               <>
                 <KnockoutMatch match={props.roundOf16_1} />
@@ -47,7 +48,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex gap-24 mx-auto">
+          <View className="flex-row gap-2 mx-auto">
             {isNational ? (
               <>
                 <KnockoutMatch match={props.quarterFinals_1} />
@@ -61,7 +62,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex mx-auto">
+          <View className="flex-row mx-auto">
             {isNational ? (
               <KnockoutMatch match={props.semiFinals_1} />
             ) : (
@@ -69,11 +70,11 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex mx-auto">
+          <View className="flex-row mx-auto">
             <KnockoutMatch isFinal match={props.final} />
           </View>
 
-          <View className="flex mx-auto">
+          <View className="flex-row mx-auto">
             {isNational ? (
               <KnockoutMatch match={props.semiFinals_2} />
             ) : (
@@ -81,7 +82,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex gap-24 mx-auto">
+          <View className="flex-row gap-2 mx-auto">
             {isNational ? (
               <>
                 <KnockoutMatch match={props.quarterFinals_3} />
@@ -95,7 +96,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex gap-3 mx-auto">
+          <View className="flex-row gap-3 mx-auto">
             {isNational ? (
               <>
                 <KnockoutMatch match={props.roundOf16_5} />
