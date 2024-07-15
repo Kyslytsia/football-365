@@ -1,10 +1,9 @@
 import React, { memo, useEffect, useState } from "react";
 import {
-  View,
   Text,
-  TouchableOpacity,
+  View,
   Modal,
-  Pressable,
+  TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native";
 import { Image } from "expo-image";
