@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
-import { View, Text, Image } from "react-native";
+import { Image } from "expo-image";
+import { View, Text } from "react-native";
 import { DefaultClub, Star } from "@/assets/icon";
 
 import { Final } from "./final";
@@ -50,8 +51,6 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
     game?.fixture.status.short,
   ]);
 
-  console.log(winner.length);
-
   return (
     <>
       {isFinal ? (
@@ -70,7 +69,7 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
           finalEndedOnPenalties={matchEndedOnPenalties}
         />
       ) : (
-        <View className="relative flex flex-col items-center justify-center gap-y-0.5 p-1 w-[70px] h-[70px] bg-gray-800 rounded-lg border border-Grey">
+        <View className="relative flex-col items-center justify-center gap-y-0.5 p-1 w-[70px] h-[70px] bg-gray-800 rounded-lg border border-Grey">
           {matchEndedOnPenalties && (
             <Text className="absolute bottom-0.5 text-[10px] text-Grey">
               after pen
@@ -88,35 +87,25 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
               <DefaultClub width="25px" height="25px" />
             ) : (
               <Image
-                source={{ uri: game?.teams.home.logo }}
+                contentFit="contain"
                 style={{ width: 25, height: 25 }}
+                source={{ uri: game?.teams.home.logo }}
               />
-            )}
-
-            {winner.length > 0 && (
-              <View
-                className={`absolute top-0 ${
-                  winner === "1"
-                    ? "left-[-2px] top-[-2px] opacity-100"
-                    : "right-[-2px] top-[-2px] opacity-100"
-                }`}
-              >
-                <Star width="7px" height="7px" />
-              </View>
             )}
 
             {!game ? (
               <DefaultClub width="25px" height="25px" />
             ) : (
               <Image
-                source={{ uri: game?.teams.away.logo }}
+                contentFit="contain"
                 style={{ width: 25, height: 25 }}
+                source={{ uri: game?.teams.away.logo }}
               />
             )}
           </View>
 
           {!matchNotStarted && match.length > 0 && (
-            <View className="flex items-center pb-1.5 h-4.5">
+            <View className="flex-row items-center pb-1.5 h-4.5">
               {matchEndedOnPenalties && (
                 <Text className="text-[10px] text-Grey">
                   ({game?.score?.penalty?.away})

@@ -1,5 +1,6 @@
 import React, { memo } from "react";
-import { View, Text, Image } from "react-native";
+import { Image } from "expo-image";
+import { View, Text } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 
 import { FinalProps } from "./types";
@@ -23,7 +24,7 @@ export const Final = memo(
     const { name } = useGlobalSearchParams();
 
     return (
-      <View className="relative flex flex-col items-center justify-between p-4 my-5 w-[330px] h-[120px] bg-gray-800 rounded-lg border border-Grey">
+      <View className="relative flex flex-col items-center justify-between p-4 w-[330px] h-[120px] bg-gray-800 rounded-lg border border-Grey">
         {finalEndedOnPenalties && (
           <Text className="absolute top-0.5 text-xs text-Grey">after pen</Text>
         )}
@@ -40,6 +41,7 @@ export const Final = memo(
               <DefaultClub width="45px" height="45px" />
             ) : (
               <Image
+                contentFit="contain"
                 source={{ uri: homeTeamLogo }}
                 style={{ width: 45, height: 45 }}
               />
@@ -80,6 +82,7 @@ export const Final = memo(
               <DefaultClub width="45px" height="45px" />
             ) : (
               <Image
+                contentFit="contain"
                 source={{ uri: awayTeamLogo }}
                 style={{ width: 45, height: 45 }}
               />

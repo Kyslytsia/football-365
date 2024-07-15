@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, Modal } from "react-native";
+import { View, Text, TouchableOpacity, Modal } from "react-native";
+import { Image } from "expo-image";
 
 import { MatchProps } from "@/types/match";
 import { DefaultClub, Star } from "@/assets/icon";
@@ -58,21 +59,28 @@ export const KnockoutMatches = memo(
           visible={isModalActive}
           onRequestClose={() => setIsModalActive(false)}
         >
-          <View>Add your modal content here</View>
+          <View>
+            <Image
+              source={{ uri: matches[0]?.teams.home.logo }}
+              style={{ width: 25, height: 25 }}
+            />
+          </View>
         </Modal> */}
 
         <TouchableOpacity onPress={() => setIsModalActive(matches.length > 0)}>
-          <View className="relative flex flex-col items-center justify-center gap-y-0.5 p-1 my-5 w-[70px] h-[70px] bg-gray-800 rounded-lg border border-Grey">
+          <View className="relative flex-col items-center justify-center gap-y-0.5 p-1 w-[70px] h-[70px] bg-gray-800 rounded-lg border border-Grey">
             {matchEndedOnPenalties && (
               <Text className="absolute bottom-0.5 text-[10px] text-Grey">
                 after pen
               </Text>
             )}
+
             {firstMatchEnded && secondMatchNotStarted && (
               <Text className="absolute bottom-0.5 text-[10px] text-Grey">
                 1 match
               </Text>
             )}
+
             {firstMatchNotStarted && (
               <Text className="absolute bottom-0.5 text-[10px] text-Grey">
                 not started
@@ -84,8 +92,9 @@ export const KnockoutMatches = memo(
                 <DefaultClub width="25px" height="25px" />
               ) : (
                 <Image
-                  source={{ uri: matches[0]?.teams.home.logo }}
+                  contentFit="contain"
                   style={{ width: 25, height: 25 }}
+                  source={{ uri: matches[0]?.teams.home.logo }}
                 />
               )}
 
@@ -105,8 +114,9 @@ export const KnockoutMatches = memo(
                 <DefaultClub width="25px" height="25px" />
               ) : (
                 <Image
-                  source={{ uri: matches[0]?.teams.away.logo }}
+                  contentFit="contain"
                   style={{ width: 25, height: 25 }}
+                  source={{ uri: matches[0]?.teams.away.logo }}
                 />
               )}
             </View>

@@ -18,19 +18,13 @@ const renderLines = (lines: Array<{ className: string; style: any }>) =>
 export const KnockoutTable = memo(
   ({ isNational, ...props }: KnockoutTableProps) => {
     return (
-      <ScrollView
-        contentContainerStyle={
-          {
-            // justifyContent: "space-around",
-          }
-        }
-      >
-        <View className="relative mx-auto w-[90%]">
+      <ScrollView>
+        <View className="relative gap-y-11 py-5 mx-auto w-[360px]">
           {renderLines(roundOf16Lines)}
           {renderLines(quarterFinalsLines)}
           {renderLines(semiFinalsAndFinalLines)}
 
-          <View className="flex-row gap-3 mx-auto">
+          <View className="flex-row items-center justify-between mx-auto w-[320px]">
             {isNational ? (
               <>
                 <KnockoutMatch match={props.roundOf16_1} />
@@ -48,7 +42,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex-row gap-2 mx-auto">
+          <View className="flex-row items-center justify-between mx-auto w-[233px]">
             {isNational ? (
               <>
                 <KnockoutMatch match={props.quarterFinals_1} />
@@ -82,7 +76,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex-row gap-2 mx-auto">
+          <View className="flex-row items-center justify-between mx-auto w-[233px]">
             {isNational ? (
               <>
                 <KnockoutMatch match={props.quarterFinals_3} />
@@ -96,7 +90,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex-row gap-3 mx-auto">
+          <View className="flex-row items-center justify-between mx-auto w-[320px]">
             {isNational ? (
               <>
                 <KnockoutMatch match={props.roundOf16_5} />

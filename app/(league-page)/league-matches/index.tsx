@@ -22,10 +22,10 @@ const LeagueMatches = () => {
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [roundMatches, setRoundMatches] = useState<GroupedMatches[]>([]);
 
-  const params = useGlobalSearchParams();
+  const { id, name } = useGlobalSearchParams();
   const itemHeightsRef = useRef<{ [key: number]: number }>({});
-  const ID = Number(params.id);
-  const year = getCurrentSeason(params.name as string);
+  const ID = Number(id);
+  const year = getCurrentSeason(name as string);
   const isMatches = roundMatches.length !== 0 ? roundMatches : matches;
 
   const overrideItemLayout = useCallback(
@@ -39,7 +39,7 @@ const LeagueMatches = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const storageLeagueMatches = await AsyncStorage.getItem(`${params.name}`);
+      const storageLeagueMatches = await AsyncStorage.getItem(`${name}`);
 
       try {
         if (
@@ -50,15 +50,14 @@ const LeagueMatches = () => {
           const groupedMatches = groupMatchesByDateAndLeague(
             JSON.parse(storageLeagueMatches)
           );
+
           setRoundMatches([]);
           setMatches(groupedMatches);
         } else if (!storageLeagueMatches && value === "all matches") {
           const response = await getAllMatchesForSeasonByLeagueId(year, ID);
-          await AsyncStorage.setItem(
-            `${params.name}`,
-            JSON.stringify(response)
-          );
+          await AsyncStorage.setItem(`${name}`, JSON.stringify(response));
           const groupedMatches = groupMatchesByDateAndLeague(response);
+
           setRoundMatches([]);
           setMatches(groupedMatches);
         } else {

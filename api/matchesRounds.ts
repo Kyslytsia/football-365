@@ -2,8 +2,6 @@ import axios from "axios";
 
 import { getCurrentSeason } from "@/hooks";
 
-const year = getCurrentSeason();
-
 const getMatchesRounds = async (
   round: string,
   season: number,
@@ -27,20 +25,20 @@ const getMatchesRounds = async (
   }
 };
 
-const getRoundOf16Matches = async (id: number) => {
-  return await getMatchesRounds("Round%20of%2016", year, id);
+const getRoundOf16Matches = async (id: number, name: string) => {
+  return await getMatchesRounds("Round%20of%2016", getCurrentSeason(name), id);
 };
 
-const getQuarterFinalsMatches = async (id: number) => {
-  return await getMatchesRounds("Quarter-finals", year, id);
+const getQuarterFinalsMatches = async (id: number, name: string) => {
+  return await getMatchesRounds("Quarter-finals", getCurrentSeason(name), id);
 };
 
-const getSemiFinalsMatches = async (id: number) => {
-  return await getMatchesRounds("Semi-finals", year, id);
+const getSemiFinalsMatches = async (id: number, name: string) => {
+  return await getMatchesRounds("Semi-finals", getCurrentSeason(name), id);
 };
 
-const getFinalMatch = async (id: number) => {
-  return await getMatchesRounds("Final", year, id);
+const getFinalMatch = async (id: number, name: string) => {
+  return await getMatchesRounds("Final", getCurrentSeason(name), id);
 };
 
 export {
