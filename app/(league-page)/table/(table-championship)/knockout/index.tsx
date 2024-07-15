@@ -12,6 +12,7 @@ import {
 } from "@/api/matchesRounds";
 
 import { UCLKnockout } from "./UCL-knockout";
+import { UELKnockout } from "./UEL-knockout";
 import { UEROKnockout } from "./EURO-knockout";
 
 const Knockout = () => {
@@ -99,14 +100,14 @@ const Knockout = () => {
         />
       )}
 
-      {/* {name === "UEFA Europa League" && (
+      {name === "UEFA Europa League" && (
         <UELKnockout
           final={final}
           roundOf16={roundOf16}
           semiFinals={semiFinals}
           quarterFinals={quarterFinals}
         />
-      )} */}
+      )}
 
       {name === "Euro Championship" && (
         <UEROKnockout
