@@ -45,7 +45,7 @@ export const RankLogoTable = memo(
             />
 
             {isChampion && el.rank === 1 && (
-              <View className="absolute top-0.5 left-[15px]">
+              <View className="absolute top-0.5 left-[12.5px]">
                 <Crown width={5} height={5} />
               </View>
             )}
