@@ -71,7 +71,7 @@ export const KnockoutMatches = memo(
           <TouchableWithoutFeedback
             onPress={() => setIsModalActive(!isModalActive)}
           >
-            <View className="flex-1 items-center justify-center bg-[rgba(0, 0, 0, 0.5)]">
+            <View className="flex-1 items-center justify-center bg-[#00000080]">
               <View className="w-[350px] bg-gray-800 rounded-lg overflow-hidden">
                 {matches?.map((el, index) => (
                   <Match key={index} match={el} />

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { useGlobalSearchParams } from "expo-router";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import { StandingProps } from "@/types/standings";
 import { getStandings } from "@/api/standings";
 import { getCurrentSeason } from "@/hooks";
 import { Table } from "@/components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { FlashList } from "@shopify/flash-list";
 
 const Groups = () => {
   const [standings, setStandings] = useState<StandingProps[][]>([]);
@@ -37,18 +38,17 @@ const Groups = () => {
     })();
   }, []);
 
-  console.log(standings);
-
   return (
-    <ScrollView>
-      <View className="py-2 mx-auto w-[360px]">
-        {standings.map((group, index) => (
-          <View className="flex-col my-2" key={index + "championship"}>
-            <Table championship standings={group} />
-          </View>
-        ))}
-      </View>
-    </ScrollView>
+    <FlashList
+      data={standings}
+      estimatedItemSize={300}
+      keyExtractor={(_, index) => index.toString() + "championship"}
+      renderItem={({ item }) => (
+        <View className="flex-col my-2">
+          <Table championship standings={item} />
+        </View>
+      )}
+    />
   );
 };
 
