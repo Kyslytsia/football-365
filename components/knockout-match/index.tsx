@@ -1,6 +1,8 @@
 import React, { memo, useEffect, useState } from "react";
+import { View, Text, Pressable } from "react-native";
 import { Image } from "expo-image";
-import { View, Text } from "react-native";
+import { useNavigation } from "expo-router";
+
 import { DefaultClub, Star } from "@/assets/icon";
 
 import { Final } from "./final";
@@ -8,6 +10,7 @@ import { KnockoutMatchProps } from "./types";
 
 export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
   const [winner, setWinner] = useState<string>("");
+  const navigation = useNavigation<any>();
 
   const game = match.length > 0 ? match[0] : null;
 
@@ -51,8 +54,24 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
     game?.fixture.status.short,
   ]);
 
+  const handleNavigate = (id: number, name: string, icon: string) => {
+    navigation.push("match-page/index", {
+      id: id,
+      name: name,
+      icon: icon,
+    });
+  };
+
   return (
-    <>
+    <Pressable
+      onPress={() =>
+        handleNavigate(
+          game?.fixture.id as number,
+          game?.league.name as string,
+          game?.league.logo as string
+        )
+      }
+    >
       {isFinal ? (
         <Final
           final={game}
@@ -137,6 +156,6 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
           )}
         </View>
       )}
-    </>
+    </Pressable>
   );
 });
