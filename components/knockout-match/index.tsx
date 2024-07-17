@@ -55,7 +55,7 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
   ]);
 
   const handleNavigate = (id: number, name: string, icon: string) => {
-    navigation.push("match-page/index", {
+    navigation.push("(match-page)", {
       id: id,
       name: name,
       icon: icon,

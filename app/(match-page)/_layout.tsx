@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getMatchId } from "@/api/match";
 import { Match } from "@/types/matchPage";
 
 import { Header } from "./header";
+import { Nav } from "@/components";
 
 const MatchPage = () => {
   const [match, setMatch] = useState<Match[]>([]);
@@ -41,10 +42,17 @@ const MatchPage = () => {
     <>
       <Header match={match} />
 
-      <View>
-        <Text style={{ color: "white" }}>{id}</Text>
-        <Text style={{ color: "white" }}>{id}</Text>
-      </View>
+      <Nav
+        rightText="lineups"
+        leftText="details"
+        rightRoute="/lineups"
+        classNameWrapper="p-2"
+        leftRoute="/details"
+      />
+
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="details" />
+      </Stack>
     </>
   );
 };

@@ -21,7 +21,7 @@ export const Match = memo(({ match, isBorder }: PropsMatch) => {
   const navigation = useNavigation<any>();
 
   const handleNavigate = () => {
-    navigation.push("match-page/index", {
+    navigation.push("(match-page)", {
       id: id,
     });
   };
