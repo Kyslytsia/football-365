@@ -41,9 +41,11 @@ const Groups = () => {
 
   return (
     <ScrollView>
-      <View className="flex-col gap-y-2 py-2 mx-auto w-[360px]">
+      <View className="py-2 mx-auto w-[360px]">
         {standings.map((group, index) => (
-          <Table championship standings={group} key={index + "championship"} />
+          <View className="flex-col my-2" key={index + "championship"}>
+            <Table championship standings={group} />
+          </View>
         ))}
       </View>
     </ScrollView>
