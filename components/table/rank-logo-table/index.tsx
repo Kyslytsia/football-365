@@ -37,10 +37,10 @@ export const RankLogoTable = memo(
         {standings.map((el, index) => (
           <View
             key={index + "rankLogo"}
-            className="relative flex-row items-center justify-between p-[0_5px_0_8px] w-[55px] border-t border-table-border h-8"
+            className="relative flex-row items-center justify-between p-[0_5px_0_5px] w-[45px] border-t border-table-border h-8"
           >
             <View
-              className={`absolute left-0 h-full w-0.5
+              className={`absolute top-0 left-0 h-full w-0.5
               ${getStatusStyle(modifyDescription(el))}`}
             />
 

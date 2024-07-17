@@ -27,9 +27,9 @@ export const TeamNameTable = memo(
     };
 
     return (
-      <View className="ml-12">
-        <View className="flex-row h-8">
-          <Text className="text-xs text-white min-w-[50px] ml-[-5px] justify-center">
+      <View className="ml-10">
+        <View className="flex-row items-center h-8">
+          <Text className="text-[8px] text-white text-center min-w-[115px] ml-[8px] justify-center">
             {championship && standings[0].group}
           </Text>
         </View>
@@ -40,13 +40,13 @@ export const TeamNameTable = memo(
             className="flex-row pl-2 h-8 border-t border-table-border"
           >
             <View className="flex-col items-start justify-center">
-              <Text className="text-xs text-white leading-3">
+              <Text className="pl-1 text-xs text-white leading-3">
                 {team.team.name}
               </Text>
 
               {team.description !== null && (
                 <Text
-                  className={`text-[8px] 
+                  className={`pl-1 text-[8px] 
                   ${getStatusStyle(modifyDescription(team, isChampion))}`}
                 >
                   {modifyDescription(team, isChampion)}

@@ -44,12 +44,12 @@ export const StatisticsTable = memo(
       >
         <View className="flex flex-row justify-end w-[565px]">
           <View>
-            <View className={`flex-row h-8`}>
+            <View className="flex-row h-8">
               {["PT", "P", "F:A", "+/-", "W", "D", "L", "Form"].map(
                 (header, index) => (
                   <View
                     key={index}
-                    className={`flex justify-center items-center h-full ${
+                    className={`flex justify-center items-center h-full bg-table-bg ${
                       header === "Form" ? "w-[140px]" : "w-8"
                     }`}
                   >
@@ -103,13 +103,13 @@ export const StatisticsTable = memo(
                   </Text>
                 </View>
 
-                <View className="flex-row justify-around items-center h-full w-[140px] px-1">
+                <View className="flex-row justify-around items-center h-full w-[145px] px-1">
                   {team.form?.split("").map((letter, index) => (
                     <View
                       key={index + "form"}
                       className={`
                      ${styles.formWrapper}
-                      ${() => getFormStyle(letter)}
+                      ${getFormStyle(letter)}
                     `}
                     >
                       <Text className={styles.formText}>{letter}</Text>
@@ -121,7 +121,7 @@ export const StatisticsTable = memo(
                       <View
                         key={index + "form"}
                         className={`${styles.formWrapper}
-                        ${() => getFormStyle(letter)}
+                        ${getFormStyle(letter)}
                       `}
                       >
                         <Text className={styles.formText}>{letter}</Text>
