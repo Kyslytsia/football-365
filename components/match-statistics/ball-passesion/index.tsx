@@ -35,13 +35,13 @@ export const BallPossession = ({
           height={radius * 2}
           viewBox={`0 0 ${radius * 2} ${radius * 2}`}
         >
-          <Path d={calculateArc(percentageHome, radius)} fill={colorHome} />
+          <Path d={calculateArc(percentageAway, radius)} fill={colorAway} />
 
           <Path
-            d={calculateArc(percentageAway, radius)}
-            fill={colorAway}
+            d={calculateArc(percentageHome, radius)}
+            fill={colorHome}
             transform={`rotate(${
-              (percentageHome / 100) * 360
+              (percentageAway / 100) * 360
             }, ${center}, ${center})`}
           />
         </Svg>

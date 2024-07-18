@@ -74,7 +74,7 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
             <View className="flex-row">
               <View className="flex-row justify-end w-1/2 h-1 mt-1 bg-gray-700 rounded-l-md overflow-hidden">
                 <View
-                  className={`h-full bg-green-500`}
+                  className={`h-full bg-green-700`}
                   style={{
                     width: `${
                       stat.isPercentage
@@ -89,7 +89,7 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
 
               <View className="flex-row justify-start w-1/2 h-1 mt-1 bg-gray-700 rounded-r-md overflow-hidden">
                 <View
-                  className={`h-full bg-blue-500`}
+                  className={`h-full bg-blue-700`}
                   style={{
                     width: `${
                       stat.isPercentage

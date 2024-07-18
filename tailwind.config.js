@@ -20,6 +20,7 @@ module.exports = {
         Grey: casper,
         Black: tune,
         Blue: loading,
+        Green: malachite,
         wrapper: {
           bg: balticSea2,
           bgTitle: charade,
