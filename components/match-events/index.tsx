@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Animated, {
-  Easing,
-  useAnimatedStyle,
-  useSharedValue,
   withTiming,
+  useSharedValue,
+  useAnimatedStyle,
 } from "react-native-reanimated";
 import { View, Text, Pressable } from "react-native";
 

@@ -9,7 +9,7 @@ export const RenderList = memo(({ item }: { item: GroupedMatches }) => {
   return (
     <View className="m-auto w-[360px]">
       <Wrapper
-        margin="mb-[20px]"
+        wrapperClass="mb-[20px]"
         title={
           <Text className="text-white">{getFormattedDate(item.date)}</Text>
         }

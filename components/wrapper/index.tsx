@@ -5,8 +5,8 @@ import { WrapperProps } from "./types";
 import { View } from "react-native";
 
 export const Wrapper = memo(
-  ({ title, margin, children, padding }: WrapperProps) => {
-    const styles = getStyles({ margin, padding });
+  ({ title, wrapperClass, children, childrenClass }: WrapperProps) => {
+    const styles = getStyles({ wrapperClass, childrenClass });
 
     return (
       <View className={styles.wrapper}>
