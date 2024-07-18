@@ -10,6 +10,7 @@ import { StandingProps } from "@/types/standings";
 
 import { Nav } from "./nav";
 import { TableInfo } from "@/components/table-info";
+import { ScrollView } from "react-native";
 
 const NationalTable = () => {
   const [standings, setStandings] = useState<StandingProps[]>([]);
@@ -81,7 +82,7 @@ const NationalTable = () => {
   }, [round]);
 
   return (
-    <>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <Nav setValue={setNavValue} />
 
       <Table
@@ -90,7 +91,7 @@ const NationalTable = () => {
         isChampion={isChampion}
         component={<TableInfo />}
       />
-    </>
+    </ScrollView>
   );
 };
 

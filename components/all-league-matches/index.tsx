@@ -27,7 +27,7 @@ export const AllLeaguesMatches = memo(({ matches }: { matches: Matches[] }) => {
       {matches.map((league) => {
         return (
           <Wrapper
-            margin="mb-[15px]"
+            wrapperClass="mb-[15px]"
             key={league.leagueName}
             title={
               <Pressable

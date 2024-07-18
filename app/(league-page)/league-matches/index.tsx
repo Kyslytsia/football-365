@@ -94,6 +94,7 @@ const LeagueMatches = () => {
         data={isMatches}
         estimatedItemSize={500}
         removeClippedSubviews={false}
+        showsVerticalScrollIndicator={false}
         overrideItemLayout={overrideItemLayout}
         initialScrollIndex={value === "all matches" ? index : 0}
         keyExtractor={(group, index) => `${group.date}_${index}`}

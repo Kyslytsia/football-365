@@ -58,6 +58,7 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
 
   return (
     <Wrapper
+      wrapperClass="mb-4"
       childrenClass="flex-col gap-y-[5px] py-4"
       title={<Text className="text-white">match statistics</Text>}
     >

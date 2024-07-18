@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import { View, Text, Pressable } from "react-native";
 import Animated, {
   withTiming,
   useSharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import { View, Text, Pressable } from "react-native";
 
 import { Events, Match } from "@/types/matchPage";
 
@@ -114,7 +114,10 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
   }, [matchData]);
 
   return (
-    <Wrapper title={<Text className="text-white">match events</Text>}>
+    <Wrapper
+      wrapperClass="mb-4"
+      title={<Text className="text-white">match events</Text>}
+    >
       <Animated.View
         style={useAnimatedStyle(() => {
           return {

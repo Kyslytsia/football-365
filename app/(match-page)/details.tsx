@@ -51,11 +51,9 @@ const Details = () => {
     fetchHeadToHead();
   }, [homeId, awayId]);
 
-  console.log({ matchData });
-
   return (
-    <ScrollView>
-      <View className="mx-auto mt-2">
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View className="flex-col gap-y-[10px] mx-auto mt-2">
         {notStarted !== "NS" && (
           <>
             <MatchEvents match={matchData} />

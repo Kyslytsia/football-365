@@ -14,6 +14,7 @@ import {
 import { UCLKnockout } from "./UCL-knockout";
 import { UELKnockout } from "./UEL-knockout";
 import { UEROKnockout } from "./EURO-knockout";
+import { ScrollView } from "react-native";
 
 const Knockout = () => {
   const [roundOf16, setRoundOf16] = useState<MatchProps[]>([]);
@@ -87,7 +88,7 @@ const Knockout = () => {
       {loading ? (
         <Loading />
       ) : (
-        <>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {name === "UEFA Champions League" && (
             <UCLKnockout
               final={final}
@@ -114,7 +115,7 @@ const Knockout = () => {
               quarterFinals={quarterFinals}
             />
           )}
-        </>
+        </ScrollView>
       )}
     </>
   );

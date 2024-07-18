@@ -42,6 +42,7 @@ const Groups = () => {
     <FlashList
       data={standings}
       estimatedItemSize={300}
+      showsVerticalScrollIndicator={false}
       keyExtractor={(_, index) => index.toString() + "championship"}
       renderItem={({ item }) => (
         <View className="flex-col my-2">
