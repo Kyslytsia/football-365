@@ -39,8 +39,6 @@ export const Rounds = ({ value, setValue }: RoundsProps) => {
   const change = (round: string) => {
     setValue(round);
     setIsOpen(false);
-    heightScroll.value = withSpring(0);
-    heightWrapper.value = withSpring(0);
   };
 
   const toggleOpen = () => {
