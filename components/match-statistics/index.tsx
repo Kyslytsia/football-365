@@ -1,10 +1,15 @@
-import { Match } from "@/types/matchPage";
 import React, { useState } from "react";
 import { Pressable, Text, View } from "react-native";
+import Animated, {
+  withTiming,
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+
+import { Match } from "@/types/matchPage";
+
 import { Wrapper } from "../wrapper";
 import { BallPossession } from "./ball-passesion";
-// import { Match } from "../../pages/match-page/types";
-// import { BallPossession } from "./ball-possesssion";
 
 interface MatchStatisticsProps {
   match?: Match[] | [];
@@ -15,6 +20,7 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
 
   const firstTeamStat = match?.[0]?.statistics?.[0]?.statistics;
   const secondTeamStat = match?.[0]?.statistics?.[1]?.statistics;
+  const heightView = useSharedValue(180);
 
   const data = firstTeamStat?.map((homeStat) => {
     const awayStat = secondTeamStat?.find((s) => s?.type === homeStat?.type);
@@ -43,6 +49,13 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
   const statsData = data?.filter((el) => el.label !== "Ball Possession");
   const ballPossession = data?.find((el) => el.label === "Ball Possession");
 
+  const toggle = (bol: boolean) => {
+    setIsOpen(bol);
+    heightView.value = withTiming(isOpen ? 180 : 1500, {
+      duration: 300,
+    });
+  };
+
   return (
     <Wrapper
       childrenClass="flex-col gap-y-[5px] py-4"
@@ -58,10 +71,13 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
         percentageAway={ballPossession?.awayPercentage ?? 0}
       />
 
-      <View
-        className={`p-4 ${
-          isOpen ? "max-h-full" : "max-h-185"
-        } overflow-hidden transition-max-h duration-200 ease-in-out`}
+      <Animated.View
+        className="p-4 overflow-hidden"
+        style={useAnimatedStyle(() => {
+          return {
+            maxHeight: heightView.value,
+          };
+        })}
       >
         {statsData?.map((stat, index) => (
           <View key={index} className="flex items-center justify-between py-2">
@@ -104,12 +120,9 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
             </View>
           </View>
         ))}
-      </View>
+      </Animated.View>
 
-      <Pressable
-        className="p-2 cursor-pointer"
-        onPress={() => setIsOpen(!isOpen)}
-      >
+      <Pressable className="p-2 cursor-pointer" onPress={() => toggle(!isOpen)}>
         <Text className="text-white text-center">
           {!isOpen ? "Show more" : "Close"}
         </Text>
