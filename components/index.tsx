@@ -9,4 +9,5 @@ export { MatchEvents } from "./match-events";
 export { Nav } from "./nav";
 export { Rounds } from "./rounds";
 export { Table } from "./table";
+export { TableInfo } from "./table-info";
 export { Wrapper } from "./wrapper";

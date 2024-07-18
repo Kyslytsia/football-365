@@ -8,8 +8,6 @@ const Table = () => {
   const { name } = useGlobalSearchParams();
   const route = useRouter();
 
-  console.log(name);
-
   useEffect(() => {
     if (
       name === "Euro Championship" ||

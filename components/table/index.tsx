@@ -9,10 +9,10 @@ import { StatisticsTable } from "./statistics-table";
 export const Table = memo(
   ({
     navValue,
+    component,
     standings,
     isChampion,
     championship,
-    component,
   }: TableProps) => {
     return (
       <ScrollView
