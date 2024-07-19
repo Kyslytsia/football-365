@@ -8,8 +8,6 @@ import Header from "./header";
 export default function Layout() {
   const { name, icon } = useGlobalSearchParams();
 
-  console.log(name);
-
   return (
     <>
       <Header icon={icon as string} leagueName={name as string} />
@@ -24,7 +22,7 @@ export default function Layout() {
 
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="league-matches/index" />
-        <Stack.Screen name="table/index" />
+        <Stack.Screen name="table" />
       </Stack>
     </>
   );

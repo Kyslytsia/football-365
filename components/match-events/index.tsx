@@ -109,8 +109,8 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
     if (extra > 0) height = extra * 36 + 17.5 + height;
     if (pen > 0) height = pen * 36 + 17.5 + height;
 
-    heightView.value = height - 30;
-    setInitialHeight(height - 30);
+    heightView.value = height;
+    setInitialHeight(height);
   }, [matchData]);
 
   return (

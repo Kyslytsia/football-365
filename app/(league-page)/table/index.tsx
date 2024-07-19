@@ -1,12 +1,13 @@
-import "react-native-reanimated";
+import { useEffect } from "react";
 import { useRouter, useGlobalSearchParams } from "expo-router";
 
 import NationalTable from "./table-national";
-import { useEffect } from "react";
 
 const Table = () => {
   const { name } = useGlobalSearchParams();
   const route = useRouter();
+
+  console.log(name);
 
   useEffect(() => {
     if (

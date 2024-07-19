@@ -96,7 +96,7 @@ const MainPage = () => {
     <FlashList
       data={matches}
       estimatedItemSize={500}
-      initialScrollIndex={index}
+      initialScrollIndex={240}
       removeClippedSubviews={false}
       showsVerticalScrollIndicator={false}
       overrideItemLayout={overrideItemLayout}

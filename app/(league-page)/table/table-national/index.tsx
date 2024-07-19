@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getRounds } from "@/api/rounds";
-import { Table } from "@/components/table";
 import { getCurrentSeason } from "@/hooks";
 import { getStandings } from "@/api/standings";
+import { Table, TableInfo } from "@/components";
 import { StandingProps } from "@/types/standings";
 
 import { Nav } from "./nav";
-import { TableInfo } from "@/components/table-info";
-import { ScrollView } from "react-native";
 
 const NationalTable = () => {
   const [standings, setStandings] = useState<StandingProps[]>([]);
