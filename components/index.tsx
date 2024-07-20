@@ -8,6 +8,7 @@ export { Matches } from "./matches";
 export { MatchEvents } from "./match-events";
 export { MatchInfo } from "./match-info";
 export { Nav } from "./nav";
+export { PreviousMeetings } from "./previous-metings";
 export { Rounds } from "./rounds";
 export { Table } from "./table";
 export { TableInfo } from "./table-info";

@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getMatchId } from "@/api/match";
 import { Match } from "@/types/matchPage";
-import { MatchEvents, MatchInfo } from "@/components";
+import { MatchEvents, MatchInfo, PreviousMeetings } from "@/components";
 import { getHeadToHead } from "@/api/headToHead";
 import MatchStatistics from "@/components/match-statistics";
 
@@ -63,13 +63,13 @@ const Details = () => {
 
         <MatchInfo match={matchData} />
 
-        {/* <PreviousMeetings
+        <PreviousMeetings
           matches={headToHead}
           homeId={Number(homeId) ?? null}
           awayId={Number(awayId) ?? null}
-          logoHome={match?.[0]?.teams.home.logo ?? ""}
-          logoAway={match?.[0]?.teams.away.logo ?? ""}
-        /> */}
+          logoHome={matchData?.[0]?.teams.home.logo ?? ""}
+          logoAway={matchData?.[0]?.teams.away.logo ?? ""}
+        />
       </View>
     </ScrollView>
   );
