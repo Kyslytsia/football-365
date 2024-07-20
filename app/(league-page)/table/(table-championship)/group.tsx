@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-
-import { useGlobalSearchParams } from "expo-router";
 import { View } from "react-native";
-import { StandingProps } from "@/types/standings";
-import { getStandings } from "@/api/standings";
-import { getCurrentSeason } from "@/hooks";
-import { Table } from "@/components";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useGlobalSearchParams } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { Table } from "@/components";
+import { getCurrentSeason } from "@/hooks";
+import { getStandings } from "@/api/standings";
+import { StandingProps } from "@/types/standings";
 
 const Groups = () => {
   const [standings, setStandings] = useState<StandingProps[][]>([]);
@@ -26,6 +26,7 @@ const Groups = () => {
           setStandings(JSON.parse(storageData));
         } else {
           const response = await getStandings(year, ID, name as string);
+
           await AsyncStorage.setItem(
             `${name} standings`,
             JSON.stringify(response)

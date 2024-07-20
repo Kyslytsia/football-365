@@ -61,12 +61,13 @@ const NationalTable = () => {
 
           setStandings(standings);
           setRound(rounds);
-          if (standings.length !== 0) {
-            await AsyncStorage.setItem(
-              `${name} standings`,
-              JSON.stringify(standings)
-            );
-          }
+
+          await AsyncStorage.setItem(`${name} Rounds`, JSON.stringify(rounds));
+
+          await AsyncStorage.setItem(
+            `${name} standings`,
+            JSON.stringify(standings)
+          );
         }
       } catch (error: any) {
         console.error(error.message);

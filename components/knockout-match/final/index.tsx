@@ -24,7 +24,7 @@ export const Final = memo(
     const { name } = useGlobalSearchParams();
 
     return (
-      <View className="relative flex flex-col items-center justify-between p-4 w-[330px] h-[120px] bg-gray-800 rounded-lg border border-Grey">
+      <View className="relative flex flex-col items-center justify-center p-4 w-[330px] h-[120px] bg-gray-800 rounded-lg border border-Grey">
         {finalEndedOnPenalties && (
           <Text className="absolute top-0.5 text-xs text-Grey">after pen</Text>
         )}

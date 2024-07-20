@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -14,7 +15,6 @@ import {
 import { UCLKnockout } from "./UCL-knockout";
 import { UELKnockout } from "./UEL-knockout";
 import { UEROKnockout } from "./EURO-knockout";
-import { ScrollView } from "react-native";
 
 const Knockout = () => {
   const [roundOf16, setRoundOf16] = useState<MatchProps[]>([]);
@@ -29,31 +29,41 @@ const Knockout = () => {
   useEffect(() => {
     (async () => {
       try {
-        const storageRoundOf16 = await AsyncStorage.getItem(
-          `${name} Round of 16`
+        const roundNames = [
+          "Round of 16",
+          "Quarter Finals",
+          "Semi Finals",
+          "Final",
+        ];
+
+        const storageData = await Promise.all(
+          roundNames.map((round) => AsyncStorage.getItem(`${name} ${round}`))
         );
-        const storageQuarterFinals = await AsyncStorage.getItem(
-          `${name} Quarter Finals`
-        );
-        const storageSemiFinals = await AsyncStorage.getItem(
-          `${name} Semi Finals`
-        );
-        const storageFinal = await AsyncStorage.getItem(`${name} Final`);
+
+        const [
+          storageRoundOf16,
+          storageQuarterFinals,
+          storageSemiFinals,
+          storageFinal,
+        ] = storageData;
 
         if (!storageQuarterFinals || storageQuarterFinals === "[]") {
-          const [roundOf16, quarterFinals, semiFinals, final] =
-            await Promise.allSettled([
-              getRoundOf16Matches(ID, name as string),
-              getQuarterFinalsMatches(ID, name as string),
-              getSemiFinalsMatches(ID, name as string),
-              getFinalMatch(ID, name as string),
-            ]);
+          const rounds = await Promise.allSettled([
+            getRoundOf16Matches(ID, name as string),
+            getQuarterFinalsMatches(ID, name as string),
+            getSemiFinalsMatches(ID, name as string),
+            getFinalMatch(ID, name as string),
+          ]);
 
-          [roundOf16, quarterFinals, semiFinals, final].forEach(async (el) => {
+          rounds.forEach(async (el, index) => {
             if (el.status === "fulfilled") {
-              setRoundOf16(el.value);
+              if (index === 0) setRoundOf16(el.value);
+              if (index === 1) setQuarterFinals(el.value);
+              if (index === 2) setSemiFinals(el.value);
+              if (index === 3) setFinal(el.value);
+
               await AsyncStorage.setItem(
-                `${name} Round of 16`,
+                `${name} ${roundNames[index]}`,
                 JSON.stringify(el.value)
               );
             }

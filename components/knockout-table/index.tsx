@@ -5,8 +5,8 @@ import { KnockoutTableProps } from "./types";
 import { KnockoutMatch } from "../knockout-match";
 import { KnockoutMatches } from "../knockout-matches";
 import {
-  quarterFinalsLines,
   roundOf16Lines,
+  quarterFinalsLines,
   semiFinalsAndFinalLines,
 } from "./lineClasses";
 
