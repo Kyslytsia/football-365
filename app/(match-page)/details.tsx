@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getMatchId } from "@/api/match";
 import { Match } from "@/types/matchPage";
-import { MatchEvents } from "@/components";
+import { MatchEvents, MatchInfo } from "@/components";
 import { getHeadToHead } from "@/api/headToHead";
 import MatchStatistics from "@/components/match-statistics";
 
@@ -38,10 +38,9 @@ const Details = () => {
           setMatchData(match);
           await AsyncStorage.setItem("match", JSON.stringify(match));
 
-          const response = await getHeadToHead(homeId, awayId);
-          setHeadToHead(response);
-          console.log("headToHead", response);
-          await AsyncStorage.setItem("H2H", JSON.stringify(response));
+          const headToHead = await getHeadToHead(homeId, awayId);
+          setHeadToHead(headToHead);
+          await AsyncStorage.setItem("H2H", JSON.stringify(headToHead));
         }
       } catch (error: any) {
         console.error(error.message);
@@ -62,7 +61,7 @@ const Details = () => {
           </>
         )}
 
-        {/* <MatchInfo match={match} /> */}
+        <MatchInfo match={matchData} />
 
         {/* <PreviousMeetings
           matches={headToHead}
