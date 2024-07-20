@@ -19,12 +19,13 @@ const Details = () => {
   const { id } = useGlobalSearchParams();
 
   const ID = Number(id);
+  console.log(ID);
 
   useEffect(() => {
     const fetchHeadToHead = async () => {
       try {
-        const h2h = await AsyncStorage.getItem("H2H");
-        const storageMatch = await AsyncStorage.getItem("match");
+        const h2h = await AsyncStorage.getItem(`${id} H2H`);
+        const storageMatch = await AsyncStorage.getItem(`${id} match`);
 
         const isStorage = h2h && storageMatch;
 
@@ -36,11 +37,11 @@ const Details = () => {
         if (!isStorage) {
           const match = await getMatchId(ID);
           setMatchData(match);
-          await AsyncStorage.setItem("match", JSON.stringify(match));
+          await AsyncStorage.setItem(`${id} match`, JSON.stringify(match));
 
           const headToHead = await getHeadToHead(homeId, awayId);
           setHeadToHead(headToHead);
-          await AsyncStorage.setItem("H2H", JSON.stringify(headToHead));
+          await AsyncStorage.setItem(`${id} H2H`, JSON.stringify(headToHead));
         }
       } catch (error: any) {
         console.error(error.message);

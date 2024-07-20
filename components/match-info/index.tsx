@@ -29,6 +29,7 @@ export const MatchInfo = ({ match }: { match?: Match[] | [] }) => {
         icon={
           <Image
             alt={league?.name}
+            contentFit="contain"
             source={league?.logo}
             className="w-[25px] h-[25px]"
           />

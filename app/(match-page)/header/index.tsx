@@ -49,7 +49,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
           </View>
         ) : (
           <View className="relative flex-row justify-center items-center w-[100px] mx-auto">
-            <Text className="flex items-center justify-center text-[8px]">
+            <Text className="flex items-center justify-center text-[8px] text-white">
               {matchEndedOnPenalties && `(${matchData?.score.penalty.home})`}
             </Text>
 
@@ -70,7 +70,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
               {matchData?.goals.away ?? "0"}
             </Text>
 
-            <Text className="flex items-center justify-center text-[8px]">
+            <Text className="flex items-center justify-center text-[8px] text-white">
               {matchEndedOnPenalties && `(${matchData?.score?.penalty?.away})`}
             </Text>
           </View>

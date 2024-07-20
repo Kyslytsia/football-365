@@ -38,7 +38,12 @@ export const PreviousMeetings = ({
       title={<Text className="text-white">previous meetings</Text>}
     >
       <View className="flex flex-row items-center justify-between p-7">
-        <Image source={logoHome} className="h-12 w-12" alt="1" />
+        <Image
+          alt="1"
+          source={logoHome}
+          contentFit="contain"
+          className="h-12 w-12"
+        />
 
         <View className="flex flex-row items-center justify-center gap-2.5">
           <View className="flex flex-col items-center justify-center text-white">
@@ -57,7 +62,12 @@ export const PreviousMeetings = ({
           </View>
         </View>
 
-        <Image source={logoAway} className="h-12 w-12" alt="2" />
+        <Image
+          alt="2"
+          source={logoAway}
+          className="h-12 w-12"
+          contentFit="contain"
+        />
       </View>
     </Wrapper>
   );

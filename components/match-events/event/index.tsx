@@ -37,17 +37,17 @@ export const Event = ({ event, homeTeam }: EventProps) => {
     <View>
       {isGoal && <Ball width={10} height={10} />}
       {isMissedPenalty && !isPenaltySeries && (
-        <Text className="flex items-center justify-center h-2.5 w-2.5 rounded-full bg-red-600 text-[8px] font-medium">
-          M
-        </Text>
+        <View className="flex items-center justify-center h-2.5 w-2.5 rounded-full bg-red-600">
+          <Text className="text-[8px] font-medium">M</Text>
+        </View>
       )}
       {isMissedPenalty && isPenaltySeries && (
         <Ball width={10} height={10} fill="red" />
       )}
       {isScoredPenalty && !isPenaltySeries && (
-        <Text className="flex items-center justify-center h-2.5 w-2.5 rounded-full bg-yellow-400 text-[8px] font-medium">
-          P
-        </Text>
+        <View className="flex items-center justify-center h-2.5 w-2.5 rounded-full bg-white">
+          <Text className="text-[8px] text-center font-medium">P</Text>
+        </View>
       )}
       {isScoredPenalty && isPenaltySeries && (
         <Ball width={10} height={10} fill="green" />
@@ -61,7 +61,7 @@ export const Event = ({ event, homeTeam }: EventProps) => {
   const renderEventTime = () => (
     <View className="relative flex items-center justify-center ">
       <Text
-        className={`flex items-center justify-center text-white bg-wrapper-bg text-xs w-[16px] text-center ${
+        className={`flex items-center justify-center text-white bg-wrapper-bg text-xs w-[25px] text-center ${
           isHomeName ? "right-[0]" : "left-[0]"
         }`}
       >
@@ -77,7 +77,7 @@ export const Event = ({ event, homeTeam }: EventProps) => {
       }`}
     >
       <View
-        className={`flex flex-row gap-x-3 items-center w-[200px] ${
+        className={`flex flex-row gap-x-3 items-center w-[204px] ${
           isHomeName ? "justify-end" : "justify-start"
         }`}
       >

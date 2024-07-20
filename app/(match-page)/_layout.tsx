@@ -18,7 +18,7 @@ const MatchPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const storageMatch = await AsyncStorage.getItem("match");
+        const storageMatch = await AsyncStorage.getItem(`${id} match`);
 
         const isMatch = storageMatch && storageMatch !== "[]";
 
@@ -29,7 +29,7 @@ const MatchPage = () => {
 
           setMatch(match);
 
-          await AsyncStorage.setItem("match", JSON.stringify(match));
+          await AsyncStorage.setItem(`${id} match`, JSON.stringify(match));
         }
       } catch (error: any) {
         console.error(error.message);

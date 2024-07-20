@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 
 import { Match } from "@/types/matchPage";
-import { useLocalSearchParams } from "expo-router";
+import { useGlobalSearchParams, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMatchId } from "@/api/match";
 import { LineupBench, LineupTactics } from "@/components";
@@ -14,25 +14,27 @@ const Lineups = () => {
   const awayTeam = match?.[0]?.teams.away.name;
   const tactics = match?.[0]?.lineups[team].formation;
 
-  const { id } = useLocalSearchParams();
+  const { id } = useGlobalSearchParams();
 
   const ID = Number(id);
+
+  console.log(ID);
 
   useEffect(() => {
     (async () => {
       try {
-        const storageMatch = await AsyncStorage.getItem("match");
+        const storageMatch = await AsyncStorage.getItem(`${id} match`);
 
         const isMatch = storageMatch && storageMatch !== "[]";
 
         if (isMatch) setMatch(JSON.parse(storageMatch));
 
         if (!isMatch) {
-          const match = await getMatchId(ID);
+          const response = await getMatchId(ID);
 
-          setMatch(match);
+          setMatch(response);
 
-          await AsyncStorage.setItem("match", JSON.stringify(match));
+          await AsyncStorage.setItem(`${id} match`, JSON.stringify(response));
         }
       } catch (error: any) {
         console.error(error.message);

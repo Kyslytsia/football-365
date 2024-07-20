@@ -57,8 +57,10 @@ export const Player = ({
 
           {playerGoal && (
             <View className="relative">
-              <View className="absolute top-1 left-[-4px] w-2.5 h-2.5 rounded-full bg-blue-600 text-white text-2xs flex items-center justify-center">
-                <Text className="text-white text-2xs">{playerGoal}</Text>
+              <View className="absolute top-[-4px] left-[-4px] w-2.5 h-2.5 rounded-full bg-blue-600 text-white text-2xs flex items-center justify-center z-10">
+                <Text className="text-white text-[8px] text-center">
+                  {playerGoal}
+                </Text>
               </View>
 
               <Ball width="18px" height="18px" />
@@ -67,7 +69,7 @@ export const Player = ({
 
           {playerSubs && (
             <View className="relative">
-              <Text className="absolute top-2 left-2.5 text-white text-[8px]">
+              <Text className="absolute top-0 right-[-4px] text-white text-[8px] font-bold z-10">
                 {playerSubs}
               </Text>
 
