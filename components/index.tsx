@@ -2,6 +2,7 @@ export { AllLeaguesMatches } from "./all-league-matches";
 export { KnockoutMatch } from "./knockout-match";
 export { KnockoutMatches } from "./knockout-matches";
 export { KnockoutTable } from "./knockout-table";
+export { LineupTactics } from "./lineups-tactics";
 export { Loading } from "./loading";
 export { Match } from "./match";
 export { Matches } from "./matches";

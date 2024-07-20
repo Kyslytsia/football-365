@@ -6,5 +6,5 @@ export const ligue1 = require("./ligue-1.png");
 export const premierleague = require("./premierleague.png");
 export const seriaA = require("./serie-a.png");
 export const ucl = require("./ucl.webp");
-export const field = require("./Football_field.png");
+export const field = require("./Football-field.png");
 export const matchBg = require("./match-bg.jpg");

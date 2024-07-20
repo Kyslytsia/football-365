@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -46,12 +45,13 @@ const MatchPage = () => {
         rightText="lineups"
         leftText="details"
         rightRoute="/lineups"
-        classNameWrapper="p-2"
         leftRoute="/details"
+        classNameWrapper="p-2"
       />
 
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="details" />
+        <Stack.Screen name="lineups" />
       </Stack>
     </>
   );
