@@ -21,6 +21,8 @@ module.exports = {
         Black: tune,
         Blue: loading,
         Green: malachite,
+        Red: alizarinCrimson,
+        LightRed: flamingo,
         wrapper: {
           bg: balticSea2,
           bgTitle: charade,

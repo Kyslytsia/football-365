@@ -5,7 +5,7 @@ import { Match } from "@/types/matchPage";
 import { useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMatchId } from "@/api/match";
-import { LineupTactics } from "@/components";
+import { LineupBench, LineupTactics } from "@/components";
 
 const Lineups = () => {
   const [match, setMatch] = useState<Match[]>([]);
@@ -40,15 +40,16 @@ const Lineups = () => {
     })();
   }, []);
 
-  console.log(awayTeam);
-
   return (
-    <ScrollView className="flex flex-col gap-y-4 py-2">
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      className="flex flex-col gap-y-4 py-2"
+    >
       <View className="flex-row items-center justify-center px-1 mx-auto w-[360px]">
         <TouchableOpacity
           onPress={() => setTeam(0)}
           className={`flex items-center justify-center p-1 w-1/2 rounded-full ${
-            team === 0 ? "bg-[#637ff8]" : "bg-transparent"
+            team === 0 ? "bg-nav-active" : "bg-transparent"
           }`}
         >
           <Text className="text-white">{homeTeam}</Text>
@@ -57,7 +58,7 @@ const Lineups = () => {
         <TouchableOpacity
           onPress={() => setTeam(1)}
           className={`flex items-center justify-center p-1 w-1/2 rounded-full ${
-            team === 1 ? "bg-[#637ff8]" : "bg-transparent"
+            team === 1 ? "bg-nav-active" : "bg-transparent"
           }`}
         >
           <Text className="text-white">{awayTeam}</Text>
@@ -82,7 +83,9 @@ const Lineups = () => {
         <LineupTactics team={team} match={match} />
       </View>
 
-      {/* <LineupBench team={team} match={match} />  */}
+      <View>
+        <LineupBench team={team} match={match} />
+      </View>
     </ScrollView>
   );
 };
