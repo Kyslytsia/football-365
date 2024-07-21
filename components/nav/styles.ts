@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 export const getStyles = (underline: boolean, className: string) => ({
-  wrapper: clsx("flex-row justify-center items-center gap-[20px]", {
+  wrapper: clsx("flex-row justify-center items-center gap-x-[20px]", {
     [`${className}`]: className,
   }),
   nav: clsx(

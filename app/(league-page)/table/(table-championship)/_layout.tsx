@@ -8,11 +8,11 @@ export default function Layout() {
     <>
       <Nav
         underline
-        leftText="group"
-        rightText="knockout"
+        firstRouteText="group"
         classNameWrapper="pb-4"
-        leftRoute="/table/group"
-        rightRoute="/table/knockout"
+        firstRoute="/table/group"
+        secondRouteText="knockout"
+        secondRoute="/table/knockout"
       />
 
       <Stack screenOptions={{ headerShown: false }}>

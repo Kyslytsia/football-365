@@ -13,11 +13,11 @@ export default function Layout() {
       <Header icon={icon as string} leagueName={name as string} />
 
       <Nav
-        rightText="table"
-        leftText="matches"
-        rightRoute="/table"
+        secondRoute="/table"
         classNameWrapper="p-2"
-        leftRoute="/league-matches"
+        secondRouteText="table"
+        firstRouteText="matches"
+        firstRoute="/league-matches"
       />
 
       <Stack screenOptions={{ headerShown: false }}>

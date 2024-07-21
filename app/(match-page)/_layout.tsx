@@ -42,11 +42,11 @@ const MatchPage = () => {
       <Header match={match} />
 
       <Nav
-        rightText="lineups"
-        leftText="details"
-        rightRoute="/lineups"
-        leftRoute="/details"
+        firstRoute="/details"
+        secondRoute="/lineups"
         classNameWrapper="p-2"
+        firstRouteText="details"
+        secondRouteText="lineups"
       />
 
       <Stack screenOptions={{ headerShown: false }}>

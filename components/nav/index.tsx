@@ -1,23 +1,29 @@
 import { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 
 import { NavProps } from "./type";
 import { getStyles } from "./styles";
 
 export const Nav = ({
-  leftText,
-  rightText,
-  leftRoute,
-  rightRoute,
+  fourRoute,
+  firstRoute,
+  thirdRoute,
+  secondRoute,
+  fourRouteText,
+  firstRouteText,
+  thirdRouteText,
+  secondRouteText,
   underline = false,
   classNameWrapper = "",
 }: NavProps) => {
-  const [selectedTab, setSelectedTab] = useState(leftText);
+  const [selectedTab, setSelectedTab] = useState(firstRouteText);
   const route = useRouter();
 
-  const isLeftRoute = selectedTab === leftText;
-  const isRightRoute = selectedTab === rightText;
+  const isFirstRoute = selectedTab === firstRouteText;
+  const isSecondRoute = selectedTab === secondRouteText;
+  const isThirdRoute = selectedTab === thirdRouteText;
+  const isFourRoute = selectedTab === fourRouteText;
 
   const styles = getStyles(underline, classNameWrapper);
 
@@ -30,19 +36,48 @@ export const Nav = ({
 
   return (
     <View className={styles.wrapper}>
-      <Pressable
-        className={`${styles.nav} ${isLeftRoute ? styles.active : ""}`}
-        onPress={() => handleNavigate(leftRoute, leftText)}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          flex: thirdRoute && fourRoute ? 0 : 1,
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
       >
-        <Text className="text-white">{leftText}</Text>
-      </Pressable>
+        <TouchableOpacity
+          className={`${styles.nav} ${isFirstRoute ? styles.active : ""}`}
+          onPress={() => handleNavigate(firstRoute, firstRouteText)}
+        >
+          <Text className="text-white">{firstRouteText}</Text>
+        </TouchableOpacity>
 
-      <Pressable
-        className={`${styles.nav} ${isRightRoute ? styles.active : ""}`}
-        onPress={() => handleNavigate(rightRoute, rightText)}
-      >
-        <Text className="text-white">{rightText}</Text>
-      </Pressable>
+        <TouchableOpacity
+          className={`${styles.nav} ${isSecondRoute ? styles.active : ""}`}
+          onPress={() => handleNavigate(secondRoute, secondRouteText)}
+        >
+          <Text className="text-white">{secondRouteText}</Text>
+        </TouchableOpacity>
+
+        {thirdRoute && thirdRouteText && (
+          <TouchableOpacity
+            className={`${styles.nav} ${isThirdRoute ? styles.active : ""}`}
+            onPress={() => handleNavigate(thirdRoute, thirdRouteText)}
+          >
+            <Text className="text-white">{thirdRouteText}</Text>
+          </TouchableOpacity>
+        )}
+
+        {fourRoute && fourRouteText && (
+          <TouchableOpacity
+            className={`${styles.nav} ${isFourRoute ? styles.active : ""}`}
+            onPress={() => handleNavigate(fourRoute, fourRouteText)}
+          >
+            <Text className="text-white">{fourRouteText}</Text>
+          </TouchableOpacity>
+        )}
+      </ScrollView>
     </View>
   );
 };
