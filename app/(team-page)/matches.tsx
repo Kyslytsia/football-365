@@ -9,12 +9,7 @@ const index = () => {
 
   return (
     <View>
-      <Text>srgdtfhg</Text>
-      <Text>srgdtfhg</Text>
-      <Text>srgdtfhg</Text>
-      <Text>srgdtfhg</Text>
-      <Text>{id}</Text>
-      <Text>{name}</Text>
+      <Text>matches</Text>
     </View>
   );
 };

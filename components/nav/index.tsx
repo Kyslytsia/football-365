@@ -44,6 +44,7 @@ export const Nav = ({
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "row",
+          padding: thirdRoute && fourRoute ? 10 : 0,
         }}
       >
         <TouchableOpacity
