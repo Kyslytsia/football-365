@@ -1,9 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
+import { useNavigation } from "expo-router";
+import { Image, ImageBackground } from "expo-image";
+
+import { matchBg } from "@/assets/img";
 import { Match } from "@/types/matchPage";
 import { getFormattedDate, MatchTime } from "@/hooks";
-import { Image, ImageBackground } from "expo-image";
-import { matchBg } from "@/assets/img";
 
 export const Header = ({ match }: { match?: Match[] | [] }) => {
   const matchData = match?.[0];
@@ -14,18 +16,38 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
   const matchNotStarted = matchData?.fixture.status.short === "NS";
   const matchEndedOnPenalties = matchData?.fixture.status.short === "PEN";
 
+  const navigation = useNavigation<any>();
+
+  const handleNavigate = (id: number, name: string, icon: string) => {
+    navigation.push("(team-page)", {
+      id: id,
+      name: name,
+      icon: icon,
+    });
+  };
+
   return (
     <ImageBackground
       source={matchBg}
       className="relative flex-row justify-around items-center py-2 h-[100px]"
     >
       <View className="flex flex-col justify-around items-center w-[120px]">
-        <Image
-          contentFit="contain"
-          className="w-[50px] h-[50px]"
-          alt={matchData?.teams?.home?.name}
-          source={matchData?.teams?.home?.logo}
-        />
+        <Pressable
+          onPress={() =>
+            handleNavigate(
+              matchData?.teams.home.id as number,
+              matchData?.teams.home.name as string,
+              matchData?.teams.home.logo as string
+            )
+          }
+        >
+          <Image
+            contentFit="contain"
+            className="w-[50px] h-[50px]"
+            alt={matchData?.teams?.home?.name}
+            source={matchData?.teams?.home?.logo}
+          />
+        </Pressable>
 
         <Text className="text-[11px] text-white">
           {matchData?.teams?.home?.name}
@@ -78,12 +100,22 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
       </View>
 
       <View className="flex flex-col justify-around items-center w-[120px]">
-        <Image
-          contentFit="contain"
-          className="w-[50px] h-[50px]"
-          alt={matchData?.teams?.away?.name}
-          source={matchData?.teams?.away?.logo}
-        />
+        <Pressable
+          onPress={() =>
+            handleNavigate(
+              matchData?.teams.away.id as number,
+              matchData?.teams.away.name as string,
+              matchData?.teams.away.logo as string
+            )
+          }
+        >
+          <Image
+            contentFit="contain"
+            className="w-[50px] h-[50px]"
+            alt={matchData?.teams?.away?.name}
+            source={matchData?.teams?.away?.logo}
+          />
+        </Pressable>
 
         <Text className="text-[11px] text-white">
           {matchData?.teams?.away?.name}

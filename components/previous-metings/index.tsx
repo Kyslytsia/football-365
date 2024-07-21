@@ -1,7 +1,9 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
+import { Image } from "expo-image";
+import { useNavigation } from "expo-router";
+
 import { Wrapper } from "../wrapper";
 import { PreviousMeetingsProps } from "./types";
-import { Image } from "expo-image";
 
 export const PreviousMeetings = ({
   homeId,
@@ -10,6 +12,8 @@ export const PreviousMeetings = ({
   logoHome,
   logoAway,
 }: PreviousMeetingsProps) => {
+  const homeNameTeam = matches?.find((el) => el.teams.home.id === homeId);
+  const awayNameTeam = matches?.find((el) => el.teams.away.id === awayId);
   const winsAndDraws = () => {
     let team1Wins = 0;
     let team2Wins = 0;
@@ -32,18 +36,38 @@ export const PreviousMeetings = ({
     return { team1Wins, team2Wins, draws };
   };
 
+  const navigation = useNavigation<any>();
+
+  const handleNavigate = (id: number, name: string, icon: string) => {
+    navigation.push("(team-page)", {
+      id: id,
+      name: name,
+      icon: icon,
+    });
+  };
+
   return (
     <Wrapper
       wrapperClass="mb-[20px]"
       title={<Text className="text-white">previous meetings</Text>}
     >
       <View className="flex flex-row items-center justify-between p-7">
-        <Image
-          alt="1"
-          source={logoHome}
-          contentFit="contain"
-          className="h-12 w-12"
-        />
+        <Pressable
+          onPress={() =>
+            handleNavigate(
+              homeId,
+              homeNameTeam?.teams.home.name as string,
+              logoHome
+            )
+          }
+        >
+          <Image
+            alt="1"
+            source={logoHome}
+            contentFit="contain"
+            className="h-12 w-12"
+          />
+        </Pressable>
 
         <View className="flex flex-row items-center justify-center gap-2.5">
           <View className="flex flex-col items-center justify-center text-white">
@@ -62,12 +86,22 @@ export const PreviousMeetings = ({
           </View>
         </View>
 
-        <Image
-          alt="2"
-          source={logoAway}
-          className="h-12 w-12"
-          contentFit="contain"
-        />
+        <Pressable
+          onPress={() =>
+            handleNavigate(
+              awayId,
+              homeNameTeam?.teams.away.name as string,
+              logoAway
+            )
+          }
+        >
+          <Image
+            alt="2"
+            source={logoAway}
+            className="h-12 w-12"
+            contentFit="contain"
+          />
+        </Pressable>
       </View>
     </Wrapper>
   );
