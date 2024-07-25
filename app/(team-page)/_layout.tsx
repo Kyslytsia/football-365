@@ -1,6 +1,8 @@
 import { Stack } from "expo-router";
-import Header from "./header";
+
 import { Nav } from "@/components";
+
+import Header from "./header";
 
 export default function Layout() {
   return (
@@ -14,7 +16,7 @@ export default function Layout() {
         secondRoute="/standings"
         firstRouteText="matches"
         secondRouteText="standings"
-        thirdRouteText="player stat"
+        thirdRouteText="player stats"
         thirdRoute="/playerStatistics"
       />
 

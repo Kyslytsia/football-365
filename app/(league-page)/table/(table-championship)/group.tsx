@@ -9,29 +9,31 @@ import { getCurrentSeason } from "@/hooks";
 import { getStandings } from "@/api/standings";
 import { StandingProps } from "@/types/standings";
 
-const Groups = () => {
+const Groups = ({ standingsData }: { standingsData?: StandingProps[][] }) => {
   const [standings, setStandings] = useState<StandingProps[][]>([]);
   const { id, name } = useGlobalSearchParams();
 
-  const year = getCurrentSeason(name as string);
-
   const ID = Number(id);
+  const year = getCurrentSeason(name as string);
+  const isStandingsData = standingsData ?? standings;
 
   useEffect(() => {
     (async () => {
       try {
-        const storageData = await AsyncStorage.getItem(`${name} standings`);
+        if (!standingsData) {
+          const storageData = await AsyncStorage.getItem(`${name} standings`);
 
-        if (storageData && storageData !== "[]") {
-          setStandings(JSON.parse(storageData));
-        } else {
-          const response = await getStandings(year, ID, name as string);
+          if (storageData && storageData !== "[]") {
+            setStandings(JSON.parse(storageData));
+          } else {
+            const response = await getStandings(year, ID, name as string);
 
-          await AsyncStorage.setItem(
-            `${name} standings`,
-            JSON.stringify(response)
-          );
-          setStandings(response);
+            await AsyncStorage.setItem(
+              `${name} standings`,
+              JSON.stringify(response)
+            );
+            setStandings(response);
+          }
         }
       } catch (error: any) {
         console.error(error.message);
@@ -39,9 +41,11 @@ const Groups = () => {
     })();
   }, []);
 
+  console.log({ isStandingsData });
+
   return (
     <FlashList
-      data={standings}
+      data={isStandingsData}
       estimatedItemSize={300}
       showsVerticalScrollIndicator={false}
       keyExtractor={(_, index) => index.toString() + "championship"}

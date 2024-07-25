@@ -3,15 +3,15 @@ import { ScrollView } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { Table } from "@/components";
 import { getRounds } from "@/api/rounds";
 import { getCurrentSeason } from "@/hooks";
 import { getStandings } from "@/api/standings";
-import { Table, TableInfo } from "@/components";
 import { StandingProps } from "@/types/standings";
 
 import { Nav } from "./nav";
 
-const NationalTable = () => {
+const NationalTable = ({ leagueId }: { leagueId?: number }) => {
   const [standings, setStandings] = useState<StandingProps[]>([]);
   const [navValue, setNavValue] = useState<string>("overall");
   const [round, setRound] = useState<string[]>([""]);
@@ -20,6 +20,7 @@ const NationalTable = () => {
 
   const ID = Number(id);
   const year = getCurrentSeason(name as string);
+  const isLeagueId = leagueId && typeof leagueId === "number" ? leagueId : ID;
 
   const calculateChampion = (
     standings: StandingProps[],
@@ -55,8 +56,8 @@ const NationalTable = () => {
           setRound(JSON.parse(storageRounds));
         } else {
           const [standings, rounds] = await Promise.all([
-            getStandings(year, ID),
-            getRounds(year, ID),
+            getStandings(year, isLeagueId),
+            getRounds(year, isLeagueId),
           ]);
 
           setStandings(standings);
@@ -73,7 +74,7 @@ const NationalTable = () => {
         console.error(error.message);
       }
     })();
-  }, []);
+  }, [leagueId]);
 
   useEffect(() => {
     const totalRound = +round[round.length - 1].split(" ").slice(-1);
@@ -89,7 +90,6 @@ const NationalTable = () => {
         navValue={navValue}
         standings={standings}
         isChampion={isChampion}
-        component={<TableInfo />}
       />
     </ScrollView>
   );

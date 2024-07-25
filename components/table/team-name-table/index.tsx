@@ -12,6 +12,10 @@ export const TeamNameTable = memo(
         case "Champions League":
         case "Won title":
         case "Euro":
+        case "(League A - Play Offs)":
+        case "(League A)":
+        case "(League B)":
+        case "(League C)":
           return "text-table-status-ucl";
         case "Europa League":
         case "Ranking of third-placed teams":
@@ -20,6 +24,7 @@ export const TeamNameTable = memo(
         case "Europa Conference League":
           return "text-table-status-ecl";
         case "Relegation":
+        case "(League C - Play Out)":
           return "text-table-status-rl";
         default:
           return {};

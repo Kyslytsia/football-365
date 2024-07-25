@@ -7,6 +7,7 @@ export const modifyDescription = (el: StandingProps, isChampion?: boolean) => {
       .replace("(Group Stage: )", "")
       .replace("(League phase: )", "")
       .replace("(Qualification: )", "")
+      .replace("UEFA Nations League", "")
       .replace("(Play Offs: 1/8-finals)", "")
       .replace("(Play Offs: 1/16-finals)", "")
       .trim();
