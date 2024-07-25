@@ -18,15 +18,18 @@ const Standings = () => {
       try {
         const storageLeagueId = await AsyncStorage.getItem(`${name} league`);
 
-        // if (storageLeagueId) setData(JSON.parse(storageLeagueId));
+        if (storageLeagueId) setData(JSON.parse(storageLeagueId));
 
-        // if (!storageLeagueId) {
-        const response = await getLeagueForTeamOnId(id as string);
+        if (!storageLeagueId) {
+          const response = await getLeagueForTeamOnId(id as string);
 
-        setData(response);
+          setData(response);
 
-        await AsyncStorage.setItem(`${name} league`, JSON.stringify(response));
-        // }
+          await AsyncStorage.setItem(
+            `${name} league`,
+            JSON.stringify(response)
+          );
+        }
       } catch (error: any) {
         console.error(error.message);
       }
