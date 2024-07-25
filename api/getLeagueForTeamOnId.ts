@@ -21,13 +21,15 @@ export const getLeagueForTeamOnId = async (id: string) => {
         : el?.league?.name === "UEFA Nations League"
     );
 
-    if (league.league.type === "League") return league.league.id;
+    console.log({ league });
+
+    if (league.league.type === "League")
+      return { nameLeague: league.league.name, data: league.league.id };
 
     if (league.league.name === "UEFA Nations League") {
       const currentDate = new Date().toISOString().split("T")[0];
 
       const seasons = league.seasons;
-      console.log(seasons);
       const lastSeason = seasons[seasons.length - 1];
       const secondLastSeason = seasons[seasons.length - 2];
 
@@ -40,7 +42,9 @@ export const getLeagueForTeamOnId = async (id: string) => {
       };
 
       const response = await axios.get(
-        `https://v3.football.api-sports.io/standings?league=${league.league.id}&season=2020`,
+        `https://v3.football.api-sports.io/standings?league=${
+          league.league.id
+        }&season=${getYear()}`,
         {
           headers: {
             "x-rapidapi-host": "v3.football.api-sports.io",
@@ -49,7 +53,10 @@ export const getLeagueForTeamOnId = async (id: string) => {
         }
       );
 
-      return response.data.response[0].league.standings;
+      return {
+        nameLeague: league.league.name,
+        data: response.data.response[0].league.standings,
+      };
     }
   } catch (error: any) {
     console.error(error.message);

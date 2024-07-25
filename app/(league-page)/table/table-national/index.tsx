@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -10,8 +10,9 @@ import { getStandings } from "@/api/standings";
 import { StandingProps } from "@/types/standings";
 
 import { Nav } from "./nav";
+import { NationalTableProps } from "./types";
 
-const NationalTable = ({ leagueId }: { leagueId?: number }) => {
+const NationalTable = ({ leagueId, leagueName }: NationalTableProps) => {
   const [standings, setStandings] = useState<StandingProps[]>([]);
   const [navValue, setNavValue] = useState<string>("overall");
   const [round, setRound] = useState<string[]>([""]);
@@ -85,6 +86,10 @@ const NationalTable = ({ leagueId }: { leagueId?: number }) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <Nav setValue={setNavValue} />
+
+      {leagueName && (
+        <Text className="pb-4 text-white text-center">{leagueName}</Text>
+      )}
 
       <Table
         navValue={navValue}

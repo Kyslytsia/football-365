@@ -8,25 +8,32 @@ import { getLeagueForTeamOnId } from "@/api/getLeagueForTeamOnId";
 import NationalTable from "../(league-page)/table/table-national";
 import Groups from "../(league-page)/table/(table-championship)/group";
 
+interface TeamData {
+  nameLeague: string;
+  data: number | StandingProps[][];
+}
+
 const Standings = () => {
   const { id, name } = useGlobalSearchParams();
 
-  const [data, setData] = useState<number | StandingProps[][]>();
+  const [teamData, setTeamData] = useState<TeamData>();
 
   useEffect(() => {
     (async () => {
       try {
-        const storageLeagueId = await AsyncStorage.getItem(`${name} league`);
+        const storageLeagueId = await AsyncStorage.getItem(
+          `${name} league info`
+        );
 
-        if (storageLeagueId) setData(JSON.parse(storageLeagueId));
+        if (storageLeagueId) setTeamData(JSON.parse(storageLeagueId));
 
         if (!storageLeagueId) {
           const response = await getLeagueForTeamOnId(id as string);
 
-          setData(response);
+          setTeamData(response);
 
           await AsyncStorage.setItem(
-            `${name} league`,
+            `${name} league info`,
             JSON.stringify(response)
           );
         }
@@ -38,9 +45,19 @@ const Standings = () => {
 
   return (
     <>
-      {data && typeof data === "number" && <NationalTable leagueId={data} />}
+      {teamData && typeof teamData.data === "number" && (
+        <NationalTable
+          leagueId={teamData.data}
+          leagueName={teamData.nameLeague}
+        />
+      )}
 
-      {data && Array.isArray(data) && <Groups standingsData={data} />}
+      {teamData && Array.isArray(teamData.data) && (
+        <Groups
+          standingsData={teamData.data}
+          leagueName={teamData.nameLeague}
+        />
+      )}
     </>
   );
 };
