@@ -6,7 +6,7 @@ interface PlayerSquadProps {
   name: string;
   photo: string;
   position: string;
-  number: string | number | null;
+  number?: string | number | null;
 }
 
 export const PlayerSquad = ({

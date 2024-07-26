@@ -16,6 +16,10 @@ const Squad = () => {
   const [midfielder, setMidfielder] = useState<Player[]>();
   const [attacker, setAttacker] = useState<Player[]>();
 
+  const coach = squad?.coach.find((coach) =>
+    coach.career.some((career) => career.end === null)
+  );
+
   useEffect(() => {
     (async () => {
       const storageTeamPlatersStats = await AsyncStorage.getItem(
@@ -70,10 +74,21 @@ const Squad = () => {
     setAttacker(attacker);
   }, [squad]);
 
-  console.log(squad?.players);
+  console.log(coach);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+      <Wrapper
+        wrapperClass="mb-4"
+        title={<Text className="text-white">coach</Text>}
+      >
+        <PlayerSquad
+          name={coach?.name as string}
+          photo={coach?.photo as string}
+          position={coach?.nationality as string}
+        />
+      </Wrapper>
+
       <Wrapper
         wrapperClass="mb-4"
         title={<Text className="text-white">goalkeepers</Text>}
