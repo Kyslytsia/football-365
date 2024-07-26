@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 
 import { Match } from "@/types/matchPage";
-import { useGlobalSearchParams, useLocalSearchParams } from "expo-router";
+import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMatchId } from "@/api/match";
 import { LineupBench, LineupTactics } from "@/components";
@@ -17,8 +17,6 @@ const Lineups = () => {
   const { id } = useGlobalSearchParams();
 
   const ID = Number(id);
-
-  console.log(ID);
 
   useEffect(() => {
     (async () => {

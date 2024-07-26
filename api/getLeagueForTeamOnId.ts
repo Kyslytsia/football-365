@@ -21,8 +21,6 @@ export const getLeagueForTeamOnId = async (id: string) => {
         : el?.league?.name === "UEFA Nations League"
     );
 
-    console.log({ league });
-
     if (league.league.type === "League")
       return { nameLeague: league.league.name, data: league.league.id };
 

@@ -19,7 +19,6 @@ const Details = () => {
   const { id } = useGlobalSearchParams();
 
   const ID = Number(id);
-  console.log(ID);
 
   useEffect(() => {
     const fetchHeadToHead = async () => {

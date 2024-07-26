@@ -4,7 +4,7 @@ import { useGlobalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 
 const Header = () => {
-  const { id, name, icon } = useGlobalSearchParams();
+  const { name, icon } = useGlobalSearchParams();
 
   return (
     <View className="flex-col items-center justify-center h-[110px] bg-gray-800">
