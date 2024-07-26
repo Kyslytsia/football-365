@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, Text } from "react-native";
+import { View, ScrollView } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 
-import { Wrapper } from "@/components";
 import { PlayerSStatistics } from "@/types/teamPlayersStats";
 import { getPlayersOfTeamStats } from "@/api/getPlayersOfTeamStats";
 import AsyncStorage from "@react-native-async-storage/async-storage";
