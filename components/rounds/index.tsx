@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Pressable, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useGlobalSearchParams } from "expo-router";
-import Animated, {
-  withSpring,
-  withTiming,
-  useSharedValue,
-} from "react-native-reanimated";
+import Animated, { withTiming, useSharedValue } from "react-native-reanimated";
 
 import { getRounds } from "@/api/rounds";
 import { getCurrentSeason } from "@/hooks";

@@ -6,7 +6,7 @@ import { Ball, Substitution } from "@/assets/icon";
 
 import { PlayerProps } from "./types";
 
-export const Player = ({
+export const PlayerLineup = ({
   name,
   stat,
   number,

@@ -1,6 +1,6 @@
-import { Player } from "../player";
 import { Wrapper } from "../wrapper";
 import { LineupBenchProps } from "./types";
+import { PlayerLineup } from "../player-lineup";
 
 import { Text, View } from "react-native";
 
@@ -24,7 +24,12 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
         wrapperClass="mb-[20px]"
         title={<Text className="text-white">coach</Text>}
       >
-        {<Player name={coach?.name ?? ""} playerPhoto={coach?.photo ?? ""} />}
+        {
+          <PlayerLineup
+            name={coach?.name ?? ""}
+            playerPhoto={coach?.photo ?? ""}
+          />
+        }
       </Wrapper>
 
       <Wrapper
@@ -58,7 +63,7 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
           );
 
           return (
-            <Player
+            <PlayerLineup
               key={player.player.photo}
               name={player.player.name}
               playerPhoto={player.player.photo}
