@@ -39,8 +39,6 @@ const PlayerStatistics = () => {
     })();
   }, []);
 
-  console.log({ playersStats });
-
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View className="py-2 mx-auto w-[360px]">

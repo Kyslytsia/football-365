@@ -11,6 +11,7 @@ export { MatchEvents } from "./match-events";
 export { MatchInfo } from "./match-info";
 export { Nav } from "./nav";
 export { PlayerLineup } from "./player-lineup";
+export { PlayerSquad } from "./player-squad";
 export { PlayerStat } from "./player-stat";
 export { PreviousMeetings } from "./previous-metings";
 export { Rounds } from "./rounds";

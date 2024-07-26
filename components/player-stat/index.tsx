@@ -7,21 +7,8 @@ import Animated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 
-import { PlayerSStatistics } from "@/types/teamPlayersStats";
-
 import { Wrapper } from "../wrapper";
-
-interface FilteredPlayersProps {
-  name: string;
-  photo: string;
-  nation: string;
-  stat: string | number;
-}
-
-interface PlayerStatProps {
-  type: string;
-  playersStats: PlayerSStatistics[];
-}
+import { FilteredPlayersProps, PlayerStatProps } from "./types";
 
 export const PlayerStat = ({ type, playersStats }: PlayerStatProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
