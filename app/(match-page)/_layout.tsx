@@ -14,6 +14,8 @@ const MatchPage = () => {
   const { id } = useLocalSearchParams();
 
   const ID = Number(id);
+  const matchNotStarted =
+    match.length > 0 && match?.[0].fixture.status.short === "NS";
 
   useEffect(() => {
     (async () => {
@@ -47,6 +49,7 @@ const MatchPage = () => {
         classNameWrapper="p-2"
         firstRouteText="details"
         secondRouteText="lineups"
+        disabled={matchNotStarted}
       />
 
       <Stack screenOptions={{ headerShown: false }}>

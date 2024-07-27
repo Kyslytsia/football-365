@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { View, Text, Pressable } from "react-native";
-import { useNavigation } from "expo-router";
+import { useGlobalSearchParams, useNavigation } from "expo-router";
 
 import { modifyDescription } from "@/hooks";
 
@@ -9,6 +9,9 @@ import { TeamNameTableProps } from "./types";
 export const TeamNameTable = memo(
   ({ standings, isChampion, championship }: TeamNameTableProps) => {
     const navigation = useNavigation<any>();
+    const { name } = useGlobalSearchParams();
+
+    const teamName = name;
 
     const getStatusStyle = (status: string) => {
       switch (status) {
@@ -35,12 +38,16 @@ export const TeamNameTable = memo(
     };
 
     const handleNavigate = (id: number, name: string, icon: string) => {
+      if (teamName === name) return;
+
       navigation.push("(team-page)", {
         id: id,
         name: name,
         icon: icon,
       });
     };
+
+    console.log(name);
 
     return (
       <View className="ml-10 w-full">

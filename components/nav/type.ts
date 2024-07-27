@@ -1,4 +1,5 @@
 export interface NavProps {
+  disabled?: boolean;
   firstRoute: string;
   fourRoute?: string;
   secondRoute: string;

@@ -61,13 +61,15 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
       <View className="relative flex-row justify-center items-center w-fit mx-auto">
         {matchNotStarted ? (
           <View className="flex flex-col justify-center items-center">
-            <Text className="text-[25px] whitespace-nowrap font-[500] text-white">
+            <Text className="text-[15px] whitespace-nowrap font-[500] text-white">
               {getFormattedDate(
                 new Date(matchData.fixture.date).toISOString().slice(0, 10)
               )}
             </Text>
 
-            <Text>{MatchTime(matchData.fixture.date)}</Text>
+            <Text className="text-white">
+              {MatchTime(matchData.fixture.date)}
+            </Text>
           </View>
         ) : (
           <View className="relative flex-row justify-center items-center w-[100px] mx-auto">

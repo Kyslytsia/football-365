@@ -6,6 +6,7 @@ import { NavProps } from "./type";
 import { getStyles } from "./styles";
 
 export const Nav = ({
+  disabled,
   fourRoute,
   firstRoute,
   thirdRoute,
@@ -55,10 +56,13 @@ export const Nav = ({
         </TouchableOpacity>
 
         <TouchableOpacity
+          disabled={disabled}
           className={`${styles.nav} ${isSecondRoute ? styles.active : ""}`}
           onPress={() => handleNavigate(secondRoute, secondRouteText)}
         >
-          <Text className="text-white">{secondRouteText}</Text>
+          <Text className={`text-white ${disabled && "text-gray-500"}`}>
+            {secondRouteText}
+          </Text>
         </TouchableOpacity>
 
         {thirdRoute && thirdRouteText && (
