@@ -5,9 +5,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getMatchId } from "@/api/match";
 import { Match } from "@/types/matchPage";
-import { MatchEvents, MatchInfo, PreviousMeetings } from "@/components";
 import { getHeadToHead } from "@/api/headToHead";
 import MatchStatistics from "@/components/match-statistics";
+import { MatchEvents, MatchInfo, PreviousMeetings } from "@/components";
 
 const Details = () => {
   const [matchData, setMatchData] = useState<Match[]>([]);

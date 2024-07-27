@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
 
@@ -30,7 +30,7 @@ export const AllLeaguesMatches = memo(({ matches }: { matches: Matches[] }) => {
             wrapperClass="mb-[15px]"
             key={league.leagueName}
             title={
-              <Pressable
+              <TouchableOpacity
                 onPress={() =>
                   handleNavigate(
                     league.leagueId,
@@ -49,7 +49,7 @@ export const AllLeaguesMatches = memo(({ matches }: { matches: Matches[] }) => {
 
                   <Text className="w-full text-white">{league.leagueName}</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             }
           >
             <View>

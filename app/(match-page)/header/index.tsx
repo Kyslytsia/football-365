@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "expo-router";
 import { Image, ImageBackground } from "expo-image";
 
@@ -32,7 +32,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
       className="relative flex-row justify-around items-center py-2 h-[100px]"
     >
       <View className="flex flex-col justify-around items-center w-[120px]">
-        <Pressable
+        <TouchableOpacity
           onPress={() =>
             handleNavigate(
               matchData?.teams.home.id as number,
@@ -47,7 +47,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
             alt={matchData?.teams?.home?.name}
             source={matchData?.teams?.home?.logo}
           />
-        </Pressable>
+        </TouchableOpacity>
 
         <Text className="text-[11px] text-white">
           {matchData?.teams?.home?.name}
@@ -100,7 +100,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
       </View>
 
       <View className="flex flex-col justify-around items-center w-[120px]">
-        <Pressable
+        <TouchableOpacity
           onPress={() =>
             handleNavigate(
               matchData?.teams.away.id as number,
@@ -115,7 +115,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
             alt={matchData?.teams?.away?.name}
             source={matchData?.teams?.away?.logo}
           />
-        </Pressable>
+        </TouchableOpacity>
 
         <Text className="text-[11px] text-white">
           {matchData?.teams?.away?.name}

@@ -1,5 +1,6 @@
 import { memo } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import { useNavigation } from "expo-router";
 
 import { modifyDescription } from "@/hooks";
 
@@ -7,6 +8,8 @@ import { TeamNameTableProps } from "./types";
 
 export const TeamNameTable = memo(
   ({ standings, isChampion, championship }: TeamNameTableProps) => {
+    const navigation = useNavigation<any>();
+
     const getStatusStyle = (status: string) => {
       switch (status) {
         case "Champions League":
@@ -31,6 +34,16 @@ export const TeamNameTable = memo(
       }
     };
 
+    const handleNavigate = (id: number, name: string, icon: string) => {
+      console.log("asdf");
+
+      navigation.push("(team-page)", {
+        id: id,
+        name: name,
+        icon: icon,
+      });
+    };
+
     return (
       <View className="ml-10">
         <View className="flex-row items-center h-8">
@@ -40,9 +53,18 @@ export const TeamNameTable = memo(
         </View>
 
         {standings.map((team, index) => (
-          <View
+          <TouchableOpacity
             key={index + "teamName"}
             className="flex-row pl-2 h-8 border-t border-table-border"
+            onPressIn={() => {
+              console.log("asdf");
+
+              handleNavigate(
+                team?.team.id as number,
+                team?.team.name as string,
+                team?.team.logo as string
+              );
+            }}
           >
             <View className="flex-col items-start justify-center">
               <Text className="pl-1 text-xs text-white leading-3">
@@ -58,7 +80,7 @@ export const TeamNameTable = memo(
                 </Text>
               )}
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
     );
