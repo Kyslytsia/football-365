@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { useNavigation } from "expo-router";
 
 import { modifyDescription } from "@/hooks";
@@ -35,8 +35,6 @@ export const TeamNameTable = memo(
     };
 
     const handleNavigate = (id: number, name: string, icon: string) => {
-      console.log("asdf");
-
       navigation.push("(team-page)", {
         id: id,
         name: name,
@@ -45,7 +43,7 @@ export const TeamNameTable = memo(
     };
 
     return (
-      <View className="ml-10">
+      <View className="ml-10 w-full">
         <View className="flex-row items-center h-8">
           <Text className="text-[8px] text-white text-center min-w-[115px] ml-[8px] justify-center">
             {championship && standings[0].group}
@@ -53,18 +51,16 @@ export const TeamNameTable = memo(
         </View>
 
         {standings.map((team, index) => (
-          <TouchableOpacity
+          <Pressable
             key={index + "teamName"}
             className="flex-row pl-2 h-8 border-t border-table-border"
-            onPressIn={() => {
-              console.log("asdf");
-
+            onPress={() =>
               handleNavigate(
                 team?.team.id as number,
                 team?.team.name as string,
                 team?.team.logo as string
-              );
-            }}
+              )
+            }
           >
             <View className="flex-col items-start justify-center">
               <Text className="pl-1 text-xs text-white leading-3">
@@ -80,7 +76,7 @@ export const TeamNameTable = memo(
                 </Text>
               )}
             </View>
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
     );
