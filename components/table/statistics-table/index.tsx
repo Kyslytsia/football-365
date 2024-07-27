@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Text, View } from "react-native";
 import {
+  Directions,
   Gesture,
   GestureDetector,
   GestureHandlerRootView,
@@ -8,6 +9,7 @@ import {
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  withSpring,
 } from "react-native-reanimated";
 
 import { StandingProps } from "@/types/standings";
@@ -53,6 +55,7 @@ export const StatisticsTable = memo(
     };
 
     const gesture = Gesture.Pan()
+      .minDistance(20)
       .onUpdate((e) => {
         offset.value = Math.min(
           Math.max(e.translationX + startOffset.value, -415),
