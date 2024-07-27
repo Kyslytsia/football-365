@@ -1,11 +1,11 @@
 import clsx from "clsx";
 
 export const getStyles = (underline: boolean, className: string) => ({
-  wrapper: clsx("flex-row justify-center items-center gap-x-[20px]", {
+  wrapper: clsx("flex-row justify-center items-center", {
     [`${className}`]: className,
   }),
   nav: clsx(
-    "flex justify-center items-center p-[8px] w-[100px] rounded-[20px]",
+    "flex justify-center items-center p-[8px] w-[90px] rounded-[20px]",
     {
       "rounded-none": underline,
     }

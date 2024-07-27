@@ -13,6 +13,7 @@ export default function Layout() {
         fourRoute="/squad"
         firstRoute="/matches"
         fourRouteText="squad"
+        classNameWrapper="p-3"
         secondRoute="/standings"
         firstRouteText="matches"
         secondRouteText="standings"

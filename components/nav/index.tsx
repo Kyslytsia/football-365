@@ -37,52 +37,42 @@ export const Nav = ({
 
   return (
     <View className={styles.wrapper}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{
-          flex: thirdRoute && fourRoute ? 0 : 1,
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "row",
-          padding: thirdRoute && fourRoute ? 10 : 0,
-        }}
+      <TouchableOpacity
+        className={`${styles.nav} ${isFirstRoute ? styles.active : ""}`}
+        onPress={() => handleNavigate(firstRoute, firstRouteText)}
       >
-        <TouchableOpacity
-          className={`${styles.nav} ${isFirstRoute ? styles.active : ""}`}
-          onPress={() => handleNavigate(firstRoute, firstRouteText)}
+        <Text className="text-white text-[12px]">{firstRouteText}</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        disabled={disabled}
+        className={`${styles.nav} ${isSecondRoute ? styles.active : ""}`}
+        onPress={() => handleNavigate(secondRoute, secondRouteText)}
+      >
+        <Text
+          className={`text-white text-[12px] ${disabled && "text-gray-500"}`}
         >
-          <Text className="text-white">{firstRouteText}</Text>
-        </TouchableOpacity>
+          {secondRouteText}
+        </Text>
+      </TouchableOpacity>
 
+      {thirdRoute && thirdRouteText && (
         <TouchableOpacity
-          disabled={disabled}
-          className={`${styles.nav} ${isSecondRoute ? styles.active : ""}`}
-          onPress={() => handleNavigate(secondRoute, secondRouteText)}
+          className={`${styles.nav} ${isThirdRoute ? styles.active : ""}`}
+          onPress={() => handleNavigate(thirdRoute, thirdRouteText)}
         >
-          <Text className={`text-white ${disabled && "text-gray-500"}`}>
-            {secondRouteText}
-          </Text>
+          <Text className="text-white text-[12px]">{thirdRouteText}</Text>
         </TouchableOpacity>
+      )}
 
-        {thirdRoute && thirdRouteText && (
-          <TouchableOpacity
-            className={`${styles.nav} ${isThirdRoute ? styles.active : ""}`}
-            onPress={() => handleNavigate(thirdRoute, thirdRouteText)}
-          >
-            <Text className="text-white">{thirdRouteText}</Text>
-          </TouchableOpacity>
-        )}
-
-        {fourRoute && fourRouteText && (
-          <TouchableOpacity
-            className={`${styles.nav} ${isFourRoute ? styles.active : ""}`}
-            onPress={() => handleNavigate(fourRoute, fourRouteText)}
-          >
-            <Text className="text-white">{fourRouteText}</Text>
-          </TouchableOpacity>
-        )}
-      </ScrollView>
+      {fourRoute && fourRouteText && (
+        <TouchableOpacity
+          className={`${styles.nav} ${isFourRoute ? styles.active : ""}`}
+          onPress={() => handleNavigate(fourRoute, fourRouteText)}
+        >
+          <Text className="text-white text-[12px]">{fourRouteText}</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
