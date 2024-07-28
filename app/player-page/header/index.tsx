@@ -1,9 +1,9 @@
-import React from "react";
 import { View, Text } from "react-native";
+import React from "react";
 import { useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 
-const Header = () => {
+export const Header = () => {
   const { name, icon } = useLocalSearchParams();
 
   return (
@@ -12,12 +12,10 @@ const Header = () => {
         alt="alt"
         source={icon}
         contentFit="contain"
-        className="w-12 h-12"
+        className="w-12 h-12 rounded-full"
       />
 
       <Text className="text-white">{name}</Text>
     </View>
   );
 };
-
-export default Header;

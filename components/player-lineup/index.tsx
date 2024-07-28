@@ -1,12 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
+import { useNavigation } from "expo-router";
 
 import { Ball, Substitution } from "@/assets/icon";
 
 import { PlayerProps } from "./types";
 
 export const PlayerLineup = ({
+  id,
   name,
   stat,
   number,
@@ -18,8 +20,21 @@ export const PlayerLineup = ({
   playerSubsNumber,
   playerYellowCard,
 }: PlayerProps) => {
+  const navigation = useNavigation<any>();
+
+  const handleNavigate = (id: number, name: string, icon: string) => {
+    navigation.push("player-page", {
+      id,
+      name,
+      icon,
+    });
+  };
+
   return (
-    <View className="flex flex-row items-center gap-x-2 p-1 border-t border-table-border">
+    <TouchableOpacity
+      onPress={() => handleNavigate(id, name, playerPhoto)}
+      className="flex flex-row items-center gap-x-2 p-1 border-t border-table-border"
+    >
       <Image
         alt={name}
         source={playerPhoto}
@@ -80,6 +95,6 @@ export const PlayerLineup = ({
           <View>{stat}</View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };

@@ -1,4 +1,5 @@
 export interface PlayerProps {
+  id: number;
   name: string;
   number?: number;
   playerPhoto: string;

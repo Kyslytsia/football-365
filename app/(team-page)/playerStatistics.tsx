@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { View, ScrollView } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 
-import { PlayerSStatistics } from "@/types/teamPlayersStats";
+import { PlayerStat } from "@/components/player-stat";
 import { getPlayersOfTeamStats } from "@/api/getPlayersOfTeamStats";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { PlayerStat } from "@/components/player-stat";
+import { PlayerStatistics as PlayerStatisticsProps } from "@/types/teamPlayersStats";
 
 const PlayerStatistics = () => {
   const { id, name } = useGlobalSearchParams();
 
-  const [playersStats, setPlayersStats] = useState<PlayerSStatistics[]>([]);
+  const [playersStats, setPlayersStats] = useState<PlayerStatisticsProps[]>([]);
 
   useEffect(() => {
     (async () => {

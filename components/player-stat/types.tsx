@@ -1,6 +1,7 @@
-import { PlayerSStatistics } from "@/types/teamPlayersStats";
+import { PlayerStatistics } from "@/types/teamPlayersStats";
 
 export interface FilteredPlayersProps {
+  id: number;
   name: string;
   photo: string;
   nation: string;
@@ -9,5 +10,5 @@ export interface FilteredPlayersProps {
 
 export interface PlayerStatProps {
   type: string;
-  playersStats: PlayerSStatistics[];
+  playersStats: PlayerStatistics[];
 }

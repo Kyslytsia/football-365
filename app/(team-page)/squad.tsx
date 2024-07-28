@@ -83,6 +83,7 @@ const Squad = () => {
         title={<Text className="text-white">coach</Text>}
       >
         <PlayerSquad
+          id={coach?.id as number}
           name={coach?.name as string}
           photo={coach?.photo as string}
           position={coach?.nationality as string}
@@ -95,6 +96,7 @@ const Squad = () => {
       >
         {goalkeeper?.map((player) => (
           <PlayerSquad
+            id={player.id}
             key={player.id}
             name={player.name}
             number={player.number}
@@ -110,6 +112,7 @@ const Squad = () => {
       >
         {defender?.map((player) => (
           <PlayerSquad
+            id={player.id}
             key={player.id}
             name={player.name}
             number={player.number}
@@ -125,6 +128,7 @@ const Squad = () => {
       >
         {midfielder?.map((player) => (
           <PlayerSquad
+            id={player.id}
             key={player.id}
             name={player.name}
             number={player.number}
@@ -140,6 +144,7 @@ const Squad = () => {
       >
         {attacker?.map((player) => (
           <PlayerSquad
+            id={player.id}
             key={player.id}
             name={player.name}
             number={player.number}

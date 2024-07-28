@@ -26,6 +26,7 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
       >
         {
           <PlayerLineup
+            id={coach?.id as number}
             name={coach?.name ?? ""}
             playerPhoto={coach?.photo ?? ""}
           />
@@ -64,6 +65,7 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
 
           return (
             <PlayerLineup
+              id={player.player.id}
               key={player.player.photo}
               name={player.player.name}
               playerPhoto={player.player.photo}

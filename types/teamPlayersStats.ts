@@ -119,7 +119,7 @@ interface Statistics {
   team: Team;
 }
 
-export interface PlayerSStatistics {
+export interface PlayerStatistics {
   player: Player;
   statistics: Statistics[];
 }

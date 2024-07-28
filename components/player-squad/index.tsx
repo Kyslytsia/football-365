@@ -1,22 +1,32 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
+import { useNavigation } from "expo-router";
 
-interface PlayerSquadProps {
-  name: string;
-  photo: string;
-  position: string;
-  number?: string | number | null;
-}
+import { PlayerSquadProps } from "./types";
 
 export const PlayerSquad = ({
+  id,
   name,
   photo,
   number,
   position,
 }: PlayerSquadProps) => {
+  const navigation = useNavigation<any>();
+
+  const handleNavigate = (id: number, name: string, icon: string) => {
+    navigation.push("player-page", {
+      id,
+      name,
+      icon,
+    });
+  };
+
   return (
-    <View className="flex-row items-center justify-between px-2 h-10">
+    <TouchableOpacity
+      onPress={() => handleNavigate(id, name, photo)}
+      className="flex-row items-center justify-between px-2 h-10"
+    >
       <View className="flex-row gap-x-3">
         <Image source={photo} alt={name} className="h-8 w-8 rounded-full" />
 
@@ -31,6 +41,6 @@ export const PlayerSquad = ({
           <Text className="text-black text-center text-[10px]">{number}</Text>
         </View>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };

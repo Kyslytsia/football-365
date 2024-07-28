@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
+import { useNavigation } from "expo-router";
 import Animated, {
   withTiming,
   useSharedValue,
@@ -17,6 +18,15 @@ export const PlayerStat = ({ type, playersStats }: PlayerStatProps) => {
   >([]);
 
   const heightWrapper = useSharedValue(200);
+  const navigation = useNavigation<any>();
+
+  const handleNavigate = (id: number, name: string, icon: string) => {
+    navigation.push("player-page", {
+      id: id,
+      name: name,
+      icon: icon,
+    });
+  };
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
@@ -63,6 +73,7 @@ export const PlayerStat = ({ type, playersStats }: PlayerStatProps) => {
 
       return {
         stat: stat,
+        id: player.player.id,
         name: player.player.name,
         photo: player.player.photo,
         nation: player.player.nationality,
@@ -89,8 +100,11 @@ export const PlayerStat = ({ type, playersStats }: PlayerStatProps) => {
       >
         {filteredPlayers.map((player) => {
           return (
-            <View
+            <TouchableOpacity
               key={player.name + "stat"}
+              onPress={() =>
+                handleNavigate(player.id, player.name, player.photo)
+              }
               className="flex-row items-center justify-between px-2 h-10 border-t border-Black"
             >
               <View className="flex-row gap-x-2">
@@ -111,7 +125,7 @@ export const PlayerStat = ({ type, playersStats }: PlayerStatProps) => {
                   {player.stat}
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </Animated.View>
