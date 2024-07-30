@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
@@ -11,7 +11,7 @@ import Animated, {
 import { Wrapper } from "../wrapper";
 import { FilteredPlayersProps, PlayerStatProps } from "./types";
 
-export const PlayerStat = ({ type, playersStats }: PlayerStatProps) => {
+export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [filteredPlayers, setFilteredPlayers] = useState<
     FilteredPlayersProps[]
@@ -138,4 +138,4 @@ export const PlayerStat = ({ type, playersStats }: PlayerStatProps) => {
       </Pressable>
     </Wrapper>
   );
-};
+});

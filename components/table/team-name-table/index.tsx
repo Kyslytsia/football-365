@@ -47,8 +47,6 @@ export const TeamNameTable = memo(
       });
     };
 
-    console.log(name);
-
     return (
       <View className="ml-10 w-full">
         <View className="flex-row items-center h-8">

@@ -74,8 +74,6 @@ const Squad = () => {
     setAttacker(attacker);
   }, [squad]);
 
-  console.log(coach);
-
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <Wrapper
@@ -90,21 +88,23 @@ const Squad = () => {
         />
       </Wrapper>
 
-      <Wrapper
-        wrapperClass="mb-4"
-        title={<Text className="text-white">goalkeepers</Text>}
-      >
-        {goalkeeper?.map((player) => (
-          <PlayerSquad
-            id={player.id}
-            key={player.id}
-            name={player.name}
-            number={player.number}
-            photo={player.photo}
-            position={player.position}
-          />
-        ))}
-      </Wrapper>
+      {goalkeeper && (
+        <Wrapper
+          wrapperClass="mb-4"
+          title={<Text className="text-white">goalkeepers</Text>}
+        >
+          {goalkeeper?.map((player) => (
+            <PlayerSquad
+              id={player.id}
+              key={player.id}
+              name={player.name}
+              number={player.number}
+              photo={player.photo}
+              position={player.position}
+            />
+          ))}
+        </Wrapper>
+      )}
 
       <Wrapper
         wrapperClass="mb-4"
