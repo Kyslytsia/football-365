@@ -10,8 +10,9 @@ import { View } from "react-native";
 const PlayerPage = () => {
   const { id, name } = useGlobalSearchParams();
 
-  const [stat, setStat] = useState<PlayerStatistics[]>([]);
-  const [number, setNumber] = useState<number>(0);
+  const [stat, setStat] = useState<PlayerStatistics[] | []>([]);
+  const [number, setNumber] = useState<number | null>(null);
+  const [nationalityLogo, setNationalityLogo] = useState<string>("");
 
   useEffect(() => {
     (async () => {
@@ -21,6 +22,7 @@ const PlayerPage = () => {
         if (storagePlayer) {
           setStat(JSON.parse(storagePlayer).stat);
           setNumber(JSON.parse(storagePlayer).number);
+          setNationalityLogo(JSON.parse(storagePlayer).nationalityLogo);
         }
 
         if (!storagePlayer) {
@@ -28,18 +30,23 @@ const PlayerPage = () => {
 
           await AsyncStorage.setItem(`${name}`, JSON.stringify(response));
 
-          setStat(response.stat);
-          setNumber(response.number);
+          setStat(response?.stat);
+          setNumber(response?.number);
+          setNationalityLogo(response?.nationalityLogo);
         }
       } catch (error: any) {
-        console.error(error.message);
+        console.log(error.message);
       }
     })();
   }, []);
 
   return (
     <View className="flex flex-col gap-y-2 pt-4">
-      {stat.length > 0 && <PlayerDetails stat={stat} number={number} />}
+      <PlayerDetails
+        stat={stat}
+        number={number}
+        nationalityLogo={nationalityLogo}
+      />
 
       <PlayerStatTable stat={stat} />
     </View>

@@ -7,7 +7,11 @@ import { PlayerStatistics } from "@/types/teamPlayersStats";
 import { Wrapper } from "../wrapper";
 import { PlayerStatTableProps } from "./types";
 
-export const PlayerStatTable = ({ stat }: { stat: PlayerStatistics[] }) => {
+export const PlayerStatTable = ({
+  stat,
+}: {
+  stat: PlayerStatistics[] | [];
+}) => {
   const [playerStat, setPlayerStat] = useState<PlayerStatTableProps>();
   useEffect(() => {
     const playersData = () => {
@@ -15,38 +19,41 @@ export const PlayerStatTable = ({ stat }: { stat: PlayerStatistics[] }) => {
       let assists = 0;
       let ratings: string[] = [];
 
-      stat[0].statistics.forEach((el) => {
-        if (el?.goals.total !== null) {
-          goals += el.goals.total;
-        }
+      stat.length > 0 &&
+        stat[0]?.statistics.forEach((el) => {
+          if (el?.goals.total !== null) {
+            goals += el.goals.total;
+          }
 
-        if (el?.goals.assists !== null) {
-          assists += el.goals.assists;
-        }
+          if (el?.goals.assists !== null) {
+            assists += el.goals.assists;
+          }
 
-        if (el?.games.rating) {
-          ratings.push(el.games.rating);
-        }
-      });
+          if (el?.games.rating) {
+            ratings.push(el.games.rating);
+          }
+        });
 
       const rating =
-        ratings.reduce((total, rating) => total + parseFloat(rating), 0) /
-        ratings.length;
+        ratings.length === 0
+          ? 0
+          : ratings.reduce((total, rating) => total + parseFloat(rating), 0) /
+            ratings.length;
 
       return {
         goals: goals,
-        rating: rating.toLocaleString().slice(0, 3).replace(",", "."),
         assists: assists,
+        rating: rating?.toLocaleString().slice(0, 3).replace(",", "."),
       };
     };
 
     setPlayerStat(playersData());
-  }, []);
+  }, [stat]);
 
   return (
     <Wrapper
       childrenClass="flex flex-row py-6 border-t border-Black"
-      title={<Text className="text-white">statistics</Text>}
+      title={<Text className="text-white">player statistics</Text>}
     >
       <View className="flex flex-col items-center gap-y-2 w-1/3">
         <Ball width={25} height={25} />
