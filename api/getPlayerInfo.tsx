@@ -38,6 +38,26 @@ export const getPlayerInfo = async (id: string) => {
       }
     );
 
+    const transfers = await axios.get(
+      `https://v3.football.api-sports.io/transfers?player=${id}`,
+      {
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "a9e25ccda5106259432cf3588c6b858b",
+        },
+      }
+    );
+
+    const trophies = await axios.get(
+      `https://v3.football.api-sports.io/trophies?player=${id}`,
+      {
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "a9e25ccda5106259432cf3588c6b858b",
+        },
+      }
+    );
+
     const player = squad?.data?.response?.[0].players.filter(
       (player: any) => player.id === playerStat.data.response[0].player.id
     );
@@ -45,6 +65,8 @@ export const getPlayerInfo = async (id: string) => {
     return {
       number: player[0].number,
       stat: playerStat?.data?.response,
+      trophies: trophies.data.response,
+      transfers: transfers?.data?.response[0].transfers,
       nationalityLogo: nationality?.data?.response?.[0].team.logo,
     };
   } catch (error: any) {

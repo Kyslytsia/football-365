@@ -13,8 +13,10 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
   const matchStatusLong = matchData?.fixture.status.long;
   const matchStatusShort = matchData?.fixture.status.short;
   const matchEnded = matchData?.fixture.status.short === "FT";
-  const matchNotStarted = matchData?.fixture.status.short === "NS";
   const matchEndedOnPenalties = matchData?.fixture.status.short === "PEN";
+  const matchNotStarted =
+    matchData?.fixture.status.short === "NS" ||
+    matchData?.fixture.status.short === "TBD";
 
   const navigation = useNavigation<any>();
 
@@ -25,6 +27,8 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
       icon: icon,
     });
   };
+
+  console.log(match);
 
   return (
     <ImageBackground

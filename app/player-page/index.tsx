@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { PlayerDetails, PlayerStatTable } from "@/components";
+import { Trophies } from "@/types/trophies";
+import { Transfer } from "@/types/transfers";
 import { getPlayerInfo } from "@/api/getPlayerInfo";
 import { PlayerStatistics } from "@/types/teamPlayersStats";
-import { View } from "react-native";
+import { PlayerDetails, PlayerStatTable } from "@/components";
 
 const PlayerPage = () => {
   const { id, name } = useGlobalSearchParams();
@@ -13,6 +15,8 @@ const PlayerPage = () => {
   const [stat, setStat] = useState<PlayerStatistics[] | []>([]);
   const [number, setNumber] = useState<number | null>(null);
   const [nationalityLogo, setNationalityLogo] = useState<string>("");
+  const [transfers, setTransfers] = useState<Transfer[]>([]);
+  const [trophies, setTrophies] = useState<Trophies[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -22,6 +26,7 @@ const PlayerPage = () => {
         if (storagePlayer) {
           setStat(JSON.parse(storagePlayer).stat);
           setNumber(JSON.parse(storagePlayer).number);
+          setTransfers(JSON.parse(storagePlayer).transfers);
           setNationalityLogo(JSON.parse(storagePlayer).nationalityLogo);
         }
 
@@ -32,6 +37,8 @@ const PlayerPage = () => {
 
           setStat(response?.stat);
           setNumber(response?.number);
+          setTrophies(response?.trophies);
+          setTransfers(response?.transfers);
           setNationalityLogo(response?.nationalityLogo);
         }
       } catch (error: any) {

@@ -14,8 +14,9 @@ export const Match = memo(({ match, isBorder }: PropsMatch) => {
   const matchStatusLong = match.fixture.status.long;
   const matchStatusShort = match.fixture.status.short;
   const matchEnded = match.fixture.status.short === "FT";
-  const matchNotStarted = match.fixture.status.short === "NS";
   const matchEndedOnPenalties = match.fixture.status.short === "PEN";
+  const matchNotStarted =
+    match.fixture.status.short === "NS" || match.fixture.status.short === "TBD";
 
   const styles = getStyles({ isBorder, status: matchStatusShort });
   const navigation = useNavigation<any>();
