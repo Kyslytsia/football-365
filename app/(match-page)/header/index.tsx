@@ -28,8 +28,6 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
     });
   };
 
-  console.log(match);
-
   return (
     <ImageBackground
       source={matchBg}

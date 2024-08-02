@@ -52,6 +52,7 @@ export const PlayerStatTable = ({
 
   return (
     <Wrapper
+      wrapperClass="mb-4"
       childrenClass="flex flex-row py-6 border-t border-Black"
       title={<Text className="text-white">player statistics</Text>}
     >

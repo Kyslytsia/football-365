@@ -7,7 +7,7 @@ import { Trophies } from "@/types/trophies";
 import { Transfer } from "@/types/transfers";
 import { getPlayerInfo } from "@/api/getPlayerInfo";
 import { PlayerStatistics } from "@/types/teamPlayersStats";
-import { PlayerDetails, PlayerStatTable } from "@/components";
+import { CareerTable, PlayerDetails, PlayerStatTable } from "@/components";
 
 const PlayerPage = () => {
   const { id, name } = useGlobalSearchParams();
@@ -47,8 +47,10 @@ const PlayerPage = () => {
     })();
   }, []);
 
+  console.log(transfers);
+
   return (
-    <View className="flex flex-col gap-y-2 pt-4">
+    <View className="flex flex-col gap-y-2 pt-6">
       <PlayerDetails
         stat={stat}
         number={number}
@@ -56,6 +58,8 @@ const PlayerPage = () => {
       />
 
       <PlayerStatTable stat={stat} />
+
+      <CareerTable transfers={transfers} />
     </View>
   );
 };

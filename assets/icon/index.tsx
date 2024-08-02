@@ -9,6 +9,7 @@ import Star from "./star.svg";
 import Substitution from "./substitution.svg";
 import Timer from "./timer.svg";
 import Whistle from "./whistle.svg";
+import RightArrow from "./arrow-right.svg";
 
 export {
   Star,
@@ -19,6 +20,7 @@ export {
   Calendar,
   Location,
   BackArrow,
+  RightArrow,
   DefaultClub,
   Substitution,
   FootballShoe,
