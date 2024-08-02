@@ -31,6 +31,7 @@ const PlayerPage = () => {
         if (storagePlayer) {
           setStat(JSON.parse(storagePlayer).stat);
           setNumber(JSON.parse(storagePlayer).number);
+          setTrophies(JSON.parse(storagePlayer).trophies);
           setTransfers(JSON.parse(storagePlayer).transfers);
           setNationalityLogo(JSON.parse(storagePlayer).nationalityLogo);
         }

@@ -1,6 +1,7 @@
 export interface PlayerProps {
   id: number;
   name: string;
+  coach?: boolean;
   number?: number;
   playerPhoto: string;
   playerSubsName?: string;

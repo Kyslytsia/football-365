@@ -81,6 +81,7 @@ const Squad = () => {
         title={<Text className="text-white">coach</Text>}
       >
         <PlayerSquad
+          coach
           id={coach?.id as number}
           name={coach?.name as string}
           photo={coach?.photo as string}

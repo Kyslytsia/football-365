@@ -6,10 +6,20 @@ import { useNavigation } from "expo-router";
 import { PlayerSquadProps } from "./types";
 
 export const PlayerSquad = memo(
-  ({ id, name, photo, number, position }: PlayerSquadProps) => {
+  ({ id, name, photo, coach, number, position }: PlayerSquadProps) => {
     const navigation = useNavigation<any>();
 
     const handleNavigate = (id: number, name: string, icon: string) => {
+      if (coach) {
+        navigation.push("coach-page", {
+          id,
+          name,
+          icon,
+        });
+
+        return;
+      }
+
       navigation.push("player-page", {
         id,
         name,

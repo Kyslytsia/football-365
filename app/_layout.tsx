@@ -9,6 +9,9 @@ export default function RootLayout() {
         <Stack.Screen name="index" />
         <Stack.Screen name="(league-page)" />
         <Stack.Screen name="(match-page)" />
+        <Stack.Screen name="(team-page)" />
+        <Stack.Screen name="player-page" />
+        <Stack.Screen name="coach-page" />
       </Stack>
     </ThemeProvider>
   );

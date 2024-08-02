@@ -11,6 +11,7 @@ export const PlayerLineup = ({
   id,
   name,
   stat,
+  coach,
   number,
   playerSubs,
   playerGoal,
@@ -23,6 +24,16 @@ export const PlayerLineup = ({
   const navigation = useNavigation<any>();
 
   const handleNavigate = (id: number, name: string, icon: string) => {
+    if (coach) {
+      navigation.push("coach-page", {
+        id,
+        name,
+        icon,
+      });
+
+      return;
+    }
+
     navigation.push("player-page", {
       id,
       name,

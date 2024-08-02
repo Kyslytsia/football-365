@@ -109,8 +109,8 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
             >
               <View className="flex-row gap-x-2">
                 <Image
-                  source={player.photo}
                   alt={player.name}
+                  source={player.photo}
                   className="h-8 w-8 rounded-full"
                 />
 
