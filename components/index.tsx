@@ -20,4 +20,5 @@ export { PreviousMeetings } from "./previous-metings";
 export { Rounds } from "./rounds";
 export { Table } from "./table";
 export { TableInfo } from "./table-info";
+export { TrophiesTable } from "./trophies-table";
 export { Wrapper } from "./wrapper";

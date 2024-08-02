@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -7,7 +7,12 @@ import { Trophies } from "@/types/trophies";
 import { Transfer } from "@/types/transfers";
 import { getPlayerInfo } from "@/api/getPlayerInfo";
 import { PlayerStatistics } from "@/types/teamPlayersStats";
-import { CareerTable, PlayerDetails, PlayerStatTable } from "@/components";
+import {
+  CareerTable,
+  PlayerDetails,
+  TrophiesTable,
+  PlayerStatTable,
+} from "@/components";
 
 const PlayerPage = () => {
   const { id, name } = useGlobalSearchParams();
@@ -47,19 +52,24 @@ const PlayerPage = () => {
     })();
   }, []);
 
-  console.log(transfers);
-
   return (
-    <View className="flex flex-col gap-y-2 pt-6">
-      <PlayerDetails
-        stat={stat}
-        number={number}
-        nationalityLogo={nationalityLogo}
-      />
+    <View className="py-4">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        className="flex flex-col"
+      >
+        <PlayerDetails
+          stat={stat}
+          number={number}
+          nationalityLogo={nationalityLogo}
+        />
 
-      <PlayerStatTable stat={stat} />
+        <PlayerStatTable stat={stat} />
 
-      <CareerTable transfers={transfers} />
+        <CareerTable transfers={transfers} />
+
+        <TrophiesTable trophies={trophies} />
+      </ScrollView>
     </View>
   );
 };

@@ -9,7 +9,11 @@ import { Wrapper } from "../wrapper";
 
 export const CareerTable = ({ transfers }: { transfers: Transfer[] }) => {
   return (
-    <Wrapper title={<Text className="text-white">player career</Text>}>
+    <Wrapper
+      wrapperClass="mb-4"
+      childrenClass="border-t border-Black"
+      title={<Text className="text-white">player career</Text>}
+    >
       {transfers.map((transfer) => {
         return (
           <View
