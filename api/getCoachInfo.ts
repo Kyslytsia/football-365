@@ -6,7 +6,7 @@ const year = getCurrentSeason();
 export const getCoachInfo = async (id: string) => {
   try {
     const coachInfo = await axios.get(
-      `https://v3.football.api-sports.io/coach?id=${id}&season=${year}`,
+      `https://v3.football.api-sports.io/coachs?id=${id}`,
       {
         headers: {
           "x-rapidapi-host": "v3.football.api-sports.io",
@@ -15,7 +15,7 @@ export const getCoachInfo = async (id: string) => {
       }
     );
 
-    const nation = coachInfo.data.response[0].coach.nationality;
+    const nation = coachInfo.data.response[0].birth.country;
 
     const nationality = await axios.get(
       `https://v3.football.api-sports.io/teams?name=${nation}`,
@@ -38,7 +38,7 @@ export const getCoachInfo = async (id: string) => {
     );
 
     return {
-      info: coachInfo?.data?.response,
+      info: coachInfo.data.response,
       trophies: trophies.data.response,
       nationalityLogo: nationality?.data?.response?.[0].team.logo,
     };

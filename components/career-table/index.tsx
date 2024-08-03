@@ -3,16 +3,20 @@ import { View, Text } from "react-native";
 import { Image } from "expo-image";
 
 import { RightArrow } from "@/assets/icon";
-import { Transfer } from "@/types/transfers";
+import { CareerTableProps } from "./types";
 
 import { Wrapper } from "../wrapper";
 
-export const CareerTable = ({ transfers }: { transfers: Transfer[] }) => {
+export const CareerTable = ({ coach, transfers }: CareerTableProps) => {
   return (
     <Wrapper
       wrapperClass="mb-4"
       childrenClass="border-t border-Black"
-      title={<Text className="text-white">player career</Text>}
+      title={
+        <Text className="text-white">
+          {coach ? "coach career" : "player career"}
+        </Text>
+      }
     >
       {transfers.map((transfer) => {
         return (

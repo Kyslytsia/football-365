@@ -11,13 +11,13 @@ import { CareerTable, PlayerDetails, TrophiesTable } from "@/components";
 const CoachPage = () => {
   const { id, name } = useGlobalSearchParams();
 
-  const [info, setInfo] = useState<PlayerStatistics[] | []>([]);
+  const [info, setInfo] = useState<any[] | []>([]);
   const [nationalityLogo, setNationalityLogo] = useState<string>("");
   const [trophies, setTrophies] = useState<Trophies[]>([]);
 
   useEffect(() => {
     (async () => {
-      const storageCoach = await AsyncStorage.getItem(`${name}`);
+      const storageCoach = await AsyncStorage.getItem(`${name} info`);
 
       try {
         if (storageCoach) {
@@ -29,7 +29,7 @@ const CoachPage = () => {
         if (!storageCoach) {
           const response = await getCoachInfo(id as string);
 
-          await AsyncStorage.setItem(`${name}`, JSON.stringify(response));
+          await AsyncStorage.setItem(`${name} info`, JSON.stringify(response));
 
           setInfo(response?.info);
           setTrophies(response?.trophies);
@@ -46,14 +46,18 @@ const CoachPage = () => {
   return (
     <View className="py-4">
       <ScrollView
-        showsVerticalScrollIndicator={false}
         className="flex flex-col"
+        showsVerticalScrollIndicator={false}
       >
-        <PlayerDetails stat={info} nationalityLogo={nationalityLogo} />
+        <PlayerDetails
+          coach
+          coachInfo={info}
+          nationalityLogo={nationalityLogo}
+        />
 
-        {/* <CareerTable transfers={transfers} /> */}
+        {/* <CareerTable coach transfers={transfers} /> */}
 
-        <TrophiesTable trophies={trophies} />
+        {/* <TrophiesTable coach trophies={trophies} /> */}
       </ScrollView>
     </View>
   );

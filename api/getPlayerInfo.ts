@@ -5,7 +5,7 @@ const year = getCurrentSeason();
 
 export const getPlayerInfo = async (id: string) => {
   try {
-    const playerStat = await axios.get(
+    const playerInfo = await axios.get(
       `https://v3.football.api-sports.io/players?id=${id}&season=${year}`,
       {
         headers: {
@@ -15,8 +15,8 @@ export const getPlayerInfo = async (id: string) => {
       }
     );
 
-    const nation = playerStat.data.response[0].player.nationality;
-    const idTeam = playerStat.data.response[0].statistics[0].team.id;
+    const nation = playerInfo.data.response[0].player.nationality;
+    const idTeam = playerInfo.data.response[0].statistics[0].team.id;
 
     const nationality = await axios.get(
       `https://v3.football.api-sports.io/teams?name=${nation}`,
@@ -59,12 +59,12 @@ export const getPlayerInfo = async (id: string) => {
     );
 
     const player = squad?.data?.response?.[0].players.filter(
-      (player: any) => player.id === playerStat.data.response[0].player.id
+      (player: any) => player.id === playerInfo.data.response[0].player.id
     );
 
     return {
       number: player[0].number,
-      stat: playerStat?.data?.response,
+      info: playerInfo?.data?.response,
       trophies: trophies.data.response,
       transfers: transfers?.data?.response[0].transfers,
       nationalityLogo: nationality?.data?.response?.[0].team.logo,

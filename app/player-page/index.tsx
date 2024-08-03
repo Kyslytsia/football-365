@@ -17,7 +17,7 @@ import {
 const PlayerPage = () => {
   const { id, name } = useGlobalSearchParams();
 
-  const [stat, setStat] = useState<PlayerStatistics[] | []>([]);
+  const [info, setInfo] = useState<PlayerStatistics[] | []>([]);
   const [number, setNumber] = useState<number | null>(null);
   const [nationalityLogo, setNationalityLogo] = useState<string>("");
   const [transfers, setTransfers] = useState<Transfer[]>([]);
@@ -25,11 +25,11 @@ const PlayerPage = () => {
 
   useEffect(() => {
     (async () => {
-      const storagePlayer = await AsyncStorage.getItem(`${name}`);
+      const storagePlayer = await AsyncStorage.getItem(`${name} info`);
 
       try {
         if (storagePlayer) {
-          setStat(JSON.parse(storagePlayer).stat);
+          setInfo(JSON.parse(storagePlayer).info);
           setNumber(JSON.parse(storagePlayer).number);
           setTrophies(JSON.parse(storagePlayer).trophies);
           setTransfers(JSON.parse(storagePlayer).transfers);
@@ -39,16 +39,16 @@ const PlayerPage = () => {
         if (!storagePlayer) {
           const response = await getPlayerInfo(id as string);
 
-          await AsyncStorage.setItem(`${name}`, JSON.stringify(response));
+          await AsyncStorage.setItem(`${name} info`, JSON.stringify(response));
 
-          setStat(response?.stat);
+          setInfo(response?.info);
           setNumber(response?.number);
           setTrophies(response?.trophies);
           setTransfers(response?.transfers);
           setNationalityLogo(response?.nationalityLogo);
         }
       } catch (error: any) {
-        console.log(error.message);
+        console.error(error.message);
       }
     })();
   }, []);
@@ -60,12 +60,12 @@ const PlayerPage = () => {
         className="flex flex-col"
       >
         <PlayerDetails
-          stat={stat}
           number={number}
+          playerInfo={info}
           nationalityLogo={nationalityLogo}
         />
 
-        <PlayerStatTable stat={stat} />
+        <PlayerStatTable stat={info} />
 
         <CareerTable transfers={transfers} />
 

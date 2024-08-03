@@ -4,8 +4,9 @@ import { View, Text } from "react-native";
 import { Trophies } from "@/types/trophies";
 
 import { Wrapper } from "../wrapper";
+import { TrophiesTableProps } from "./types";
 
-export const TrophiesTable = ({ trophies }: { trophies: Trophies[] }) => {
+export const TrophiesTable = ({ coach, trophies }: TrophiesTableProps) => {
   const countWins = (trophies: Trophies[]) => {
     const result: Record<string, number> = {};
 
@@ -23,7 +24,11 @@ export const TrophiesTable = ({ trophies }: { trophies: Trophies[] }) => {
   return (
     <Wrapper
       childrenClass="p-1"
-      title={<Text className="text-white">player trophies</Text>}
+      title={
+        <Text className="text-white">
+          {coach ? "coach trophies" : "player trophies"}
+        </Text>
+      }
     >
       {Object.entries(wins).map(([league, count]) => (
         <View key={league} className="p-1">
