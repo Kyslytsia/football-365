@@ -4,7 +4,7 @@ interface Team {
   logo: string;
 }
 
-interface Career {
+export interface Career {
   team: Team;
   start: string;
   end: string | null;

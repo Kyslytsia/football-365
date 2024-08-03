@@ -3,15 +3,15 @@ import { ScrollView, View } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { Coach } from "@/types/coach";
 import { Trophies } from "@/types/trophies";
 import { getCoachInfo } from "@/api/getCoachInfo";
-import { PlayerStatistics } from "@/types/teamPlayersStats";
 import { CareerTable, PlayerDetails, TrophiesTable } from "@/components";
 
 const CoachPage = () => {
   const { id, name } = useGlobalSearchParams();
 
-  const [info, setInfo] = useState<any[] | []>([]);
+  const [info, setInfo] = useState<Coach[]>([]);
   const [nationalityLogo, setNationalityLogo] = useState<string>("");
   const [trophies, setTrophies] = useState<Trophies[]>([]);
 
@@ -41,8 +41,6 @@ const CoachPage = () => {
     })();
   }, []);
 
-  console.log(info);
-
   return (
     <View className="py-4">
       <ScrollView
@@ -55,9 +53,9 @@ const CoachPage = () => {
           nationalityLogo={nationalityLogo}
         />
 
-        {/* <CareerTable coach transfers={transfers} /> */}
+        {info && <CareerTable coach career={info[0]?.career} />}
 
-        {/* <TrophiesTable coach trophies={trophies} /> */}
+        <TrophiesTable coach trophies={trophies} />
       </ScrollView>
     </View>
   );
