@@ -52,7 +52,7 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
       <View className="absolute top-0 left-0 right-0 flex flex-col justify-between py-2.5 mx-auto h-[300px] z-2">
         {startPlayers?.map((players: PlayerData[], index: number) => (
           <View
-            key={"startPlayers" + index}
+            key={`startPlayers-${index}`}
             className="flex flex-row items-center justify-around"
           >
             {players
@@ -83,7 +83,7 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
 
                 return (
                   <View
-                    key={player.player.id}
+                    key={`player-${player.player.id}-${player.player.photo}`}
                     className="relative flex justify-center items-center text-xs"
                   >
                     {playerEvents && (

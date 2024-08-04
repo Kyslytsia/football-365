@@ -24,6 +24,7 @@ const MainPage = () => {
   const [index, setIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
+  const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
 
   const flashListRef = useRef<FlashList<GroupedMatches>>(null);
   const itemHeightsRef = useRef<{ [key: number]: number }>({});
@@ -82,7 +83,15 @@ const MainPage = () => {
         viewPosition: 0.5,
       });
     }
-  }, [flashListRef.current]);
+  }, [index]);
+
+  const handleViewableItemsChanged = useCallback(
+    ({ viewableItems }: any) => {
+      const visibleIndexes = viewableItems.map((item: any) => item.index);
+      setShowScrollButton(!visibleIndexes.includes(index));
+    },
+    [index]
+  );
 
   useEffect(() => {
     loadMatches();
@@ -116,9 +125,18 @@ const MainPage = () => {
         overrideItemLayout={overrideItemLayout}
         keyExtractor={(group, index) => `${group.date}_${index}`}
         renderItem={({ item }: any) => <RenderList item={item} />}
+        onViewableItemsChanged={handleViewableItemsChanged}
+        viewabilityConfig={{
+          itemVisiblePercentThreshold: 50,
+        }}
       />
 
-      <Button title="Scroll to current match" onPress={scrollToCurrentMatch} />
+      {showScrollButton && (
+        <Button
+          onPress={scrollToCurrentMatch}
+          title="Scroll to current match"
+        />
+      )}
     </>
   );
 };

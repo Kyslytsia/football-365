@@ -38,7 +38,7 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
         wrapperClass="mb-[20px]"
         title={<Text className="text-white">bench</Text>}
       >
-        {bench?.map((player) => {
+        {bench?.map((player, index) => {
           const playerSubs = events?.find(
             (event) => event.assist.id === player.player.id
           );
@@ -67,7 +67,6 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
           return (
             <PlayerLineup
               id={player.player.id}
-              key={player.player.photo}
               name={player.player.name}
               playerPhoto={player.player.photo}
               playerRedCard={playerRedCard && true}
@@ -76,6 +75,7 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
               playerYellowCard={playerYellowCard && true}
               playerGoal={playerGoal?.length > 0 ? playerGoal?.length : ""}
               playerSubsNumber={playerSubsNumber?.statistics[0].games.number}
+              key={player.player.id + player.player.photo + index}
               playerSubs={
                 playerSubs && playerSubs?.type === "subst"
                   ? playerSubs.time.elapsed + "'"

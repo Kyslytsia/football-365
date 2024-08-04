@@ -14,6 +14,7 @@ import {
 } from "@/hooks";
 
 import { RenderList } from "./RenderList";
+import { Button } from "react-native";
 
 const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
   const [index, setIndex] = useState<number>(0);
@@ -21,11 +22,12 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
   const [value, setValue] = useState<string>("all matches");
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [roundMatches, setRoundMatches] = useState<GroupedMatches[]>([]);
+  const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
 
   const { id, name } = useGlobalSearchParams();
-
-  const itemHeightsRef = useRef<{ [key: number]: number }>({});
   const ID = Number(id);
+  const flashListRef = useRef<FlashList<GroupedMatches>>(null);
+  const itemHeightsRef = useRef<{ [key: number]: number }>({});
   const year = getCurrentSeason(name as string);
   const isMatches = roundMatches.length !== 0 ? roundMatches : matches;
   const isMatchesData = matchesData ? matchesData : isMatches;
@@ -36,6 +38,23 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
       layout.size = height;
     },
     [itemHeightsRef]
+  );
+
+  const scrollToCurrentMatch = useCallback(() => {
+    if (flashListRef.current && index) {
+      flashListRef.current.scrollToIndex({
+        index: index,
+        animated: true,
+      });
+    }
+  }, [index, isMatchesData]);
+
+  const handleViewableItemsChanged = useCallback(
+    ({ viewableItems }: any) => {
+      const visibleIndexes = viewableItems.map((item: any) => item.index);
+      setShowScrollButton(!visibleIndexes.includes(index));
+    },
+    [index, isMatchesData]
   );
 
   useEffect(() => {
@@ -86,26 +105,40 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
 
       itemHeightsRef.current[index] = 20 + matchesDate * 50 + 27;
     });
-  }, [isMatchesData]);
+  }, [index, isMatchesData, matchesData]);
 
   if (loading) return <Loading />;
+
+  console.log(isMatchesData);
 
   return (
     <>
       {!matchesData && <Rounds value={value} setValue={setValue} />}
 
       <FlashList
+        ref={flashListRef}
         data={isMatchesData}
         estimatedItemSize={500}
         removeClippedSubviews={false}
         showsVerticalScrollIndicator={false}
         overrideItemLayout={overrideItemLayout}
+        onViewableItemsChanged={handleViewableItemsChanged}
         keyExtractor={(group, index) => `${group.date}_${index}`}
         renderItem={({ item }: any) => <RenderList item={item} />}
+        viewabilityConfig={{
+          itemVisiblePercentThreshold: 50,
+        }}
         initialScrollIndex={
           matchesData ? index : value === "all matches" ? index : 0
         }
       />
+
+      {showScrollButton && (
+        <Button
+          onPress={scrollToCurrentMatch}
+          title="Scroll to current match"
+        />
+      )}
     </>
   );
 };
