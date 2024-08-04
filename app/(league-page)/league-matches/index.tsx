@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Button } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { useGlobalSearchParams } from "expo-router";
 import { GroupedMatches } from "@/types/groupedMatches";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FlashList } from "@shopify/flash-list";
 
 import { Loading, Rounds } from "@/components";
 import { getAllMatchesForSeasonByLeagueId } from "@/api/allMatchesLeague";
@@ -14,7 +15,6 @@ import {
 } from "@/hooks";
 
 import { RenderList } from "./RenderList";
-import { Button } from "react-native";
 
 const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
   const [index, setIndex] = useState<number>(0);
@@ -47,14 +47,14 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
         animated: true,
       });
     }
-  }, [index, isMatchesData]);
+  }, [index]);
 
   const handleViewableItemsChanged = useCallback(
     ({ viewableItems }: any) => {
       const visibleIndexes = viewableItems.map((item: any) => item.index);
       setShowScrollButton(!visibleIndexes.includes(index));
     },
-    [index, isMatchesData]
+    [index]
   );
 
   useEffect(() => {
@@ -90,7 +90,9 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
       } catch (error: any) {
         console.error(error.message);
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 100);
       }
     })();
   }, [value]);
@@ -105,11 +107,9 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
 
       itemHeightsRef.current[index] = 20 + matchesDate * 50 + 27;
     });
-  }, [index, isMatchesData, matchesData]);
+  }, [isMatchesData]);
 
   if (loading) return <Loading />;
-
-  console.log(isMatchesData);
 
   return (
     <>
@@ -123,14 +123,12 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
         showsVerticalScrollIndicator={false}
         overrideItemLayout={overrideItemLayout}
         onViewableItemsChanged={handleViewableItemsChanged}
+        initialScrollIndex={value === "all matches" ? index : 0}
         keyExtractor={(group, index) => `${group.date}_${index}`}
         renderItem={({ item }: any) => <RenderList item={item} />}
         viewabilityConfig={{
           itemVisiblePercentThreshold: 50,
         }}
-        initialScrollIndex={
-          matchesData ? index : value === "all matches" ? index : 0
-        }
       />
 
       {showScrollButton && (

@@ -42,7 +42,7 @@ const Matches = () => {
     })();
   }, []);
 
-  return <>{matches && <LeagueMatches matchesData={matches} />}</>;
+  return matches && <LeagueMatches matchesData={matches} />;
 };
 
 export default Matches;
