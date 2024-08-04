@@ -12,6 +12,7 @@ import {
   getCurrentSeason,
   groupedMatchesByRound,
   groupMatchesByDateAndLeague,
+  getFormattedDate,
 } from "@/hooks";
 
 import { RenderList } from "./RenderList";
@@ -134,7 +135,7 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
       {showScrollButton && (
         <Button
           onPress={scrollToCurrentMatch}
-          title="Scroll to current match"
+          title={getFormattedDate(isMatchesData[index].date)}
         />
       )}
     </>

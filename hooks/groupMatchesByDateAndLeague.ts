@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 import { MatchProps } from "@/types/match";
 import { GroupedMatches } from "@/types/groupedMatches";
 
@@ -6,7 +8,7 @@ export const groupMatchesByDateAndLeague = (matches: MatchProps[]) => {
 
   matches.forEach((match) => {
     const matchDate = new Date(match.fixture.date);
-    const dateKey = matchDate.toISOString().slice(0, 10);
+    const dateKey = format(matchDate, "yyyy-MM-dd");
     const leagueId = match.league.id;
     const leagueName = match.league.name;
     const leagueLogo = match.league.logo;
@@ -39,6 +41,8 @@ export const groupMatchesByDateAndLeague = (matches: MatchProps[]) => {
         matches: [match],
       });
     }
+
+    console.log(dateKey);
   });
 
   groupedMatches

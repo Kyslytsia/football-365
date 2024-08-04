@@ -22,13 +22,10 @@ export const matchDayIndex = (
 
   if (todayMatchIndex !== -1) {
     setIndex(todayMatchIndex);
-    console.log("todayMatchIndex", todayMatchIndex);
   } else if (nextMatchIndex !== -1) {
     setIndex(nextMatchIndex);
-    console.log("nextMatchIndex", nextMatchIndex);
   } else {
     const lastMatchIndex = matches.length - 1;
     setIndex(lastMatchIndex);
-    console.log("lastMatchIndex");
   }
 };

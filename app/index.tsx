@@ -4,7 +4,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Loading } from "@/components";
 import { GroupedMatches } from "@/types/groupedMatches";
-import { groupMatchesByDateAndLeague, matchDayIndex } from "@/hooks";
+import {
+  getFormattedDate,
+  groupMatchesByDateAndLeague,
+  matchDayIndex,
+} from "@/hooks";
 import {
   WorldCup,
   EuroAllMatches,
@@ -134,7 +138,7 @@ const MainPage = () => {
       {showScrollButton && (
         <Button
           onPress={scrollToCurrentMatch}
-          title="Scroll to current match"
+          title={getFormattedDate(matches[index].date)}
         />
       )}
     </>
