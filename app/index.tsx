@@ -18,12 +18,14 @@ import {
 } from "@/api/allMatchesLeague";
 
 import { RenderList } from "./RenderList";
+import { Button } from "react-native";
 
 const MainPage = () => {
   const [index, setIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
 
+  const flashListRef = useRef<FlashList<GroupedMatches>>(null);
   const itemHeightsRef = useRef<{ [key: number]: number }>({});
 
   const loadMatches = useCallback(async () => {
@@ -72,6 +74,16 @@ const MainPage = () => {
     [itemHeightsRef]
   );
 
+  const scrollToCurrentMatch = useCallback(() => {
+    if (flashListRef.current && index) {
+      flashListRef.current.scrollToIndex({
+        index: index,
+        animated: true,
+        viewPosition: 0.5,
+      });
+    }
+  }, [flashListRef.current]);
+
   useEffect(() => {
     loadMatches();
   }, [loadMatches]);
@@ -93,16 +105,21 @@ const MainPage = () => {
   if (loading) return <Loading />;
 
   return (
-    <FlashList
-      data={matches}
-      estimatedItemSize={500}
-      initialScrollIndex={index}
-      removeClippedSubviews={false}
-      showsVerticalScrollIndicator={false}
-      overrideItemLayout={overrideItemLayout}
-      keyExtractor={(group, index) => `${group.date}_${index}`}
-      renderItem={({ item }: any) => <RenderList item={item} />}
-    />
+    <>
+      <FlashList
+        data={matches}
+        ref={flashListRef}
+        estimatedItemSize={500}
+        initialScrollIndex={index}
+        removeClippedSubviews={false}
+        showsVerticalScrollIndicator={false}
+        overrideItemLayout={overrideItemLayout}
+        keyExtractor={(group, index) => `${group.date}_${index}`}
+        renderItem={({ item }: any) => <RenderList item={item} />}
+      />
+
+      <Button title="Scroll to current match" onPress={scrollToCurrentMatch} />
+    </>
   );
 };
 

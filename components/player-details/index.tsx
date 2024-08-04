@@ -61,12 +61,9 @@ export const PlayerDetails = ({
 
       <View className="flex flex-row justify-center items-center p-2">
         <View className="flex flex-col items-center text-white w-1/3 text-[16px]">
-          {isPlayer ||
-            (isCoach && (
-              <Text className="text-white text-[18px]">
-                age: {coachInfo?.[0]?.age || playerInfo?.[0]?.player?.age}
-              </Text>
-            ))}
+          <Text className="text-white text-[18px]">
+            age: {coachInfo?.[0]?.age || playerInfo?.[0]?.player?.age}
+          </Text>
 
           <Text className="text-Grey">
             {(coachInfo?.[0]?.birth.date ||
@@ -76,12 +73,9 @@ export const PlayerDetails = ({
         </View>
 
         <View className="flex flex-col items-center w-1/3 text-white text-[16px]">
-          {isPlayer ||
-            (isCoach && (
-              <Text className="text-white text-[18px]">
-                {coachInfo?.[0]?.height || playerInfo?.[0]?.player?.height}
-              </Text>
-            ))}
+          <Text className="text-white text-[18px]">
+            {coachInfo?.[0]?.height || playerInfo?.[0]?.player?.height}
+          </Text>
 
           <Text className="text-Grey">height</Text>
         </View>

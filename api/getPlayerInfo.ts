@@ -15,8 +15,8 @@ export const getPlayerInfo = async (id: string) => {
       }
     );
 
-    const nation = playerInfo.data.response[0].player.nationality;
-    const idTeam = playerInfo.data.response[0].statistics[0].team.id;
+    const nation = playerInfo.data.response[0]?.player?.nationality;
+    const idTeam = playerInfo.data.response[0]?.statistics[0]?.team.id;
 
     const nationality = await axios.get(
       `https://v3.football.api-sports.io/teams?name=${nation}`,
@@ -65,8 +65,8 @@ export const getPlayerInfo = async (id: string) => {
     return {
       number: player[0].number,
       info: playerInfo?.data?.response,
-      trophies: trophies.data.response,
-      transfers: transfers?.data?.response[0].transfers,
+      trophies: trophies?.data?.response,
+      transfers: transfers?.data?.response[0]?.transfers,
       nationalityLogo: nationality?.data?.response?.[0].team.logo,
     };
   } catch (error: any) {

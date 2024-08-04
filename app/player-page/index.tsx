@@ -56,8 +56,8 @@ const PlayerPage = () => {
   return (
     <View className="py-4">
       <ScrollView
-        showsVerticalScrollIndicator={false}
         className="flex flex-col"
+        showsVerticalScrollIndicator={false}
       >
         <PlayerDetails
           number={number}
@@ -67,9 +67,9 @@ const PlayerPage = () => {
 
         <PlayerStatTable stat={info} />
 
-        <CareerTable transfers={transfers} />
+        {transfers && <CareerTable transfers={transfers} />}
 
-        <TrophiesTable trophies={trophies} />
+        {trophies && <TrophiesTable trophies={trophies} />}
       </ScrollView>
     </View>
   );

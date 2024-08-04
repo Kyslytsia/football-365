@@ -8,7 +8,6 @@ import { CareerTableProps } from "./types";
 import { Wrapper } from "../wrapper";
 
 export const CareerTable = ({ coach, career, transfers }: CareerTableProps) => {
-  console.log({ career });
   const isCareer = career && career.length > 0;
   const isTransfers = transfers && transfers.length > 0;
   return (
