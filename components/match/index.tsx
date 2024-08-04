@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "expo-router";
 import { Image } from "expo-image";
 
@@ -28,7 +28,7 @@ export const Match = memo(({ match, isBorder }: PropsMatch) => {
   };
 
   return (
-    <Pressable onPress={handleNavigate}>
+    <TouchableOpacity onPress={handleNavigate}>
       <View className={styles.wrapper}>
         <View className={styles.status}>
           <Text className={styles.statusText}>
@@ -91,6 +91,6 @@ export const Match = memo(({ match, isBorder }: PropsMatch) => {
           </Text>
         </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 });
