@@ -20,7 +20,6 @@ const Matches = () => {
           const groupedMatches = groupMatchesByDateAndLeague(
             JSON.parse(storageTeamMatches)
           );
-          console.log(JSON.parse(storageTeamMatches));
 
           setMatches(groupedMatches);
         }

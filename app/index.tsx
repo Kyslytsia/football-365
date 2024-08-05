@@ -1,13 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Text, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Loading } from "@/components";
+import { BackArrow } from "@/assets/icon";
 import { GroupedMatches } from "@/types/groupedMatches";
 import {
+  matchDayIndex,
   getFormattedDate,
   groupMatchesByDateAndLeague,
-  matchDayIndex,
 } from "@/hooks";
 import {
   WorldCup,
@@ -22,13 +24,13 @@ import {
 } from "@/api/allMatchesLeague";
 
 import { RenderList } from "./RenderList";
-import { Button } from "react-native";
 
 const MainPage = () => {
   const [index, setIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
+  const [arrowPos, setArrowPos] = useState<boolean>(false);
 
   const flashListRef = useRef<FlashList<GroupedMatches>>(null);
   const itemHeightsRef = useRef<{ [key: number]: number }>({});
@@ -84,7 +86,6 @@ const MainPage = () => {
       flashListRef.current.scrollToIndex({
         index: index,
         animated: true,
-        viewPosition: 0.5,
       });
     }
   }, [index]);
@@ -92,7 +93,13 @@ const MainPage = () => {
   const handleViewableItemsChanged = useCallback(
     ({ viewableItems }: any) => {
       const visibleIndexes = viewableItems.map((item: any) => item.index);
-      setShowScrollButton(!visibleIndexes.includes(index));
+      const isIndexNotVisible = !visibleIndexes.includes(index);
+      const isIndexGreaterThanAnyVisible = visibleIndexes.some(
+        (visibleIndex: number) => index > visibleIndex
+      );
+
+      setShowScrollButton(isIndexNotVisible);
+      setArrowPos(isIndexGreaterThanAnyVisible);
     },
     [index]
   );
@@ -130,16 +137,24 @@ const MainPage = () => {
         keyExtractor={(group, index) => `${group.date}_${index}`}
         renderItem={({ item }: any) => <RenderList item={item} />}
         onViewableItemsChanged={handleViewableItemsChanged}
-        viewabilityConfig={{
-          itemVisiblePercentThreshold: 50,
-        }}
       />
 
       {showScrollButton && (
-        <Button
-          onPress={scrollToCurrentMatch}
-          title={getFormattedDate(matches[index].date)}
-        />
+        <View className="absolute top-10 p-3 h-[50px] w-full">
+          <View className="flex flex-row items-center gap-x-2 mx-auto py-1 px-2 h-full rounded-[14px] bg-cyan-500">
+            <Text onPress={scrollToCurrentMatch} className="text-white">
+              {getFormattedDate(matches[index].date)}
+            </Text>
+
+            <View
+              className={`${
+                arrowPos ? "rotate-[270deg]" : "rotate-90"
+              }  transition-all ease-in-out duration-300`}
+            >
+              <BackArrow width={10} height={10} />
+            </View>
+          </View>
+        </View>
       )}
     </>
   );

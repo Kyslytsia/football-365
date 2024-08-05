@@ -41,8 +41,6 @@ export const groupMatchesByDateAndLeague = (matches: MatchProps[]) => {
         matches: [match],
       });
     }
-
-    console.log(dateKey);
   });
 
   groupedMatches
