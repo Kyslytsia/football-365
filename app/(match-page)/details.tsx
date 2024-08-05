@@ -12,9 +12,11 @@ import { MatchEvents, MatchInfo, PreviousMeetings } from "@/components";
 const Details = () => {
   const [matchData, setMatchData] = useState<Match[]>([]);
   const [headToHead, setHeadToHead] = useState<Match[]>([]);
-  const notStarted = matchData?.[0]?.fixture.status.short;
   const homeId = matchData?.[0]?.teams.home.id.toString();
   const awayId = matchData?.[0]?.teams.away.id.toString();
+  const notStarted =
+    matchData?.[0]?.fixture.status.short === "TBD" ||
+    matchData?.[0]?.fixture.status.short === "NS";
 
   const { id } = useGlobalSearchParams();
 
@@ -53,7 +55,7 @@ const Details = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View className="flex-col gap-y-[10px] mx-auto mt-2">
-        {notStarted !== "NS" && (
+        {!notStarted && (
           <>
             <MatchEvents match={matchData} />
 
