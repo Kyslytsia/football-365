@@ -5,6 +5,7 @@ export interface FilteredPlayersProps {
   name: string;
   photo: string;
   nation: string;
+  position: string;
   stat: string | number;
 }
 

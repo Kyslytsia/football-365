@@ -1,21 +1,29 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
-import { Image } from "expo-image";
+
+import { PlayerHeader } from "@/components";
 
 export const Header = () => {
-  const { name, icon } = useLocalSearchParams();
+  const { pos, name, icon } = useLocalSearchParams();
+
+  const getPosition = (pos: string) => {
+    switch (pos) {
+      case "D":
+        return "Defender";
+      case "M":
+        return `Midfielder`;
+      case "A":
+        return "Attacker";
+      default:
+        return pos;
+    }
+  };
 
   return (
-    <View className="flex-col items-center justify-center h-[110px] bg-gray-800">
-      <Image
-        alt="alt"
-        source={icon}
-        contentFit="contain"
-        className="w-12 h-12 rounded-full"
-      />
-
-      <Text className="text-white">{name}</Text>
-    </View>
+    <PlayerHeader
+      icon={icon as string}
+      name={name as string}
+      pos={getPosition(pos as string)}
+    />
   );
 };

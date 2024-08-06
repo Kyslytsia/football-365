@@ -20,9 +20,15 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
   const heightWrapper = useSharedValue(200);
   const navigation = useNavigation<any>();
 
-  const handleNavigate = (id: number, name: string, icon: string) => {
+  const handleNavigate = (
+    id: number,
+    pos: string,
+    name: string,
+    icon: string
+  ) => {
     navigation.push("player-page", {
       id: id,
+      pos: pos,
       name: name,
       icon: icon,
     });
@@ -77,6 +83,7 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
         name: player.player.name,
         photo: player.player.photo,
         nation: player.player.nationality,
+        position: player.statistics[0].games.position,
       };
     });
 
@@ -103,7 +110,12 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
             <TouchableOpacity
               key={player.name + "stat"}
               onPress={() =>
-                handleNavigate(player.id, player.name, player.photo)
+                handleNavigate(
+                  player.id,
+                  player.position,
+                  player.name,
+                  player.photo
+                )
               }
               className="flex-row items-center justify-between px-2 h-10 border-t border-Black"
             >

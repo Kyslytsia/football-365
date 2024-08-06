@@ -82,10 +82,10 @@ const Squad = () => {
       >
         <PlayerSquad
           coach
+          position="Coach"
           id={coach?.id as number}
           name={coach?.name as string}
           photo={coach?.photo as string}
-          position={coach?.nationality as string}
         />
       </Wrapper>
 

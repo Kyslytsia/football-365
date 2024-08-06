@@ -13,6 +13,7 @@ export const PlayerLineup = ({
   stat,
   coach,
   number,
+  position,
   playerSubs,
   playerGoal,
   playerPhoto,
@@ -23,10 +24,16 @@ export const PlayerLineup = ({
 }: PlayerProps) => {
   const navigation = useNavigation<any>();
 
-  const handleNavigate = (id: number, name: string, icon: string) => {
+  const handleNavigate = (
+    id: number,
+    pos: string,
+    name: string,
+    icon: string
+  ) => {
     if (coach) {
       navigation.push("coach-page", {
         id,
+        pos,
         name,
         icon,
       });
@@ -36,6 +43,7 @@ export const PlayerLineup = ({
 
     navigation.push("player-page", {
       id,
+      pos,
       name,
       icon,
     });
@@ -43,7 +51,7 @@ export const PlayerLineup = ({
 
   return (
     <TouchableOpacity
-      onPress={() => handleNavigate(id, name, playerPhoto)}
+      onPress={() => handleNavigate(id, position, name, playerPhoto)}
       className="flex flex-row items-center gap-x-2 p-1 border-t border-table-border"
     >
       <Image

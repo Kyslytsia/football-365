@@ -3,6 +3,7 @@ export interface PlayerProps {
   name: string;
   coach?: boolean;
   number?: number;
+  position: string;
   playerPhoto: string;
   playerSubsName?: string;
   playerRedCard?: boolean;

@@ -9,10 +9,16 @@ export const PlayerSquad = memo(
   ({ id, name, photo, coach, number, position }: PlayerSquadProps) => {
     const navigation = useNavigation<any>();
 
-    const handleNavigate = (id: number, name: string, icon: string) => {
+    const handleNavigate = (
+      id: number,
+      pos: string,
+      name: string,
+      icon: string
+    ) => {
       if (coach) {
         navigation.push("coach-page", {
           id,
+          pos,
           name,
           icon,
         });
@@ -22,6 +28,7 @@ export const PlayerSquad = memo(
 
       navigation.push("player-page", {
         id,
+        pos,
         name,
         icon,
       });
@@ -29,7 +36,7 @@ export const PlayerSquad = memo(
 
     return (
       <TouchableOpacity
-        onPress={() => handleNavigate(id, name, photo)}
+        onPress={() => handleNavigate(id, position, name, photo)}
         className="flex-row items-center justify-between px-2 h-10"
       >
         <View className="flex-row gap-x-3">
