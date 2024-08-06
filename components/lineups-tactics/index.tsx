@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 
 import { field } from "@/assets/img";
@@ -7,6 +7,7 @@ import { PlayerData } from "@/types/matchPage";
 import { Ball, Substitution } from "@/assets/icon";
 
 import { LineupTacticsProps } from "./types";
+import { useNavigation } from "expo-router";
 
 export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
   const events = match?.[0]?.events ?? [];
@@ -25,6 +26,8 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
 
     return result;
   };
+  const startPlayers = distributePlayers().reverse();
+  const navigation = useNavigation<any>();
 
   const getRatingColorClass = (rating: number) => {
     if (rating > 8.0) return "bg-blue-500";
@@ -33,7 +36,19 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
     return "bg-orange-500";
   };
 
-  const startPlayers = distributePlayers().reverse();
+  const handleNavigate = (
+    id: number,
+    pos: string,
+    name: string,
+    icon: string
+  ) => {
+    navigation.push("player-page", {
+      id,
+      pos,
+      name,
+      icon,
+    });
+  };
 
   return (
     <View className="relative">
@@ -82,7 +97,15 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
                 );
 
                 return (
-                  <View
+                  <TouchableOpacity
+                    onPress={() =>
+                      handleNavigate(
+                        player.player.id,
+                        player.statistics[0].games.position,
+                        player.player.name,
+                        player.player.photo
+                      )
+                    }
                     key={`player-${player.player.id}-${player.player.photo}`}
                     className="relative flex justify-center items-center text-xs"
                   >
@@ -126,7 +149,7 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
                         <Ball width="12px" height="12px" fill="black" />
                       </View>
                     )}
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
           </View>

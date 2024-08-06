@@ -13,6 +13,7 @@ export const Header = () => {
       case "M":
         return `Midfielder`;
       case "A":
+      case "F":
         return "Attacker";
       default:
         return pos;
