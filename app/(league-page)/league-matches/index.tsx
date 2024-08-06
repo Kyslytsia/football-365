@@ -1,18 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Button } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { useGlobalSearchParams } from "expo-router";
 import { GroupedMatches } from "@/types/groupedMatches";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { Loading, Rounds } from "@/components";
+import { Loading, Rounds, ScrollToDateBtn } from "@/components";
 import { getAllMatchesForSeasonByLeagueId } from "@/api/allMatchesLeague";
 import {
   matchDayIndex,
   getCurrentSeason,
+  getFormattedDate,
   groupedMatchesByRound,
   groupMatchesByDateAndLeague,
-  getFormattedDate,
 } from "@/hooks";
 
 import { RenderList } from "./RenderList";
@@ -24,6 +23,7 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [roundMatches, setRoundMatches] = useState<GroupedMatches[]>([]);
   const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
+  const [arrowPos, setArrowPos] = useState<boolean>(false);
 
   const { id, name } = useGlobalSearchParams();
   const ID = Number(id);
@@ -53,7 +53,13 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
   const handleViewableItemsChanged = useCallback(
     ({ viewableItems }: any) => {
       const visibleIndexes = viewableItems.map((item: any) => item.index);
-      setShowScrollButton(!visibleIndexes.includes(index));
+      const isIndexNotVisible = !visibleIndexes.includes(index);
+      const isIndexGreaterThanAnyVisible = visibleIndexes.some(
+        (visibleIndex: number) => index > visibleIndex
+      );
+
+      setShowScrollButton(isIndexNotVisible);
+      setArrowPos(isIndexGreaterThanAnyVisible);
     },
     [index]
   );
@@ -133,9 +139,11 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
       />
 
       {showScrollButton && (
-        <Button
+        <ScrollToDateBtn
+          arrowPos={arrowPos}
           onPress={scrollToCurrentMatch}
-          title={getFormattedDate(isMatchesData[index].date)}
+          wrapperClass={matchesData ? "" : "top-14"}
+          date={getFormattedDate(isMatchesData[index].date)}
         />
       )}
     </>

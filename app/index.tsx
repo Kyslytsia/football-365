@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Text, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { Loading } from "@/components";
-import { BackArrow } from "@/assets/icon";
+import { ScrollToDateBtn, Loading } from "@/components";
 import { GroupedMatches } from "@/types/groupedMatches";
 import {
   matchDayIndex,
@@ -140,21 +138,12 @@ const MainPage = () => {
       />
 
       {showScrollButton && (
-        <View className="absolute top-10 p-3 h-[50px] w-full">
-          <View className="flex flex-row items-center gap-x-2 mx-auto py-1 px-2 h-full rounded-[14px] bg-cyan-500">
-            <Text onPress={scrollToCurrentMatch} className="text-white">
-              {getFormattedDate(matches[index].date)}
-            </Text>
-
-            <View
-              className={`${
-                arrowPos ? "rotate-[270deg]" : "rotate-90"
-              }  transition-all ease-in-out duration-300`}
-            >
-              <BackArrow width={10} height={10} />
-            </View>
-          </View>
-        </View>
+        <ScrollToDateBtn
+          arrowPos={arrowPos}
+          wrapperClass="top-10"
+          onPress={scrollToCurrentMatch}
+          date={getFormattedDate(matches[index].date)}
+        />
       )}
     </>
   );
