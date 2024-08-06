@@ -92,7 +92,7 @@ const MainPage = () => {
     ({ viewableItems }: any) => {
       const visibleIndexes = viewableItems.map((item: any) => item.index);
       const isIndexNotVisible = !visibleIndexes.includes(index);
-      const isIndexGreaterThanAnyVisible = visibleIndexes.some(
+      const isIndexGreaterThanAnyVisible = visibleIndexes.find(
         (visibleIndex: number) => index > visibleIndex
       );
 
@@ -139,7 +139,6 @@ const MainPage = () => {
 
       {showScrollButton && (
         <ScrollToDateBtn
-          arrowPos={arrowPos}
           wrapperClass="top-10"
           onPress={scrollToCurrentMatch}
           date={getFormattedDate(matches[index].date)}

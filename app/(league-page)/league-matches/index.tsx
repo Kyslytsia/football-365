@@ -23,7 +23,6 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [roundMatches, setRoundMatches] = useState<GroupedMatches[]>([]);
   const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
-  const [arrowPos, setArrowPos] = useState<boolean>(false);
 
   const { id, name } = useGlobalSearchParams();
   const ID = Number(id);
@@ -54,12 +53,8 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
     ({ viewableItems }: any) => {
       const visibleIndexes = viewableItems.map((item: any) => item.index);
       const isIndexNotVisible = !visibleIndexes.includes(index);
-      const isIndexGreaterThanAnyVisible = visibleIndexes.some(
-        (visibleIndex: number) => index > visibleIndex
-      );
 
       setShowScrollButton(isIndexNotVisible);
-      setArrowPos(isIndexGreaterThanAnyVisible);
     },
     [index]
   );
@@ -140,7 +135,6 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
 
       {showScrollButton && (
         <ScrollToDateBtn
-          arrowPos={arrowPos}
           onPress={scrollToCurrentMatch}
           wrapperClass={matchesData ? "" : "top-14"}
           date={getFormattedDate(isMatchesData[index].date)}
