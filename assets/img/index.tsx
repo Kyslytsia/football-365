@@ -1,10 +1,12 @@
 export const bundesliga = require("./bundesliga.png");
 export const el = require("./el.webp");
 export const euro = require("./euro.jpg");
+export const field = require("./Football-field.png");
 export const laliga = require("./laliga.png");
 export const ligue1 = require("./ligue-1.png");
+export const matchBg = require("./match-bg.jpg");
+export const PlayerBg = require("./player.bg.jpg");
 export const premierleague = require("./premierleague.png");
 export const seriaA = require("./serie-a.png");
+export const TeamBg = require("./team-bg.jpg");
 export const ucl = require("./ucl.webp");
-export const field = require("./Football-field.png");
-export const matchBg = require("./match-bg.jpg");

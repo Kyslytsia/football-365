@@ -1,12 +1,18 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { Image } from "expo-image";
+import { Text } from "react-native";
+import { Image, ImageBackground } from "expo-image";
+
+import { PlayerBg } from "@/assets/img";
 
 import { PlayerHeaderProps } from "./types";
 
 export const PlayerHeader = ({ pos, name, icon }: PlayerHeaderProps) => {
   return (
-    <View className="flex-col items-center justify-center h-[120px] bg-gray-800">
+    <ImageBackground
+      alt="player"
+      source={PlayerBg}
+      className="flex-col items-center justify-center h-[120px]"
+    >
       <Image
         alt="alt"
         source={icon}
@@ -15,7 +21,7 @@ export const PlayerHeader = ({ pos, name, icon }: PlayerHeaderProps) => {
       />
 
       <Text className="text-white">{name}</Text>
-      <Text className="text-Grey">{pos}</Text>
-    </View>
+      <Text className="text-white">{pos}</Text>
+    </ImageBackground>
   );
 };

@@ -1,13 +1,19 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { Image } from "expo-image";
+import { Image, ImageBackground } from "expo-image";
+
+import { TeamBg } from "@/assets/img";
 
 const Header = () => {
   const { name, icon } = useLocalSearchParams();
 
   return (
-    <View className="flex-col items-center justify-center h-[110px] bg-gray-800">
+    <ImageBackground
+      alt="team"
+      source={TeamBg}
+      className="flex-col items-center justify-center h-[110px] bg-gray-800"
+    >
       <Image
         alt="alt"
         source={icon}
@@ -16,7 +22,7 @@ const Header = () => {
       />
 
       <Text className="text-white">{name}</Text>
-    </View>
+    </ImageBackground>
   );
 };
 
