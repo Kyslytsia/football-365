@@ -3,9 +3,9 @@ import { ScrollView, Text } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { Table } from "@/components";
 import { getRounds } from "@/api/rounds";
 import { getCurrentSeason } from "@/hooks";
+import { Loading, Table } from "@/components";
 import { getStandings } from "@/api/standings";
 import { StandingProps } from "@/types/standings";
 
@@ -13,10 +13,12 @@ import { Nav } from "./nav";
 import { NationalTableProps } from "./types";
 
 const NationalTable = ({ leagueId, leagueName }: NationalTableProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [standings, setStandings] = useState<StandingProps[]>([]);
   const [navValue, setNavValue] = useState<string>("overall");
   const [round, setRound] = useState<string[]>([""]);
   const [isChampion, setIsChampion] = useState<boolean>(false);
+
   const { id, name } = useGlobalSearchParams();
 
   const ID = Number(id);
@@ -41,6 +43,8 @@ const NationalTable = ({ leagueId, leagueName }: NationalTableProps) => {
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
+
       try {
         const storageStandings = await AsyncStorage.getItem(
           `${name} standings`
@@ -73,6 +77,8 @@ const NationalTable = ({ leagueId, leagueName }: NationalTableProps) => {
         }
       } catch (error: any) {
         console.error(error.message);
+      } finally {
+        setLoading(false);
       }
     })();
   }, [leagueId]);
@@ -82,6 +88,8 @@ const NationalTable = ({ leagueId, leagueName }: NationalTableProps) => {
     const champion = calculateChampion(standings, totalRound);
     setIsChampion(champion);
   }, [round]);
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

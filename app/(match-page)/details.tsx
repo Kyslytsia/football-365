@@ -7,9 +7,15 @@ import { getMatchId } from "@/api/match";
 import { Match } from "@/types/matchPage";
 import { getHeadToHead } from "@/api/headToHead";
 import MatchStatistics from "@/components/match-statistics";
-import { MatchEvents, MatchInfo, PreviousMeetings } from "@/components";
+import {
+  Loading,
+  MatchEvents,
+  MatchInfo,
+  PreviousMeetings,
+} from "@/components";
 
 const Details = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [matchData, setMatchData] = useState<Match[]>([]);
   const [headToHead, setHeadToHead] = useState<Match[]>([]);
   const homeId = matchData?.[0]?.teams.home.id.toString();
@@ -24,6 +30,8 @@ const Details = () => {
 
   useEffect(() => {
     const fetchHeadToHead = async () => {
+      setLoading(true);
+
       try {
         const h2h = await AsyncStorage.getItem(`${id} H2H`);
         const storageMatch = await AsyncStorage.getItem(`${id} match`);
@@ -46,11 +54,15 @@ const Details = () => {
         }
       } catch (error: any) {
         console.error(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchHeadToHead();
   }, [homeId, awayId]);
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

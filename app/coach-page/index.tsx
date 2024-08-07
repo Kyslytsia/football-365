@@ -6,17 +6,24 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Coach } from "@/types/coach";
 import { Trophies } from "@/types/trophies";
 import { getCoachInfo } from "@/api/getCoachInfo";
-import { CareerTable, PlayerDetails, TrophiesTable } from "@/components";
+import {
+  CareerTable,
+  Loading,
+  PlayerDetails,
+  TrophiesTable,
+} from "@/components";
 
 const CoachPage = () => {
   const { id, name } = useGlobalSearchParams();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [info, setInfo] = useState<Coach[]>([]);
   const [nationalityLogo, setNationalityLogo] = useState<string>("");
   const [trophies, setTrophies] = useState<Trophies[]>([]);
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const storageCoach = await AsyncStorage.getItem(`${name} info`);
 
       try {
@@ -37,9 +44,13 @@ const CoachPage = () => {
         }
       } catch (error: any) {
         console.log(error.message);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <View className="py-4">

@@ -6,9 +6,10 @@ import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getMatchId } from "@/api/match";
-import { LineupBench, LineupTactics } from "@/components";
+import { LineupBench, LineupTactics, Loading } from "@/components";
 
 const Lineups = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [match, setMatch] = useState<Match[]>([]);
   const [team, setTeam] = useState<number>(0);
   const homeTeam = match?.[0]?.teams.home.name;
@@ -21,6 +22,8 @@ const Lineups = () => {
 
   useEffect(() => {
     (async () => {
+      setLoading(false);
+
       try {
         const storageMatch = await AsyncStorage.getItem(`${id} match`);
 
@@ -37,9 +40,13 @@ const Lineups = () => {
         }
       } catch (error: any) {
         console.error(error.message);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView

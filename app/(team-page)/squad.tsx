@@ -4,12 +4,13 @@ import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getSquad } from "@/api/getSquad";
-import { PlayerSquad, Wrapper } from "@/components";
+import { Loading, PlayerSquad, Wrapper } from "@/components";
 import { Player, Squad as SquadProps } from "@/types/squad";
 
 const Squad = () => {
   const { id, name } = useGlobalSearchParams();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [squad, setSquad] = useState<SquadProps>();
   const [goalkeeper, setGoalkeeper] = useState<Player[]>();
   const [defender, setDefender] = useState<Player[]>();
@@ -22,6 +23,7 @@ const Squad = () => {
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const storageTeamPlatersStats = await AsyncStorage.getItem(
         `${name} squad`
       );
@@ -40,6 +42,8 @@ const Squad = () => {
         }
       } catch (error: any) {
         console.error(error.message);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
@@ -73,6 +77,8 @@ const Squad = () => {
     setMidfielder(midfielder);
     setAttacker(attacker);
   }, [squad]);
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

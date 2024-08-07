@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, ScrollView } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 
-import { PlayerStat } from "@/components/player-stat";
+import { Loading, PlayerStat } from "@/components";
 import { getPlayersOfTeamStats } from "@/api/getPlayersOfTeamStats";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PlayerStatistics as PlayerStatisticsProps } from "@/types/teamPlayersStats";
@@ -10,10 +10,12 @@ import { PlayerStatistics as PlayerStatisticsProps } from "@/types/teamPlayersSt
 const PlayerStatistics = () => {
   const { id, name } = useGlobalSearchParams();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [playersStats, setPlayersStats] = useState<PlayerStatisticsProps[]>([]);
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const storageTeamPlatersStats = await AsyncStorage.getItem(
         `${name} platers stats`
       );
@@ -35,9 +37,13 @@ const PlayerStatistics = () => {
         }
       } catch (error: any) {
         console.error(error.message);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>

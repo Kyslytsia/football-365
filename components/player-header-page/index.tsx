@@ -6,7 +6,7 @@ import { PlayerHeaderProps } from "./types";
 
 export const PlayerHeader = ({ pos, name, icon }: PlayerHeaderProps) => {
   return (
-    <View className="flex-col items-center justify-center h-[110px] bg-gray-800">
+    <View className="flex-col items-center justify-center h-[120px] bg-gray-800">
       <Image
         alt="alt"
         source={icon}

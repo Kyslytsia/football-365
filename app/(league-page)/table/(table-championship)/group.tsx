@@ -4,14 +4,15 @@ import { useGlobalSearchParams } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { Table } from "@/components";
 import { getCurrentSeason } from "@/hooks";
+import { Loading, Table } from "@/components";
 import { getStandings } from "@/api/standings";
 import { StandingProps } from "@/types/standings";
 
 import { GroupsProps } from "./types";
 
 const Groups = ({ leagueName, standingsData }: GroupsProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [standings, setStandings] = useState<StandingProps[][]>([]);
   const { id, name } = useGlobalSearchParams();
 
@@ -20,6 +21,7 @@ const Groups = ({ leagueName, standingsData }: GroupsProps) => {
   const isStandingsData = standingsData ?? standings;
 
   useEffect(() => {
+    setLoading(true);
     (async () => {
       try {
         if (!standingsData) {
@@ -39,9 +41,13 @@ const Groups = ({ leagueName, standingsData }: GroupsProps) => {
         }
       } catch (error: any) {
         console.error(error.message);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <>

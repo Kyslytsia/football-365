@@ -31,7 +31,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
   return (
     <ImageBackground
       source={matchBg}
-      className="relative flex-row justify-around items-center py-2 h-[100px]"
+      className="relative flex-row justify-around items-center py-2 h-[120px]"
     >
       <View className="flex flex-col justify-around items-center w-[120px]">
         <TouchableOpacity

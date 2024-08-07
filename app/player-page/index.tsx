@@ -12,11 +12,13 @@ import {
   PlayerDetails,
   TrophiesTable,
   PlayerStatTable,
+  Loading,
 } from "@/components";
 
 const PlayerPage = () => {
   const { id, name } = useGlobalSearchParams();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [info, setInfo] = useState<PlayerStatistics[] | []>([]);
   const [number, setNumber] = useState<number | null>(null);
   const [nationalityLogo, setNationalityLogo] = useState<string>("");
@@ -25,6 +27,7 @@ const PlayerPage = () => {
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const storagePlayer = await AsyncStorage.getItem(`${name} info`);
 
       try {
@@ -49,9 +52,13 @@ const PlayerPage = () => {
         }
       } catch (error: any) {
         console.error(error.message);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <View className="py-4">
