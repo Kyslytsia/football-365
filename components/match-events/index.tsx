@@ -113,7 +113,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
 
     heightView.value = height;
     setInitialHeight(height);
-  }, [match]);
+  }, [match, initialHeight]);
 
   return (
     <Wrapper

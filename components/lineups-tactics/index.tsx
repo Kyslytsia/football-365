@@ -11,8 +11,8 @@ import { useNavigation } from "expo-router";
 
 export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
   const events = match?.[0]?.events ?? [];
-  const startXI = match?.[0]?.players[team]?.players.slice(0, 11) ?? [];
   const tactics = "1-" + (match?.[0]?.lineups[team]?.formation ?? "");
+  const startXI = match?.[0]?.players[team]?.players?.slice(0, 11) ?? [];
 
   const distributePlayers = () => {
     const positions = tactics?.split("-").map(Number) ?? [];

@@ -14,7 +14,7 @@ const Lineups = () => {
   const [team, setTeam] = useState<number>(0);
   const homeTeam = match?.[0]?.teams.home.name;
   const awayTeam = match?.[0]?.teams.away.name;
-  const tactics = match?.[0]?.lineups[team].formation;
+  const tactics = match?.[0]?.lineups[team]?.formation ?? "";
 
   const { id } = useGlobalSearchParams();
 
@@ -22,7 +22,7 @@ const Lineups = () => {
 
   useEffect(() => {
     (async () => {
-      setLoading(false);
+      setLoading(true);
 
       try {
         const storageMatch = await AsyncStorage.getItem(`${id} match`);
@@ -73,27 +73,35 @@ const Lineups = () => {
         </TouchableOpacity>
       </View>
 
-      <View
-        className={`flex-row items-center w-full ${
-          team === 1 ? "justify-end" : "justify-start"
-        }`}
-      >
-        <View
-          className={`flex-row items-center justify-center w-20 bg-[#384042] ${
-            team === 1 ? "rounded-l-full" : "rounded-r-full"
-          }`}
-        >
-          <Text className="text-white">{tactics}</Text>
+      {!match[0]?.lineups.length && !match[0]?.players.length ? (
+        <Text className="text-white text-center text-[20px]">
+          There's no tactic information on this match.
+        </Text>
+      ) : (
+        <View className="flex flex-col gap-y-4">
+          <View
+            className={`flex-row items-center w-full ${
+              team === 1 ? "justify-end" : "justify-start"
+            }`}
+          >
+            <View
+              className={`flex-row items-center justify-center w-20 bg-[#384042] ${
+                team === 1 ? "rounded-l-full" : "rounded-r-full"
+              }`}
+            >
+              <Text className="text-white">{tactics}</Text>
+            </View>
+          </View>
+
+          <View>
+            <LineupTactics team={team} match={match} />
+          </View>
+
+          <View>
+            <LineupBench team={team} match={match} />
+          </View>
         </View>
-      </View>
-
-      <View>
-        <LineupTactics team={team} match={match} />
-      </View>
-
-      <View>
-        <LineupBench team={team} match={match} />
-      </View>
+      )}
     </ScrollView>
   );
 };

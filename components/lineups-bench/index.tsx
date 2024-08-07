@@ -7,8 +7,8 @@ import { Text, View } from "react-native";
 export const LineupBench = ({ team, match }: LineupBenchProps) => {
   const events = match?.[0]?.events ?? [];
   const startXI = match?.[0]?.players[team]?.players.slice(0, 11);
-  const bench = match?.[0]?.players[team].players.slice(11);
-  const coach = match?.[0]?.lineups[team].coach;
+  const bench = match?.[0]?.players[team]?.players.slice(11);
+  const coach = match?.[0]?.lineups[team]?.coach;
 
   const getRatingColor = (rating: number) => {
     if (rating > 8.0) return "bg-blue-600";

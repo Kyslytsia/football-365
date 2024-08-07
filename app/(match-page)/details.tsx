@@ -71,7 +71,9 @@ const Details = () => {
           <>
             <MatchEvents match={matchData} />
 
-            <MatchStatistics match={matchData} />
+            {matchData[0]?.statistics?.length > 0 && (
+              <MatchStatistics match={matchData} />
+            )}
           </>
         )}
 
