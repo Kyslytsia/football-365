@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getMatchId } from "@/api/match";
 import { LineupBench, LineupTactics, Loading } from "@/components";
+import { getStyles } from "./styles";
 
 const Lineups = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -17,7 +18,7 @@ const Lineups = () => {
   const tactics = match?.[0]?.lineups[team]?.formation ?? "";
 
   const { id } = useGlobalSearchParams();
-
+  const styles = getStyles();
   const ID = Number(id);
 
   useEffect(() => {
@@ -53,23 +54,19 @@ const Lineups = () => {
       showsVerticalScrollIndicator={false}
       className="flex flex-col gap-y-4 py-2"
     >
-      <View className="flex-row items-center justify-center px-1 mx-auto w-[360px]">
+      <View className="flex flex-row items-center justify-center px-1 mx-auto w-[360px]">
         <TouchableOpacity
           onPress={() => setTeam(0)}
-          className={`flex items-center justify-center p-1 w-1/2 rounded-full ${
-            team === 0 ? "bg-nav-active" : "bg-transparent"
-          }`}
+          className={`${styles.btnWrapper} ${team === 0 && styles.btnActive}`}
         >
-          <Text className="text-white">{homeTeam}</Text>
+          <Text className={styles.text}>{homeTeam}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => setTeam(1)}
-          className={`flex items-center justify-center p-1 w-1/2 rounded-full ${
-            team === 1 ? "bg-nav-active" : "bg-transparent"
-          }`}
+          className={`${styles.btnWrapper} ${team === 1 && styles.btnActive}`}
         >
-          <Text className="text-white">{awayTeam}</Text>
+          <Text className={styles.text}>{awayTeam}</Text>
         </TouchableOpacity>
       </View>
 
@@ -80,16 +77,16 @@ const Lineups = () => {
       ) : (
         <View className="flex flex-col gap-y-4">
           <View
-            className={`flex-row items-center w-full ${
+            className={`flex flex-row items-center w-full ${
               team === 1 ? "justify-end" : "justify-start"
             }`}
           >
             <View
-              className={`flex-row items-center justify-center w-20 bg-tacticBtn-bg ${
+              className={`flex flex-row items-center justify-center w-20 bg-tacticBtn-bg ${
                 team === 1 ? "rounded-l-full" : "rounded-r-full"
               }`}
             >
-              <Text className="text-white">{tactics}</Text>
+              <Text className={styles.text}>{tactics}</Text>
             </View>
           </View>
 

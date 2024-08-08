@@ -10,13 +10,15 @@ import {
   semiFinalsAndFinalLines,
 } from "./lineClasses";
 
-const renderLines = (lines: Array<{ className: string; style: any }>) =>
-  lines.map((line, index) => (
-    <View key={index} style={line.style} className={line.className} />
-  ));
-
 export const KnockoutTable = memo(
   ({ isNational, ...props }: KnockoutTableProps) => {
+    const roundWrapperStyle = "flex-row items-center justify-between mx-auto";
+
+    const renderLines = (lines: Array<{ className: string; style: any }>) =>
+      lines.map((line, index) => (
+        <View key={index} style={line.style} className={line.className} />
+      ));
+
     return (
       <ScrollView>
         <View className="relative gap-y-11 py-5 mx-auto w-[360px]">
@@ -24,7 +26,7 @@ export const KnockoutTable = memo(
           {renderLines(quarterFinalsLines)}
           {renderLines(semiFinalsAndFinalLines)}
 
-          <View className="flex-row items-center justify-between mx-auto w-[320px]">
+          <View className={`${roundWrapperStyle} w-[320px]`}>
             {isNational ? (
               <>
                 <KnockoutMatch match={props.roundOf16_1} />
@@ -42,7 +44,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex-row items-center justify-between mx-auto w-[233px]">
+          <View className={`${roundWrapperStyle} w-[233px]`}>
             {isNational ? (
               <>
                 <KnockoutMatch match={props.quarterFinals_1} />
@@ -76,7 +78,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex-row items-center justify-between mx-auto w-[233px]">
+          <View className={`${roundWrapperStyle} w-[233px]`}>
             {isNational ? (
               <>
                 <KnockoutMatch match={props.quarterFinals_3} />
@@ -90,7 +92,7 @@ export const KnockoutTable = memo(
             )}
           </View>
 
-          <View className="flex-row items-center justify-between mx-auto w-[320px]">
+          <View className={`${roundWrapperStyle} w-[320px]`}>
             {isNational ? (
               <>
                 <KnockoutMatch match={props.roundOf16_5} />

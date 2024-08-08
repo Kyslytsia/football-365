@@ -4,6 +4,7 @@ import { View, Text } from "react-native";
 import { Ball, FootballShoe, Star } from "@/assets/icon";
 import { PlayerStatistics } from "@/types/teamPlayersStats";
 
+import { getStyles } from "./styles";
 import { Wrapper } from "../wrapper";
 import { PlayerStatTableProps } from "./types";
 
@@ -13,6 +14,9 @@ export const PlayerStatTable = ({
   stat: PlayerStatistics[] | [];
 }) => {
   const [playerStat, setPlayerStat] = useState<PlayerStatTableProps>();
+
+  const styles = getStyles();
+
   useEffect(() => {
     const playersData = () => {
       let goals = 0;
@@ -56,38 +60,32 @@ export const PlayerStatTable = ({
       childrenClass="flex flex-row py-6 border-t border-Black"
       title={<Text className="text-white">player statistics</Text>}
     >
-      <View className="flex flex-col items-center gap-y-2 w-1/3">
+      <View className={styles.wrapper}>
         <Ball width={25} height={25} />
 
-        <Text className="text-white text-[18px] font-medium">
-          {playerStat?.goals}
-        </Text>
+        <Text className={styles.whiteText}>{playerStat?.goals}</Text>
 
-        <Text className="text-Grey text-[12px]">goals</Text>
+        <Text className={styles.greyText}>goals</Text>
       </View>
 
       <View className="h-full w-[1px] bg-Grey" />
 
-      <View className="flex flex-col items-center gap-y-2 w-1/3">
+      <View className={styles.wrapper}>
         <FootballShoe width={25} height={25} />
 
-        <Text className="text-white text-[18px] font-medium">
-          {playerStat?.assists}
-        </Text>
+        <Text className={styles.whiteText}>{playerStat?.assists}</Text>
 
-        <Text className="text-Grey text-[12px]">assists</Text>
+        <Text className={styles.greyText}>assists</Text>
       </View>
 
       <View className="h-full w-[1px] bg-Grey" />
 
-      <View className="flex flex-col items-center gap-y-2 w-1/3">
+      <View className={styles.wrapper}>
         <Star width={25} height={25} />
 
-        <Text className="text-white text-[18px] font-medium">
-          {playerStat?.rating}
-        </Text>
+        <Text className={styles.whiteText}>{playerStat?.rating}</Text>
 
-        <Text className="text-Grey text-[12px]">rating</Text>
+        <Text className={styles.greyText}>rating</Text>
       </View>
     </Wrapper>
   );

@@ -26,12 +26,12 @@ export const PlayerDetails = ({
       }
     >
       <View className="flex flex-row justify-center p-2">
-        <View className="flex flex-col justify-center items-center gap-y-1 w-1/2">
+        <View className="flex flex-col justify-between items-center gap-y-1 pb-2 pt-4 w-1/2">
           <Image
             alt="nationality"
             contentFit="cover"
             source={nationalityLogo ?? ""}
-            className="w-[60px] h-[60px]"
+            className="w-[60px] h-[40px]"
           />
 
           <Text className="text-white">

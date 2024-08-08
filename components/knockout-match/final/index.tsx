@@ -69,7 +69,7 @@ export const Final = memo(
             </View>
           )}
 
-          <View className="flex flex-col justify-center items-center px-1  w-[42%]">
+          <View className="flex flex-col justify-center items-center px-1 w-[42%]">
             {!final ? (
               <DefaultClub width="45px" height="45px" />
             ) : (

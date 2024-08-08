@@ -49,7 +49,7 @@ const Matches = () => {
 
   if (loading) return <Loading />;
 
-  return matches && <LeagueMatches matchesData={matches} />;
+  return <LeagueMatches matchesData={matches} />;
 };
 
 export default Matches;

@@ -54,7 +54,7 @@ const MatchPage = () => {
 
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="details" />
-        <Stack.Screen name="lineups" />
+        <Stack.Screen name="lineups/index" />
       </Stack>
     </>
   );

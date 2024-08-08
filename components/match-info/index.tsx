@@ -1,12 +1,12 @@
 import { Text } from "react-native";
+import { Image } from "expo-image";
 
 import { Match } from "@/types/matchPage";
 import { getFormattedDate, MatchTime } from "@/hooks";
 import { Calendar, Location, Whistle } from "@/assets/icon";
 
-import { Wrapper } from "../wrapper";
 import { Info } from "./info";
-import { Image } from "expo-image";
+import { Wrapper } from "../wrapper";
 
 export const MatchInfo = ({ match }: { match?: Match[] | [] }) => {
   const fixtures = match?.[0]?.fixture;

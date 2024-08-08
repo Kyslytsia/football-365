@@ -9,7 +9,7 @@ export const Info = ({ icon, info, additionalInfo }: InfoProps) => {
 
       <View className="flex flex-col items-start justify-center leading-[17px]">
         <Text className="text-xs text-white">{info}</Text>
-        <Text className="text-xs text-[#a6b8c9]">{additionalInfo}</Text>
+        <Text className="text-xs text-Grey">{additionalInfo}</Text>
       </View>
     </View>
   );

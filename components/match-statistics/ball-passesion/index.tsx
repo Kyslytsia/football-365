@@ -13,6 +13,7 @@ export const BallPossession = ({
 }: CircularProgressProps) => {
   const radius = 60;
   const center = radius;
+  const text = "text-[14px] text-center font-bold text-white";
 
   const calculateArc = (percentage: number, radius: number) => {
     const angle = (percentage / 100) * 360;
@@ -25,9 +26,7 @@ export const BallPossession = ({
 
   return (
     <View className="flex-row items-center justify-between px-[20px]">
-      <Text className="text-[14px] text-center font-bold text-white">
-        {valueHome}
-      </Text>
+      <Text className={text}>{valueHome}</Text>
 
       <View className="relative w-[120px] h-[120px]">
         <Svg
@@ -47,15 +46,11 @@ export const BallPossession = ({
         </Svg>
 
         <View className="absolute top-[5px] left-[5px] flex-row items-center justify-center w-[110px] h-[110px] bg-[#26242e] rounded-full">
-          <Text className="text-[14px] text-center font-bold text-white">
-            {label}
-          </Text>
+          <Text className={text}>{label}</Text>
         </View>
       </View>
 
-      <Text className="text-[14px] text-center font-bold text-white">
-        {valueAway}
-      </Text>
+      <Text className={text}>{valueAway}</Text>
     </View>
   );
 };

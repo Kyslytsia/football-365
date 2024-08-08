@@ -70,11 +70,11 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
               id={player.player.id}
               name={player.player.name}
               playerPhoto={player.player.photo}
-              playerRedCard={playerRedCard && true}
               playerSubsName={playerSubs?.player.name}
               number={player.statistics[0].games.number}
-              playerYellowCard={playerYellowCard && true}
               position={player.statistics[0].games.position}
+              playerRedCard={playerRedCard && (true as boolean)}
+              playerYellowCard={playerYellowCard && (true as boolean)}
               playerGoal={playerGoal?.length > 0 ? playerGoal?.length : ""}
               playerSubsNumber={playerSubsNumber?.statistics[0].games.number}
               key={player.player.id + player.player.photo + index}

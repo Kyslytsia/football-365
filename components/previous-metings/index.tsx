@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
 
 import { Wrapper } from "../wrapper";
+import { getStyles } from "./styles";
 import { PreviousMeetingsProps } from "./types";
 
 export const PreviousMeetings = ({
@@ -14,6 +15,8 @@ export const PreviousMeetings = ({
 }: PreviousMeetingsProps) => {
   const homeNameTeam = matches?.find((el) => el.teams.home.id === homeId);
   const awayNameTeam = matches?.find((el) => el.teams.away.id === awayId);
+  const styles = getStyles();
+
   const winsAndDraws = () => {
     let team1Wins = 0;
     let team2Wins = 0;
@@ -49,7 +52,7 @@ export const PreviousMeetings = ({
   return (
     <Wrapper
       wrapperClass="mb-[20px]"
-      title={<Text className="text-white">previous meetings</Text>}
+      title={<Text className={styles.text}>previous meetings</Text>}
     >
       <View className="flex flex-row items-center justify-between p-7">
         <Pressable
@@ -70,19 +73,19 @@ export const PreviousMeetings = ({
         </Pressable>
 
         <View className="flex flex-row items-center justify-center gap-2.5">
-          <View className="flex flex-col items-center justify-center text-white">
-            <Text className="text-white">{winsAndDraws().team1Wins}</Text>
-            <Text className="text-white">wins</Text>
+          <View className={styles.statWrapper}>
+            <Text className={styles.text}>{winsAndDraws().team1Wins}</Text>
+            <Text className={styles.text}>wins</Text>
           </View>
 
-          <View className="flex flex-col items-center justify-center text-white">
-            <Text className="text-white">{winsAndDraws().draws}</Text>
-            <Text className="text-white">draw</Text>
+          <View className={styles.statWrapper}>
+            <Text className={styles.text}>{winsAndDraws().draws}</Text>
+            <Text className={styles.text}>draw</Text>
           </View>
 
-          <View className="flex flex-col items-center justify-center text-white">
-            <Text className="text-white">{winsAndDraws().team2Wins}</Text>
-            <Text className="text-white">wins</Text>
+          <View className={styles.statWrapper}>
+            <Text className={styles.text}>{winsAndDraws().team2Wins}</Text>
+            <Text className={styles.text}>wins</Text>
           </View>
         </View>
 
@@ -90,7 +93,7 @@ export const PreviousMeetings = ({
           onPress={() =>
             handleNavigate(
               awayId,
-              homeNameTeam?.teams.away.name as string,
+              awayNameTeam?.teams.away.name as string,
               logoAway
             )
           }
@@ -98,8 +101,8 @@ export const PreviousMeetings = ({
           <Image
             alt="2"
             source={logoAway}
-            className="h-12 w-12"
             contentFit="contain"
+            className="h-12 w-12"
           />
         </Pressable>
       </View>

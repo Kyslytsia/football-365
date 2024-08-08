@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import Animated, {
   withTiming,
   useSharedValue,
@@ -9,6 +9,7 @@ import Animated, {
 import { Events, Match } from "@/types/matchPage";
 
 import { Event } from "./event";
+import { getStyles } from "./styles";
 import { Wrapper } from "../wrapper";
 import { Timer } from "../../assets/icon";
 
@@ -20,6 +21,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
   const [nav, setNav] = useState<string>("top");
   const [initialHeight, setInitialHeight] = useState<number>(0);
 
+  const styles = getStyles();
   const matchData = match?.[0];
   const homeTeam = match?.[0]?.teams.home.name;
   const awayTeam = match?.[0]?.teams.away.name;
@@ -118,6 +120,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
   return (
     <Wrapper
       wrapperClass="mb-4"
+      childrenClass="border-t border-Black"
       title={<Text className="text-white">match events</Text>}
     >
       <View className="relative flex flex-col pb-[30px]">
@@ -126,28 +129,20 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
         <View className="flex flex-row items-center bg-wrapper-bg pb-1">
           <TouchableOpacity
             onPress={() => toggleNav("top")}
-            className={`w-1/2 border-b border-Grey ${
-              nav === "top"
-                ? "!border-nav-active"
-                : "border-wrapper-borderBottom"
+            className={`${styles.navWrapper} ${
+              nav === "top" ? styles.navActive : styles.navNotActive
             }`}
           >
-            <Text className="flex items-center p-2 text-white text-center">
-              top
-            </Text>
+            <Text className={styles.navText}>top</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => toggleNav("all")}
-            className={`w-1/2 border-b border-Grey ${
-              nav === "all"
-                ? "!border-nav-active"
-                : "border-wrapper-borderBottom"
+            className={`${styles.navWrapper} ${
+              nav === "all" ? styles.navActive : styles.navNotActive
             }`}
           >
-            <Text className="flex items-center p-2 text-white text-center">
-              all
-            </Text>
+            <Text className={styles.navText}>all</Text>
           </TouchableOpacity>
         </View>
 
@@ -162,7 +157,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
         >
           {penalty.length !== 0 && (
             <View>
-              <Text className="text-Grey text-center bg-wrapper-bg">
+              <Text className={styles.eventText}>
                 penalty {matchData?.score.penalty.home}
                 <Text> - </Text>
                 {matchData?.score.penalty.away}
@@ -176,7 +171,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
 
           {isExtra && (
             <View>
-              <Text className="text-Grey text-center bg-wrapper-bg">
+              <Text className={styles.eventText}>
                 extra time {matchData?.goals.home ?? 0}
                 <Text> - </Text>
                 {matchData?.goals.away ?? 0}
@@ -192,7 +187,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
           )}
 
           <View>
-            <Text className="text-Grey text-center bg-wrapper-bg">
+            <Text className={styles.eventText}>
               full time {matchData?.goals.home} - {matchData?.goals.away}
             </Text>
 
@@ -205,7 +200,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
           </View>
 
           <View>
-            <Text className="text-Grey text-center bg-wrapper-bg">
+            <Text className={styles.eventText}>
               first half {matchData?.score.halftime.home}
               <Text> - </Text>
               {matchData?.score.halftime.away}

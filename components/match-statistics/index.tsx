@@ -8,6 +8,7 @@ import Animated, {
 
 import { Match } from "@/types/matchPage";
 
+import { getStyles } from "./styles";
 import { Wrapper } from "../wrapper";
 import { BallPossession } from "./ball-passesion";
 
@@ -18,6 +19,7 @@ interface MatchStatisticsProps {
 const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const styles = getStyles();
   const firstTeamStat = match?.[0]?.statistics?.[0]?.statistics;
   const secondTeamStat = match?.[0]?.statistics?.[1]?.statistics;
   const heightView = useSharedValue(180);
@@ -59,7 +61,7 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
   return (
     <Wrapper
       wrapperClass="mb-4"
-      childrenClass="flex-col gap-y-[5px] py-4"
+      childrenClass="flex-col py-4 border-t border-Black"
       title={<Text className="text-white">match statistics</Text>}
     >
       <BallPossession
@@ -83,13 +85,15 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
         {statsData?.map((stat, index) => (
           <View key={index} className="flex items-center justify-between py-2">
             <View className="flex-row justify-between w-full">
-              <Text className="text-white text-center">{stat.homeValue}</Text>
-              <Text className="text-white text-center">{stat.label}</Text>
-              <Text className="text-white text-center">{stat.awayValue}</Text>
+              <Text className={styles.text}>{stat.homeValue}</Text>
+              <Text className={styles.text}>{stat.label}</Text>
+              <Text className={styles.text}>{stat.awayValue}</Text>
             </View>
 
-            <View className="flex-row">
-              <View className="flex-row justify-end w-1/2 h-1 mt-1 bg-gray-700 rounded-l-md overflow-hidden">
+            <View className="flex-row mt-1">
+              <View
+                className={`${styles.statWrapper} justify-end rounded-l-md`}
+              >
                 <View
                   className={`h-full bg-green-700`}
                   style={{
@@ -104,7 +108,9 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
                 />
               </View>
 
-              <View className="flex-row justify-start w-1/2 h-1 mt-1 bg-gray-700 rounded-r-md overflow-hidden">
+              <View
+                className={`${styles.statWrapper} justify-start rounded-r-md`}
+              >
                 <View
                   className={`h-full bg-blue-700`}
                   style={{
@@ -124,9 +130,7 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
       </Animated.View>
 
       <Pressable className="p-2 cursor-pointer" onPress={() => toggle(!isOpen)}>
-        <Text className="text-white text-center">
-          {!isOpen ? "Show more" : "Close"}
-        </Text>
+        <Text className={styles.text}>{!isOpen ? "Show more" : "Close"}</Text>
       </Pressable>
     </Wrapper>
   );

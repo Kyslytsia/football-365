@@ -21,6 +21,8 @@ const Squad = () => {
     coach.career.some((career) => career.end === null)
   );
 
+  const text = "text-white";
+
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -82,10 +84,7 @@ const Squad = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <Wrapper
-        wrapperClass="mb-4"
-        title={<Text className="text-white">coach</Text>}
-      >
+      <Wrapper wrapperClass="mb-4" title={<Text className={text}>coach</Text>}>
         <PlayerSquad
           coach
           position="Coach"
@@ -98,7 +97,7 @@ const Squad = () => {
       {goalkeeper && (
         <Wrapper
           wrapperClass="mb-4"
-          title={<Text className="text-white">goalkeepers</Text>}
+          title={<Text className={text}>goalkeepers</Text>}
         >
           {goalkeeper?.map((player) => (
             <PlayerSquad
@@ -115,7 +114,7 @@ const Squad = () => {
 
       <Wrapper
         wrapperClass="mb-4"
-        title={<Text className="text-white">defenders</Text>}
+        title={<Text className={text}>defenders</Text>}
       >
         {defender?.map((player) => (
           <PlayerSquad
@@ -131,7 +130,7 @@ const Squad = () => {
 
       <Wrapper
         wrapperClass="mb-4"
-        title={<Text className="text-white">midfielders</Text>}
+        title={<Text className={text}>midfielders</Text>}
       >
         {midfielder?.map((player) => (
           <PlayerSquad
@@ -147,7 +146,7 @@ const Squad = () => {
 
       <Wrapper
         wrapperClass="mb-4"
-        title={<Text className="text-white">attackers</Text>}
+        title={<Text className={text}>attackers</Text>}
       >
         {attacker?.map((player) => (
           <PlayerSquad
