@@ -83,6 +83,8 @@ const Details = () => {
           matches={headToHead}
           homeId={Number(homeId) ?? null}
           awayId={Number(awayId) ?? null}
+          homeName={matchData?.[0]?.teams.home.name}
+          awayName={matchData?.[0]?.teams.away.name}
           logoHome={matchData?.[0]?.teams.home.logo ?? ""}
           logoAway={matchData?.[0]?.teams.away.logo ?? ""}
         />

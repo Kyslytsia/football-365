@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { useGlobalSearchParams } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
+import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { getCurrentSeason } from "@/hooks";
@@ -14,8 +14,8 @@ import { GroupsProps } from "./types";
 const Groups = ({ leagueName, standingsData }: GroupsProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [standings, setStandings] = useState<StandingProps[][]>([]);
-  const { id, name } = useGlobalSearchParams();
 
+  const { id, name } = useGlobalSearchParams();
   const ID = Number(id);
   const year = getCurrentSeason(name as string);
   const isStandingsData = standingsData ?? standings;
@@ -55,17 +55,25 @@ const Groups = ({ leagueName, standingsData }: GroupsProps) => {
         <Text className="p-2 text-white text-center">{leagueName}</Text>
       )}
 
-      <FlashList
-        data={isStandingsData}
-        estimatedItemSize={300}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(_, index) => index.toString() + "championship"}
-        renderItem={({ item }) => (
-          <View className="flex-col my-2">
-            <Table championship standings={item} />
-          </View>
-        )}
-      />
+      {!isStandingsData.length ? (
+        <>
+          <Text className="text-white text-[20px] text-center">
+            The draw hasn't happened yet
+          </Text>
+        </>
+      ) : (
+        <FlashList
+          data={isStandingsData}
+          estimatedItemSize={300}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(_, index) => index.toString() + "championship"}
+          renderItem={({ item }) => (
+            <View className="flex-col my-2">
+              <Table championship standings={item} />
+            </View>
+          )}
+        />
+      )}
     </>
   );
 };

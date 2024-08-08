@@ -12,9 +12,9 @@ export const PreviousMeetings = ({
   matches,
   logoHome,
   logoAway,
+  homeName,
+  awayName,
 }: PreviousMeetingsProps) => {
-  const homeNameTeam = matches?.find((el) => el.teams.home.id === homeId);
-  const awayNameTeam = matches?.find((el) => el.teams.away.id === awayId);
   const styles = getStyles();
 
   const winsAndDraws = () => {
@@ -55,15 +55,7 @@ export const PreviousMeetings = ({
       title={<Text className={styles.text}>previous meetings</Text>}
     >
       <View className="flex flex-row items-center justify-between p-7">
-        <Pressable
-          onPress={() =>
-            handleNavigate(
-              homeId,
-              homeNameTeam?.teams.home.name as string,
-              logoHome
-            )
-          }
-        >
+        <Pressable onPress={() => handleNavigate(homeId, homeName, logoHome)}>
           <Image
             alt="1"
             source={logoHome}
@@ -89,15 +81,7 @@ export const PreviousMeetings = ({
           </View>
         </View>
 
-        <Pressable
-          onPress={() =>
-            handleNavigate(
-              awayId,
-              awayNameTeam?.teams.away.name as string,
-              logoAway
-            )
-          }
-        >
+        <Pressable onPress={() => handleNavigate(awayId, awayName, logoAway)}>
           <Image
             alt="2"
             source={logoAway}

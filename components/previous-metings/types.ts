@@ -5,5 +5,7 @@ export interface PreviousMeetingsProps {
   awayId: number;
   logoHome: string;
   logoAway: string;
+  homeName: string;
+  awayName: string;
   matches?: Match[] | [];
 }

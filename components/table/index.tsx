@@ -19,7 +19,7 @@ export const Table = memo(
         className="mx-auto w-[360px]"
         showsVerticalScrollIndicator={false}
       >
-        <View className="flex-row relative mx-auto w-[360px] bg-wrapper-bg rounded-[12px]">
+        <View className="flex-row relative mx-auto w-[360px] bg-wrapper-bg rounded-[12px] overflow-hidden">
           <RankLogoTable
             standings={standings}
             isChampion={isChampion}

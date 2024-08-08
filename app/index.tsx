@@ -80,7 +80,7 @@ const MainPage = () => {
   );
 
   const scrollToCurrentMatch = useCallback(() => {
-    if (flashListRef.current && index) {
+    if (flashListRef.current) {
       flashListRef.current.scrollToIndex({
         index: index,
         animated: true,

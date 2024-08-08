@@ -17,6 +17,7 @@ const getStandings = async (
     );
 
     if (
+      leagueName === "World Cup" ||
       leagueName === "Euro Championship" ||
       leagueName === "UEFA Europa League" ||
       leagueName === "UEFA Champions League"

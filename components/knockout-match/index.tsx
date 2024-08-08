@@ -55,6 +55,8 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
   ]);
 
   const handleNavigate = (id: number, name: string, icon: string) => {
+    if (!game) return;
+
     navigation.push("(match-page)", {
       id: id,
       name: name,

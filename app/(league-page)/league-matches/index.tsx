@@ -41,7 +41,7 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
   );
 
   const scrollToCurrentMatch = useCallback(() => {
-    if (flashListRef.current && index) {
+    if (flashListRef.current) {
       flashListRef.current.scrollToIndex({
         index: index,
         animated: true,
@@ -112,6 +112,9 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
   }, [isMatchesData]);
 
   if (loading) return <Loading />;
+
+  console.log(index);
+  console.log(isMatchesData);
 
   return (
     <>
