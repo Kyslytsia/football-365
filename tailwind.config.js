@@ -11,6 +11,7 @@ const loading = "#0000ff";
 const malachite = "#1ee119";
 const moonRaker = "#d3c9f2";
 const tune = "#1b1a22";
+const capeCod = "#384042";
 
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
@@ -48,6 +49,9 @@ module.exports = {
             draw: goldenDream,
             lose: flamingo,
           },
+        },
+        tacticBtn: {
+          bg: capeCod,
         },
       },
     },

@@ -85,7 +85,7 @@ const Lineups = () => {
             }`}
           >
             <View
-              className={`flex-row items-center justify-center w-20 bg-[#384042] ${
+              className={`flex-row items-center justify-center w-20 bg-tacticBtn-bg ${
                 team === 1 ? "rounded-l-full" : "rounded-r-full"
               }`}
             >
