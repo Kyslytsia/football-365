@@ -38,7 +38,7 @@ const Details = () => {
 
         const isStorage = h2h && storageMatch;
 
-        if (isStorage) {
+        if (isStorage && isStorage !== "[]") {
           setHeadToHead(JSON.parse(h2h));
           setMatchData(JSON.parse(storageMatch));
         }

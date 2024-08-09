@@ -22,11 +22,10 @@ const MatchPage = () => {
       try {
         const storageMatch = await AsyncStorage.getItem(`${id} match`);
 
-        const isMatch = storageMatch && storageMatch !== "[]";
+        if (storageMatch && storageMatch !== "[]")
+          setMatch(JSON.parse(storageMatch));
 
-        if (isMatch) setMatch(JSON.parse(storageMatch));
-
-        if (!isMatch) {
+        if (!storageMatch) {
           const match = await getMatchId(ID);
 
           setMatch(match);

@@ -29,7 +29,8 @@ const Standings = () => {
           `${name} league info`
         );
 
-        if (storageLeagueId) setTeamData(JSON.parse(storageLeagueId));
+        if (storageLeagueId && storageLeagueId !== "[]")
+          setTeamData(JSON.parse(storageLeagueId));
 
         if (!storageLeagueId) {
           const response = await getLeagueForTeamOnId(id as string);

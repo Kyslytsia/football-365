@@ -47,15 +47,17 @@ const PlayerStatistics = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View className="py-2 mx-auto w-[360px]">
-        <PlayerStat type="goals" playersStats={playersStats} />
+      {playersStats.length > 0 && (
+        <View className="py-2 mx-auto w-[360px]">
+          <PlayerStat type="goals" playersStats={playersStats} />
 
-        <PlayerStat type="assist" playersStats={playersStats} />
+          <PlayerStat type="assist" playersStats={playersStats} />
 
-        <PlayerStat type="yellow card" playersStats={playersStats} />
+          <PlayerStat type="yellow card" playersStats={playersStats} />
 
-        <PlayerStat type="red card" playersStats={playersStats} />
-      </View>
+          <PlayerStat type="red card" playersStats={playersStats} />
+        </View>
+      )}
     </ScrollView>
   );
 };

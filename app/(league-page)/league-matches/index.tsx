@@ -113,9 +113,6 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
 
   if (loading) return <Loading />;
 
-  console.log(index);
-  console.log(isMatchesData);
-
   return (
     <>
       {!matchesData && <Rounds value={value} setValue={setValue} />}
