@@ -6,6 +6,7 @@ export interface WrapperProps {
 }
 
 export interface StylesProps {
+  isAndroid?: boolean;
   wrapperClass?: string;
   childrenClass?: string;
 }

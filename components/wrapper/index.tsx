@@ -3,10 +3,12 @@ import { getStyles } from "./styles";
 import { WrapperProps } from "./types";
 
 import { View } from "react-native";
+import { Platform } from "@/hooks";
 
 export const Wrapper = memo(
   ({ title, wrapperClass, children, childrenClass }: WrapperProps) => {
-    const styles = getStyles({ wrapperClass, childrenClass });
+    const isAndroid = Platform().android;
+    const styles = getStyles({ isAndroid, wrapperClass, childrenClass });
 
     return (
       <View className={styles.wrapper}>

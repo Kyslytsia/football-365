@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Pressable, ScrollView } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Text, TextInput, Pressable } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Animated, { withTiming, useSharedValue } from "react-native-reanimated";
 
 import { getRounds } from "@/api/rounds";
-import { getCurrentSeason } from "@/hooks";
+import { getCurrentSeason, Platform } from "@/hooks";
 
 import { getStyles } from "./styles";
 import { RoundsProps } from "./types";
@@ -13,13 +13,15 @@ import { RoundsProps } from "./types";
 export const Rounds = ({ value, setValue }: RoundsProps) => {
   const [rounds, setRounds] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [initialHeight, setInitialHeight] = useState<number>(0);
 
   const { id, name } = useGlobalSearchParams();
   const ID = Number(id);
   const year = getCurrentSeason(name as string);
   const heightWrapper = useSharedValue(0);
   const heightScroll = useSharedValue(0);
-  const styles = getStyles({ heightScroll, heightWrapper });
+  const isAndroid = Platform().android;
+  const styles = getStyles({ isAndroid, heightScroll, heightWrapper });
 
   const newValue = (value?: string) => {
     return value &&
@@ -39,7 +41,10 @@ export const Rounds = ({ value, setValue }: RoundsProps) => {
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
-    heightScroll.value = withTiming(isOpen ? 0 : 300, { duration: 200 });
+    heightScroll.value = withTiming(
+      isOpen ? 0 : initialHeight > 300 ? 300 : initialHeight,
+      { duration: 200 }
+    );
     heightWrapper.value = withTiming(isOpen ? 0 : 700, { duration: 200 });
   };
 
@@ -64,14 +69,21 @@ export const Rounds = ({ value, setValue }: RoundsProps) => {
     })();
   }, []);
 
+  useEffect(() => {
+    const initialHeight = rounds.length * 41;
+    setInitialHeight(initialHeight);
+  }, [rounds]);
+
   return (
-    <View className="relative mb-4 mx-auto w-[360px] z-50">
-      <TextInput
-        readOnly
-        onPress={toggleOpen}
-        value={newValue(value)}
-        className="p-[10px] rounded-[10px] bg-round-bg border border-Black text-white overflow-hidden"
-      />
+    <View className={styles.main}>
+      <Pressable onPress={toggleOpen}>
+        <TextInput
+          readOnly
+          onPress={toggleOpen}
+          value={newValue(value)}
+          className={styles.inputText}
+        />
+      </Pressable>
 
       <Pressable onPressIn={toggleOpen}>
         <Animated.View
@@ -87,7 +99,7 @@ export const Rounds = ({ value, setValue }: RoundsProps) => {
                 <Text
                   key={round}
                   onPress={() => change(round)}
-                  className="flex justify-center items-center p-3 text-white text-center"
+                  className={styles.round}
                 >
                   {newValue(round)}
                 </Text>

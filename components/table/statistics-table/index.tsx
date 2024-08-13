@@ -8,7 +8,6 @@ import {
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
 } from "react-native-reanimated";
 
 import { StandingProps } from "@/types/standings";
@@ -67,103 +66,98 @@ export const StatisticsTable = memo(
 
     return (
       <View>
-        <GestureHandlerRootView>
-          <GestureDetector gesture={gesture}>
-            <Animated.View
-              style={animatedStyles}
-              className="absolute top-0 z-10 overflow-x-auto"
-            >
-              <View>
-                <View className="flex-row h-8">
-                  {["PT", "P", "F:A", "+/-", "W", "D", "L", "Form"].map(
-                    (header, index) => (
+        <GestureDetector gesture={gesture}>
+          <Animated.View style={animatedStyles} className="absolute top-0 z-10">
+            <View>
+              <View className="flex-row h-8">
+                {["PT", "P", "F:A", "+/-", "W", "D", "L", "Form"].map(
+                  (header, index) => (
+                    <View
+                      key={index}
+                      className={`flex justify-center items-center h-full bg-table-bg ${
+                        header === "Form" ? "w-[140px]" : "w-8"
+                      }`}
+                    >
+                      <Text className="text-xs text-white">{header}</Text>
+                    </View>
+                  )
+                )}
+              </View>
+
+              {standings.map((team, index) => (
+                <View
+                  key={index + "statistics"}
+                  className="flex-row h-8 bg-table-bg border-l border-t border-table-border"
+                >
+                  <View className={styles.statWrapper}>
+                    <Text className={styles.statText}>{team.points}</Text>
+                  </View>
+
+                  <View className={styles.statWrapper}>
+                    <Text className={styles.statText}>
+                      {change(team)?.played ?? 0}
+                    </Text>
+                  </View>
+
+                  <View className={styles.statWrapper}>
+                    <Text className={styles.statText}>
+                      {change(team)?.goals.for ?? 0}:
+                      {change(team)?.goals.against ?? 0}
+                    </Text>
+                  </View>
+
+                  <View className={styles.statWrapper}>
+                    <Text className={styles.statText}>{team.goalsDiff}</Text>
+                  </View>
+
+                  <View className={styles.statWrapper}>
+                    <Text className={styles.statText}>
+                      {change(team)?.win ?? 0}
+                    </Text>
+                  </View>
+
+                  <View className={styles.statWrapper}>
+                    <Text className={styles.statText}>
+                      {change(team)?.draw ?? 0}
+                    </Text>
+                  </View>
+
+                  <View className={styles.statWrapper}>
+                    <Text className={styles.statText}>
+                      {change(team)?.lose ?? 0}
+                    </Text>
+                  </View>
+
+                  <View className="flex-row justify-around items-center h-full w-[145px] px-1">
+                    {team.form?.split("").map((letter, index) => (
                       <View
-                        key={index}
-                        className={`flex justify-center items-center h-full bg-table-bg ${
-                          header === "Form" ? "w-[140px]" : "w-8"
-                        }`}
-                      >
-                        <Text className="text-xs text-white">{header}</Text>
-                      </View>
-                    )
-                  )}
-                </View>
-
-                {standings.map((team, index) => (
-                  <View
-                    key={index + "statistics"}
-                    className="flex-row h-8 bg-table-bg border-l border-t border-table-border"
-                  >
-                    <View className={styles.statWrapper}>
-                      <Text className={styles.statText}>{team.points}</Text>
-                    </View>
-
-                    <View className={styles.statWrapper}>
-                      <Text className={styles.statText}>
-                        {change(team)?.played ?? 0}
-                      </Text>
-                    </View>
-
-                    <View className={styles.statWrapper}>
-                      <Text className={styles.statText}>
-                        {change(team)?.goals.for ?? 0}:
-                        {change(team)?.goals.against ?? 0}
-                      </Text>
-                    </View>
-
-                    <View className={styles.statWrapper}>
-                      <Text className={styles.statText}>{team.goalsDiff}</Text>
-                    </View>
-
-                    <View className={styles.statWrapper}>
-                      <Text className={styles.statText}>
-                        {change(team)?.win ?? 0}
-                      </Text>
-                    </View>
-
-                    <View className={styles.statWrapper}>
-                      <Text className={styles.statText}>
-                        {change(team)?.draw ?? 0}
-                      </Text>
-                    </View>
-
-                    <View className={styles.statWrapper}>
-                      <Text className={styles.statText}>
-                        {change(team)?.lose ?? 0}
-                      </Text>
-                    </View>
-
-                    <View className="flex-row justify-around items-center h-full w-[145px] px-1">
-                      {team.form?.split("").map((letter, index) => (
-                        <View
-                          key={index + "form"}
-                          className={`
+                        key={index + "form"}
+                        className={`
                      ${styles.formWrapper}
                       ${getFormStyle(letter)}
                     `}
+                      >
+                        <Text className={styles.formText}>{letter}</Text>
+                      </View>
+                    ))}
+
+                    {!team.form &&
+                      ["N", "N", "N", "N", "N"].map((letter, index) => (
+                        <View
+                          key={index + "form"}
+                          className={`${styles.formWrapper}
+                        ${getFormStyle(letter)}
+                      `}
                         >
                           <Text className={styles.formText}>{letter}</Text>
                         </View>
                       ))}
-
-                      {!team.form &&
-                        ["N", "N", "N", "N", "N"].map((letter, index) => (
-                          <View
-                            key={index + "form"}
-                            className={`${styles.formWrapper}
-                        ${getFormStyle(letter)}
-                      `}
-                          >
-                            <Text className={styles.formText}>{letter}</Text>
-                          </View>
-                        ))}
-                    </View>
                   </View>
-                ))}
-              </View>
-            </Animated.View>
-          </GestureDetector>
-        </GestureHandlerRootView>
+                </View>
+              ))}
+            </View>
+          </Animated.View>
+        </GestureDetector>
       </View>
     );
   }

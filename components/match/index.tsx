@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "expo-router";
 import { Image } from "expo-image";
 
-import { MatchTime } from "@/hooks";
+import { MatchTime, Platform } from "@/hooks";
 
 import { PropsMatch } from "./types";
 import { getStyles } from "./styles";
@@ -18,7 +18,8 @@ export const Match = memo(({ match, isBorder }: PropsMatch) => {
   const matchNotStarted =
     match.fixture.status.short === "NS" || match.fixture.status.short === "TBD";
 
-  const styles = getStyles({ isBorder, status: matchStatusShort });
+  const isAndroid = Platform().android;
+  const styles = getStyles({ isAndroid, isBorder, status: matchStatusShort });
   const navigation = useNavigation<any>();
 
   const handleNavigate = () => {
@@ -40,7 +41,7 @@ export const Match = memo(({ match, isBorder }: PropsMatch) => {
         </View>
 
         <View className={styles.homeTeamWrapper}>
-          <Text className="pr-[7px] leading-3 text-[11px] text-right text-white font-extraligh">
+          <Text className={`${styles.text} pr-[7px] text-right`}>
             {match.teams.home.name}
           </Text>
 
@@ -54,20 +55,26 @@ export const Match = memo(({ match, isBorder }: PropsMatch) => {
 
         <View className={styles.scoreWrapper}>
           {matchNotStarted ? (
-            <Text className="text-white">{MatchTime(match.fixture.date)}</Text>
+            <Text className={styles.scoreText}>
+              {MatchTime(match.fixture.date)}
+            </Text>
           ) : (
             <View className={styles.score}>
               <Text className={styles.penScore}>
                 {matchEndedOnPenalties && `(${match.score.penalty.home})`}
               </Text>
 
-              <Text className="pr-[5px] font-500 text-white">
+              <Text
+                className={`${styles.scoreText} pr-[5px] font-500 text-white`}
+              >
                 {match.goals.home ?? "0"}
               </Text>
 
-              <Text className="text-white">:</Text>
+              <Text className={styles.scoreText}>:</Text>
 
-              <Text className="pl-[5px] font-500 text-white">
+              <Text
+                className={`${styles.scoreText} pl-[5px] font-500 text-white`}
+              >
                 {match.goals.away ?? "0"}
               </Text>
 
@@ -86,7 +93,7 @@ export const Match = memo(({ match, isBorder }: PropsMatch) => {
             source={match.teams.away.logo}
           />
 
-          <Text className="pl-[7px] leading-3 text-[11px] text-start text-white font-extraligh">
+          <Text className={`${styles.text} pl-[7px] text-start`}>
             {match.teams.away.name}
           </Text>
         </View>

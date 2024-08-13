@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
 
@@ -9,10 +9,12 @@ import { Match } from "../match";
 import { Wrapper } from "../wrapper";
 
 import { getStyles } from "./styles";
+import { Platform } from "@/hooks";
 
 export const AllLeaguesMatches = memo(({ matches }: { matches: Matches[] }) => {
   const styles = getStyles();
   const navigation = useNavigation<any>();
+  const isAndroid = Platform().android;
 
   const handleNavigate = (id: number, name: string, icon: string) => {
     navigation.push("(league-page)", {
@@ -47,7 +49,13 @@ export const AllLeaguesMatches = memo(({ matches }: { matches: Matches[] }) => {
                     source={league.leagueLogo}
                   />
 
-                  <Text className="w-full text-white">{league.leagueName}</Text>
+                  <Text
+                    className={`${
+                      isAndroid && "text-[10px]"
+                    } w-full text-white`}
+                  >
+                    {league.leagueName}
+                  </Text>
                 </View>
               </TouchableOpacity>
             }

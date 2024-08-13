@@ -8,4 +8,5 @@ export interface PropsMatch {
 export interface StylesProps {
   status: string;
   isBorder?: boolean;
+  isAndroid?: boolean;
 }

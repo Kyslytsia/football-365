@@ -5,7 +5,7 @@ import { Image, ImageBackground } from "expo-image";
 
 import { matchBg } from "@/assets/img";
 import { Match } from "@/types/matchPage";
-import { getFormattedDate, MatchTime } from "@/hooks";
+import { getFormattedDate, MatchTime, Platform } from "@/hooks";
 
 export const Header = ({ match }: { match?: Match[] | [] }) => {
   const matchData = match?.[0];
@@ -28,12 +28,14 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
     });
   };
 
+  const isAndroid = Platform().android;
+
   return (
     <ImageBackground
       source={matchBg}
       className="relative flex-row justify-around items-center py-2 h-[120px]"
     >
-      <View className="flex flex-col justify-around items-center w-[120px]">
+      <View className="flex flex-col justify-around items-center mt-4 w-[120px]">
         <TouchableOpacity
           onPress={() =>
             handleNavigate(
@@ -51,19 +53,29 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
           />
         </TouchableOpacity>
 
-        <Text className="text-[11px] text-white">
+        <Text
+          className={`${isAndroid ? "text-[9px]" : "text-[11px]"}  text-white`}
+        >
           {matchData?.teams?.home?.name}
         </Text>
       </View>
 
-      <Text className="absolute top-5 w-full text-[8px] text-white text-center">
+      <Text className="absolute top-8 w-full text-[8px] text-white text-center">
         {matchData?.league.name} {matchData?.league.round}
       </Text>
 
       <View className="relative flex-row justify-center items-center w-fit mx-auto">
         {matchNotStarted ? (
-          <View className="flex flex-col justify-center items-center">
-            <Text className="text-[15px] whitespace-nowrap font-[500] text-white">
+          <View
+            className={`${
+              isAndroid ? "pt-4" : "pt-2"
+            } flex flex-col justify-center items-center`}
+          >
+            <Text
+              className={`${
+                isAndroid ? "text-[12px]" : "text-[15px]"
+              } whitespace-nowrap font-[500] text-white`}
+            >
               {getFormattedDate(
                 new Date(matchData.fixture.date).toISOString().slice(0, 10)
               )}
@@ -103,7 +115,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
         )}
       </View>
 
-      <View className="flex flex-col justify-around items-center w-[120px]">
+      <View className="flex flex-col justify-around items-center mt-4 w-[120px]">
         <TouchableOpacity
           onPress={() =>
             handleNavigate(
@@ -121,7 +133,9 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
           />
         </TouchableOpacity>
 
-        <Text className="text-[11px] text-white">
+        <Text
+          className={`${isAndroid ? "text-[9px]" : "text-[11px]"}  text-white`}
+        >
           {matchData?.teams?.away?.name}
         </Text>
       </View>

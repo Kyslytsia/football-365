@@ -3,6 +3,7 @@ import { View, ImageBackground } from "react-native";
 import { Image } from "expo-image";
 
 import { HeaderProps } from "./types";
+import { Platform } from "@/hooks";
 import {
   el,
   ucl,
@@ -15,6 +16,8 @@ import {
 } from "@/assets/img";
 
 const Header = ({ icon, leagueName }: HeaderProps) => {
+  const isAndroid = Platform().android;
+
   const getBackgroundImage = () => {
     switch (leagueName) {
       case "UEFA Champions League":
@@ -39,7 +42,7 @@ const Header = ({ icon, leagueName }: HeaderProps) => {
   };
 
   return (
-    <View className="sticky h-[100px]">
+    <View className={`${isAndroid ? "h-[120px] pt-2" : "h-[100px]"}`}>
       <ImageBackground
         source={getBackgroundImage()}
         className="flex justify-center items-center w-full h-full"

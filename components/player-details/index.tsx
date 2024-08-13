@@ -12,9 +12,6 @@ export const PlayerDetails = ({
   playerInfo,
   nationalityLogo,
 }: PlayerDetailsProps) => {
-  const isCoach = coachInfo && coachInfo.length > 0;
-  const isPlayer = playerInfo && playerInfo.length > 0;
-
   return (
     <Wrapper
       wrapperClass="mb-4"
@@ -35,7 +32,7 @@ export const PlayerDetails = ({
           />
 
           <Text className="text-white">
-            {coachInfo?.[0]?.nationality ||
+            {coachInfo?.[0]?.nationality ??
               playerInfo?.[0]?.player?.nationality}
           </Text>
         </View>
@@ -47,13 +44,13 @@ export const PlayerDetails = ({
             alt="team"
             className="w-[60px] h-[60px]"
             source={
-              coachInfo?.[0]?.team?.logo ||
+              coachInfo?.[0]?.team?.logo ??
               playerInfo?.[0]?.statistics?.[0].team.logo
             }
           />
 
           <Text className="text-white">
-            {coachInfo?.[0]?.team.name ||
+            {coachInfo?.[0]?.team.name ??
               playerInfo?.[0]?.statistics?.[0].team.name}
           </Text>
         </View>
@@ -62,19 +59,19 @@ export const PlayerDetails = ({
       <View className="flex flex-row justify-center items-center p-2">
         <View className="flex flex-col items-center text-white w-1/3 text-[16px]">
           <Text className="text-white text-[18px]">
-            age: {coachInfo?.[0]?.age || playerInfo?.[0]?.player?.age}
+            age: {coachInfo?.[0]?.age ?? playerInfo?.[0]?.player?.age}
           </Text>
 
           <Text className="text-Grey">
-            {(coachInfo?.[0]?.birth.date ||
-              playerInfo?.[0]?.player?.birth.date) ??
+            {coachInfo?.[0]?.birth.date ??
+              playerInfo?.[0]?.player?.birth.date ??
               "date of birth"}
           </Text>
         </View>
 
         <View className="flex flex-col items-center w-1/3 text-white text-[16px]">
           <Text className="text-white text-[18px]">
-            {coachInfo?.[0]?.height || playerInfo?.[0]?.player?.height}
+            {coachInfo?.[0]?.height ?? playerInfo?.[0]?.player?.height}
           </Text>
 
           <Text className="text-Grey">height</Text>

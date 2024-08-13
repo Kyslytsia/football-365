@@ -28,7 +28,6 @@ const MainPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
-  const [arrowPos, setArrowPos] = useState<boolean>(false);
 
   const flashListRef = useRef<FlashList<GroupedMatches>>(null);
   const itemHeightsRef = useRef<{ [key: number]: number }>({});
@@ -92,12 +91,8 @@ const MainPage = () => {
     ({ viewableItems }: any) => {
       const visibleIndexes = viewableItems.map((item: any) => item.index);
       const isIndexNotVisible = !visibleIndexes.includes(index);
-      const isIndexGreaterThanAnyVisible = visibleIndexes.find(
-        (visibleIndex: number) => index > visibleIndex
-      );
 
       setShowScrollButton(isIndexNotVisible);
-      setArrowPos(isIndexGreaterThanAnyVisible);
     },
     [index]
   );
