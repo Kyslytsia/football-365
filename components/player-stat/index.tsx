@@ -8,7 +8,10 @@ import Animated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 
+import { Platform } from "@/hooks";
+
 import { Wrapper } from "../wrapper";
+import { getStyles } from "./styles";
 import { FilteredPlayersProps, PlayerStatProps } from "./types";
 
 export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
@@ -16,6 +19,9 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
   const [filteredPlayers, setFilteredPlayers] = useState<
     FilteredPlayersProps[]
   >([]);
+
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
 
   const heightWrapper = useSharedValue(200);
   const navigation = useNavigation<any>();
@@ -95,7 +101,7 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
   return (
     <Wrapper
       wrapperClass="mb-4"
-      title={<Text className="text-white">{type}</Text>}
+      title={<Text className={styles.title}>{type}</Text>}
     >
       <Animated.View
         className="max-h-[200px]"
@@ -123,19 +129,17 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
                 <Image
                   alt={player.name}
                   source={player.photo}
-                  className="h-8 w-8 rounded-full"
+                  className={styles.photo}
                 />
 
                 <View>
-                  <Text className="text-white">{player.name}</Text>
-                  <Text className="text-Grey text-[10px]">{player.nation}</Text>
+                  <Text className={styles.name}>{player.name}</Text>
+                  <Text className={styles.nation}>{player.nation}</Text>
                 </View>
               </View>
 
               <View className="flex-row items-center w-6">
-                <Text className="w-full text-center text-white">
-                  {player.stat}
-                </Text>
+                <Text className={styles.stat}>{player.stat}</Text>
               </View>
             </TouchableOpacity>
           );
@@ -146,7 +150,7 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
         onPress={toggleOpen}
         className="bg-table-bg border-t border-Black"
       >
-        <Text className="p-2 text-white text-center">view all</Text>
+        <Text className={`${styles.title} p-2 text-center`}>view all</Text>
       </Pressable>
     </Wrapper>
   );

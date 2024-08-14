@@ -123,7 +123,7 @@ const MainPage = () => {
         data={matches}
         ref={flashListRef}
         estimatedItemSize={500}
-        initialScrollIndex={19}
+        initialScrollIndex={index}
         removeClippedSubviews={false}
         showsVerticalScrollIndicator={false}
         overrideItemLayout={overrideItemLayout}
