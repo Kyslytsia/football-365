@@ -1,18 +1,23 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
+import { useNavigation } from "expo-router";
 
+import { Platform } from "@/hooks";
 import { field } from "@/assets/img";
 import { PlayerData } from "@/types/matchPage";
 import { Ball, Substitution } from "@/assets/icon";
 
+import { getStyles } from "./styles";
 import { LineupTacticsProps } from "./types";
-import { useNavigation } from "expo-router";
 
 export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
   const events = match?.[0]?.events ?? [];
   const tactics = "1-" + (match?.[0]?.lineups[team]?.formation ?? "");
   const startXI = match?.[0]?.players[team]?.players?.slice(0, 11) ?? [];
+  const navigation = useNavigation<any>();
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
 
   const distributePlayers = () => {
     const positions = tactics?.split("-").map(Number) ?? [];
@@ -26,8 +31,8 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
 
     return result;
   };
+
   const startPlayers = distributePlayers().reverse();
-  const navigation = useNavigation<any>();
 
   const getRatingColorClass = (rating: number) => {
     if (rating > 8.0) return "bg-blue-500";
@@ -116,7 +121,7 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
                     )}
 
                     <View className="absolute top-[-6px] left-[-3px] flex-row justify-center items-center w-3.5 h-3.5 rounded-full border border-gray-400 bg-white text-xxs z-10">
-                      <Text className="text-[8px] text-center">
+                      <Text className={styles.number}>
                         {player.statistics[0].games.number}
                       </Text>
                     </View>
@@ -126,7 +131,7 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
                         +player.statistics[0].games.rating
                       )}`}
                     >
-                      <Text className="text-white text-[10px] text-center">
+                      <Text className={styles.rating}>
                         {player.statistics[0].games.rating}
                       </Text>
                     </View>

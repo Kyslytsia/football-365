@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-
-import { Match } from "@/types/matchPage";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { Platform } from "@/hooks";
 import { getMatchId } from "@/api/match";
+import { Match } from "@/types/matchPage";
 import { LineupBench, LineupTactics, Loading } from "@/components";
+
 import { getStyles } from "./styles";
 
 const Lineups = () => {
@@ -18,7 +19,8 @@ const Lineups = () => {
   const tactics = match?.[0]?.lineups[team]?.formation ?? "";
 
   const { id } = useGlobalSearchParams();
-  const styles = getStyles();
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
   const ID = Number(id);
 
   useEffect(() => {

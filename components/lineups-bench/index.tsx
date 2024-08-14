@@ -1,14 +1,19 @@
+import { Text, View } from "react-native";
+
+import { Platform } from "@/hooks";
+
 import { Wrapper } from "../wrapper";
 import { LineupBenchProps } from "./types";
 import { PlayerLineup } from "../player-lineup";
-
-import { Text, View } from "react-native";
+import { getStyles } from "./styles";
 
 export const LineupBench = ({ team, match }: LineupBenchProps) => {
   const events = match?.[0]?.events ?? [];
   const startXI = match?.[0]?.players[team]?.players.slice(0, 11);
   const bench = match?.[0]?.players[team]?.players.slice(11);
   const coach = match?.[0]?.lineups[team]?.coach;
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
 
   const getRatingColor = (rating: number) => {
     if (rating > 8.0) return "bg-blue-600";
@@ -22,7 +27,7 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
     <>
       <Wrapper
         wrapperClass="mb-[20px]"
-        title={<Text className="text-white">coach</Text>}
+        title={<Text className={styles.title}>coach</Text>}
       >
         {
           <PlayerLineup
@@ -37,7 +42,7 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
 
       <Wrapper
         wrapperClass="mb-[20px]"
-        title={<Text className="text-white">bench</Text>}
+        title={<Text className={styles.title}>bench</Text>}
       >
         {bench?.map((player, index) => {
           const playerSubs = events?.find(
@@ -90,7 +95,7 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
                       +player.statistics[0].games.rating
                     )}`}
                   >
-                    <Text className="text-white text-center">
+                    <Text className={styles.rating}>
                       {player.statistics[0].games.rating ?? "-"}
                     </Text>
                   </View>
