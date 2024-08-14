@@ -3,8 +3,10 @@ import { Image } from "expo-image";
 import { View, Text } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 
-import { FinalProps } from "./types";
+import { Platform } from "@/hooks";
 import { DefaultClub } from "@/assets/icon";
+
+import { FinalProps } from "./types";
 
 export const Final = memo(
   ({
@@ -22,6 +24,7 @@ export const Final = memo(
     finalEndedOnPenalties,
   }: FinalProps) => {
     const { name } = useGlobalSearchParams();
+    const isAndroid = Platform().android;
 
     return (
       <View className="relative flex flex-col items-center justify-center p-4 w-[330px] h-[120px] bg-gray-800 rounded-lg border border-Grey">
@@ -46,8 +49,9 @@ export const Final = memo(
                 style={{ width: 45, height: 45 }}
               />
             )}
+
             <Text
-              className={`text-xs ${
+              className={`${isAndroid ? "text-[8px]" : "text-xs"} ${
                 winner === "1" ? "text-yellow-400" : "text-Grey"
               } whitespace-nowrap`}
             >
@@ -60,9 +64,11 @@ export const Final = memo(
               {finalEndedOnPenalties && (
                 <Text className="text-xs text-Grey">({scorePenaltyHome})</Text>
               )}
+
               <Text className="text-Grey">
                 {goalsFirstTeam} - {goalsSecondTeam}
               </Text>
+
               {finalEndedOnPenalties && (
                 <Text className="text-xs text-Grey">({scorePenaltyAway})</Text>
               )}
@@ -80,7 +86,7 @@ export const Final = memo(
               />
             )}
             <Text
-              className={`text-xs ${
+              className={`${isAndroid ? "text-[8px]" : "text-xs"} ${
                 winner === "2" ? "text-yellow-400" : "text-Grey"
               } whitespace-nowrap`}
             >
@@ -90,9 +96,16 @@ export const Final = memo(
         </View>
 
         {final !== null && (
-          <Text className="text-xs text-yellow-400">
+          <Text
+            className={`${
+              isAndroid ? "text-[8px]" : "text-xs"
+            } text-yellow-400`}
+          >
             {winner === "2" ? awayTeamName : homeTeamName}
-            <Text className="text-yellow-400"> won the {name}</Text>
+            <Text className={`${isAndroid && "text-[8px]"} text-yellow-400`}>
+              {" "}
+              won the {name}
+            </Text>
           </Text>
         )}
       </View>

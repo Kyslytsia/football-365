@@ -6,6 +6,7 @@ import Animated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 
+import { Platform } from "@/hooks";
 import { Match } from "@/types/matchPage";
 
 import { getStyles } from "./styles";
@@ -19,7 +20,8 @@ interface MatchStatisticsProps {
 const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const styles = getStyles();
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
   const firstTeamStat = match?.[0]?.statistics?.[0]?.statistics;
   const secondTeamStat = match?.[0]?.statistics?.[1]?.statistics;
   const heightView = useSharedValue(180);
@@ -62,7 +64,11 @@ const MatchStatistics: React.FC<MatchStatisticsProps> = ({ match }) => {
     <Wrapper
       wrapperClass="mb-4"
       childrenClass="flex-col py-4 border-t border-Black"
-      title={<Text className="text-white">match statistics</Text>}
+      title={
+        <Text className={`${isAndroid && "text-[10px]"} text-white`}>
+          match statistics
+        </Text>
+      }
     >
       <BallPossession
         colorAway="blue"

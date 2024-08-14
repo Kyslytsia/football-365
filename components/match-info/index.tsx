@@ -2,8 +2,8 @@ import { Text } from "react-native";
 import { Image } from "expo-image";
 
 import { Match } from "@/types/matchPage";
-import { getFormattedDate, MatchTime } from "@/hooks";
 import { Calendar, Location, Whistle } from "@/assets/icon";
+import { getFormattedDate, MatchTime, Platform } from "@/hooks";
 
 import { Info } from "./info";
 import { Wrapper } from "../wrapper";
@@ -11,11 +11,16 @@ import { Wrapper } from "../wrapper";
 export const MatchInfo = ({ match }: { match?: Match[] | [] }) => {
   const fixtures = match?.[0]?.fixture;
   const league = match?.[0]?.league;
+  const isAndroid = Platform().android;
 
   return (
     <Wrapper
       wrapperClass="mb-[20px]"
-      title={<Text className="text-white">match info</Text>}
+      title={
+        <Text className={`${isAndroid && "text-[10px]"} text-white`}>
+          match info
+        </Text>
+      }
     >
       <Info
         info={getFormattedDate(fixtures?.date ?? "")}

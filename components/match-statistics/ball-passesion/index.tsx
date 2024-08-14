@@ -1,6 +1,9 @@
 import { Text, View } from "react-native";
-import { CircularProgressProps } from "./typex";
 import { Path, Svg } from "react-native-svg";
+
+import { Platform } from "@/hooks";
+
+import { CircularProgressProps } from "./typex";
 
 export const BallPossession = ({
   label,
@@ -13,7 +16,10 @@ export const BallPossession = ({
 }: CircularProgressProps) => {
   const radius = 60;
   const center = radius;
-  const text = "text-[14px] text-center font-bold text-white";
+  const isAndroid = Platform().android;
+  const text = `${
+    isAndroid ? "text-[12px]" : "text-[14px]"
+  } text-center font-bold text-white`;
 
   const calculateArc = (percentage: number, radius: number) => {
     const angle = (percentage / 100) * 360;

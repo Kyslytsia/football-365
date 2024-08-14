@@ -1,6 +1,8 @@
-import { Ball, Substitution } from "@/assets/icon";
-import { Events } from "@/types/matchPage";
 import { View, Text } from "react-native";
+
+import { Platform } from "@/hooks";
+import { Events } from "@/types/matchPage";
+import { Ball, Substitution } from "@/assets/icon";
 
 interface EventProps {
   event: Events;
@@ -8,6 +10,7 @@ interface EventProps {
 }
 
 export const Event = ({ event, homeTeam }: EventProps) => {
+  const isAndroid = Platform().android;
   const name = event?.team.name;
   const isHomeName = homeTeam === name;
   const isGoal = event?.detail === "Normal Goal";
@@ -20,15 +23,22 @@ export const Event = ({ event, homeTeam }: EventProps) => {
   const isYellowCard = event?.detail === "Yellow Card";
   const isRedCard = event?.detail === "Red Card";
 
+  const text = isAndroid ? "text-[9px]" : "text-xs";
+
   const renderPlayerInfo = () => (
-    <View className="flex flex-col items-center justify-center text-white text-xs leading-3">
+    <View className="flex flex-col items-center justify-center leading-3">
       {isSubstitution ? (
         <>
-          <Text style={{ color: "#1ee11e" }}>{substitution}</Text>
-          <Text style={{ color: "#f66731" }}>{event?.player?.name}</Text>
+          <Text className={`${text}`} style={{ color: "#1ee11e" }}>
+            {substitution}
+          </Text>
+
+          <Text className={`${text}`} style={{ color: "#f66731" }}>
+            {event?.player?.name}
+          </Text>
         </>
       ) : (
-        <Text className="text-white">{event?.player?.name}</Text>
+        <Text className={`${text} text-white`}>{event?.player?.name}</Text>
       )}
     </View>
   );
@@ -61,7 +71,7 @@ export const Event = ({ event, homeTeam }: EventProps) => {
   const renderEventTime = () => (
     <View className="relative flex items-center justify-center ">
       <Text
-        className={`flex items-center justify-center text-white bg-wrapper-bg text-xs w-[25px] text-center ${
+        className={`flex items-center justify-center text-white bg-wrapper-bg w-[25px] text-center ${text} ${
           isHomeName ? "right-[0]" : "left-[0]"
         }`}
       >
@@ -77,9 +87,9 @@ export const Event = ({ event, homeTeam }: EventProps) => {
       }`}
     >
       <View
-        className={`flex flex-row gap-x-3 items-center w-[204px] ${
-          isHomeName ? "justify-end" : "justify-start"
-        }`}
+        className={`flex flex-row gap-x-3 items-center ${
+          isAndroid ? "w-[194.5px]" : "w-[204px]"
+        } ${isHomeName ? "justify-end" : "justify-start"}`}
       >
         {isHomeName ? (
           <>

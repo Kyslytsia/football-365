@@ -25,7 +25,9 @@ export const getStyles = ({ status, isAndroid }: StylesProps) => ({
   scoreText: clsx("text-white", {
     "text-[10px]": isAndroid,
   }),
-  penScore: "flex-row items-center justify-center text-[8px] text-white",
+  penScore: clsx("flex-row items-center justify-center text-[8px] text-white", {
+    "text-[6px]": isAndroid,
+  }),
   text: clsx("h-fit text-[11px] text-white font-extraligh", {
     "p-1 text-[8px]": isAndroid,
   }),

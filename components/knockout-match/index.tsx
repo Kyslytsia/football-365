@@ -3,6 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
 
+import { Platform } from "@/hooks";
 import { DefaultClub, Star } from "@/assets/icon";
 
 import { Final } from "./final";
@@ -11,6 +12,8 @@ import { KnockoutMatchProps } from "./types";
 export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
   const [winner, setWinner] = useState<string>("");
   const navigation = useNavigation<any>();
+
+  const isAndroid = Platform().android;
 
   const game = match.length > 0 ? match[0] : null;
 
@@ -92,13 +95,21 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
       ) : (
         <View className="relative flex-col items-center justify-center gap-y-0.5 p-1 w-[70px] h-[70px] bg-gray-800 rounded-lg border border-Grey">
           {matchEndedOnPenalties && (
-            <Text className="absolute bottom-0.5 text-[10px] text-Grey">
+            <Text
+              className={`${
+                isAndroid ? "text-[8px]" : "text-[10px]"
+              } absolute bottom-0.5 text-Grey`}
+            >
               after pen
             </Text>
           )}
 
           {matchNotStarted && (
-            <Text className="absolute bottom-0.5 text-[10px] text-Grey">
+            <Text
+              className={`${
+                isAndroid ? "text-[8px]" : "text-[10px]"
+              } absolute bottom-0.5 text-Grey`}
+            >
               not started
             </Text>
           )}
@@ -140,17 +151,25 @@ export const KnockoutMatch = memo(({ match, isFinal }: KnockoutMatchProps) => {
           {!matchNotStarted && match.length > 0 && (
             <View className="flex-row items-center pb-1.5 h-4.5">
               {matchEndedOnPenalties && (
-                <Text className="text-[10px] text-Grey">
+                <Text
+                  className={`${
+                    isAndroid ? "text-[6px]" : "text-[10px]"
+                  } text-Grey`}
+                >
                   ({game?.score?.penalty?.home})
                 </Text>
               )}
 
-              <Text className="text-Grey">
+              <Text className={`${isAndroid && "text-[10px]"} text-Grey`}>
                 {goalsFirstTeam} - {goalsSecondTeam}
               </Text>
 
               {matchEndedOnPenalties && (
-                <Text className="text-[10px] text-Grey">
+                <Text
+                  className={`${
+                    isAndroid ? "text-[6px]" : "text-[10px]"
+                  } text-Grey`}
+                >
                   ({game?.score?.penalty?.away})
                 </Text>
               )}

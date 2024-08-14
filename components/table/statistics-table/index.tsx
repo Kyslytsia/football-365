@@ -73,11 +73,7 @@ export const StatisticsTable = memo(
                     <View
                       key={index}
                       className={`flex justify-center items-center h-full bg-table-bg ${
-                        header === "Form"
-                          ? "w-[140px]"
-                          : isAndroid
-                          ? "w-6"
-                          : "w-8"
+                        header === "Form" ? "w-[140px]" : "w-8"
                       }`}
                     >
                       <Text

@@ -123,13 +123,13 @@ const MainPage = () => {
         data={matches}
         ref={flashListRef}
         estimatedItemSize={500}
-        initialScrollIndex={index}
+        initialScrollIndex={19}
         removeClippedSubviews={false}
         showsVerticalScrollIndicator={false}
         overrideItemLayout={overrideItemLayout}
+        onViewableItemsChanged={handleViewableItemsChanged}
         keyExtractor={(group, index) => `${group.date}_${index}`}
         renderItem={({ item }: any) => <RenderList item={item} />}
-        onViewableItemsChanged={handleViewableItemsChanged}
       />
 
       {showScrollButton && (

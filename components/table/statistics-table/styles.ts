@@ -1,9 +1,7 @@
 import clsx from "clsx";
 
 export const getStyles = (isAndroid?: boolean) => ({
-  statWrapper: clsx("flex justify-center items-center w-8", {
-    "w-6": isAndroid,
-  }),
+  statWrapper: "flex justify-center items-center w-8",
   statText: clsx("text-white text-sx text-center", {
     "text-[8px]": isAndroid,
   }),

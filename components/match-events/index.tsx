@@ -6,6 +6,7 @@ import Animated, {
   useAnimatedStyle,
 } from "react-native-reanimated";
 
+import { Platform } from "@/hooks";
 import { Events, Match } from "@/types/matchPage";
 
 import { Event } from "./event";
@@ -21,7 +22,8 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
   const [nav, setNav] = useState<string>("top");
   const [initialHeight, setInitialHeight] = useState<number>(0);
 
-  const styles = getStyles();
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
   const matchData = match?.[0];
   const homeTeam = match?.[0]?.teams.home.name;
   const awayTeam = match?.[0]?.teams.away.name;
@@ -121,7 +123,11 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
     <Wrapper
       wrapperClass="mb-4"
       childrenClass="border-t border-Black"
-      title={<Text className="text-white">match events</Text>}
+      title={
+        <Text className={`${isAndroid && "text-[10px]"} text-white`}>
+          match events
+        </Text>
+      }
     >
       <View className="relative flex flex-col pb-[30px]">
         <View className="absolute top-0 left-[49.8%] w-[1px] h-full bg-Grey" />

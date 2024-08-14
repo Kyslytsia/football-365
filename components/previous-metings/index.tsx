@@ -2,6 +2,8 @@ import { View, Text, Pressable } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
 
+import { Platform } from "@/hooks";
+
 import { Wrapper } from "../wrapper";
 import { getStyles } from "./styles";
 import { PreviousMeetingsProps } from "./types";
@@ -15,7 +17,8 @@ export const PreviousMeetings = ({
   homeName,
   awayName,
 }: PreviousMeetingsProps) => {
-  const styles = getStyles();
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
 
   const winsAndDraws = () => {
     let team1Wins = 0;
@@ -52,6 +55,7 @@ export const PreviousMeetings = ({
   return (
     <Wrapper
       wrapperClass="mb-[20px]"
+      childrenClass="border-t border-Black"
       title={<Text className={styles.text}>previous meetings</Text>}
     >
       <View className="flex flex-row items-center justify-between p-7">
