@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 
+import { Platform } from "@/hooks";
+
 import { getStyles } from "./styles";
 
 interface NavProps {
@@ -10,7 +12,7 @@ interface NavProps {
 export const Nav = ({ setValue }: NavProps) => {
   const [active, setActive] = useState<string>("overall");
 
-  const styles = getStyles();
+  const styles = getStyles(Platform().android);
 
   const handlePress = (value: string) => {
     setValue(value);

@@ -1,10 +1,6 @@
 import { memo } from "react";
 import { Text, View } from "react-native";
-import {
-  Gesture,
-  GestureDetector,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -14,10 +10,12 @@ import { StandingProps } from "@/types/standings";
 
 import { getStyles } from "./styles";
 import { StatisticsTableProps } from "./types";
+import { Platform } from "@/hooks";
 
 export const StatisticsTable = memo(
   ({ navValue, standings }: StatisticsTableProps) => {
-    const styles = getStyles();
+    const isAndroid = Platform().android;
+    const styles = getStyles(isAndroid);
     const offset = useSharedValue(-210);
     const startOffset = useSharedValue(-210);
 
@@ -69,16 +67,26 @@ export const StatisticsTable = memo(
         <GestureDetector gesture={gesture}>
           <Animated.View style={animatedStyles} className="absolute top-0 z-10">
             <View>
-              <View className="flex-row h-8">
+              <View className="flex-row pl-[2px] h-8">
                 {["PT", "P", "F:A", "+/-", "W", "D", "L", "Form"].map(
                   (header, index) => (
                     <View
                       key={index}
                       className={`flex justify-center items-center h-full bg-table-bg ${
-                        header === "Form" ? "w-[140px]" : "w-8"
+                        header === "Form"
+                          ? "w-[140px]"
+                          : isAndroid
+                          ? "w-6"
+                          : "w-8"
                       }`}
                     >
-                      <Text className="text-xs text-white">{header}</Text>
+                      <Text
+                        className={`${
+                          isAndroid ? "text-[8px]" : "text-[12px]"
+                        } w-fit text-white text-center`}
+                      >
+                        {header}
+                      </Text>
                     </View>
                   )
                 )}

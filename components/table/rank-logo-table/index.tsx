@@ -2,13 +2,15 @@ import React, { memo } from "react";
 import { Image } from "expo-image";
 import { Text, View } from "react-native";
 
-import { modifyDescription } from "@/hooks";
+import { modifyDescription, Platform } from "@/hooks";
 
 import { RankLogoTableProps } from "./types";
 import { Crown } from "@/assets/icon";
 
 export const RankLogoTable = memo(
   ({ isChampion, standings }: RankLogoTableProps) => {
+    const isAndroid = Platform().android;
+
     const getStatusStyle = (status: string) => {
       switch (status) {
         case "Champions League":
@@ -56,7 +58,11 @@ export const RankLogoTable = memo(
             )}
 
             <View className="flex items-center justify-center w-5 h-5">
-              <Text className="text-white text-xs">{el.rank}</Text>
+              <Text
+                className={`${isAndroid ? "text-[9px]" : "text-xs"} text-white`}
+              >
+                {el.rank}
+              </Text>
             </View>
 
             <View className="flex items-center justify-center w-5 h-5">

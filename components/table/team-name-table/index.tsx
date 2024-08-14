@@ -2,7 +2,7 @@ import { memo } from "react";
 import { View, Text, Pressable } from "react-native";
 import { useGlobalSearchParams, useNavigation } from "expo-router";
 
-import { modifyDescription } from "@/hooks";
+import { modifyDescription, Platform } from "@/hooks";
 
 import { TeamNameTableProps } from "./types";
 
@@ -12,6 +12,7 @@ export const TeamNameTable = memo(
     const { name } = useGlobalSearchParams();
 
     const teamName = name;
+    const isAndroid = Platform().android;
 
     const getStatusStyle = (status: string) => {
       switch (status) {
@@ -68,13 +69,17 @@ export const TeamNameTable = memo(
             }
           >
             <View className="flex-col items-start justify-center">
-              <Text className="pl-1 text-xs text-white leading-3">
+              <Text
+                className={`${
+                  isAndroid ? "text-[8px]" : "text-xs"
+                } pl-1 text-white leading-3`}
+              >
                 {team.team.name}
               </Text>
 
               {team.description !== null && (
                 <Text
-                  className={`pl-1 text-[8px] 
+                  className={`${isAndroid ? "text-[6px]" : "text-[8px]"} pl-1 
                   ${getStatusStyle(modifyDescription(team, isChampion))}`}
                 >
                   {modifyDescription(team, isChampion)}
