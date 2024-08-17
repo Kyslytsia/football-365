@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 
+import { Platform } from "@/hooks";
 import { Ball, FootballShoe, Star } from "@/assets/icon";
 import { PlayerStatistics } from "@/types/teamPlayersStats";
 
-import { getStyles } from "./styles";
 import { Wrapper } from "../wrapper";
+import { getStyles } from "./styles";
 import { PlayerStatTableProps } from "./types";
 
 export const PlayerStatTable = ({
@@ -15,7 +16,8 @@ export const PlayerStatTable = ({
 }) => {
   const [playerStat, setPlayerStat] = useState<PlayerStatTableProps>();
 
-  const styles = getStyles();
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
 
   useEffect(() => {
     const playersData = () => {
@@ -58,7 +60,7 @@ export const PlayerStatTable = ({
     <Wrapper
       wrapperClass="mb-4"
       childrenClass="flex flex-row py-6 border-t border-Black"
-      title={<Text className="text-white">player statistics</Text>}
+      title={<Text className={styles.title}>player statistics</Text>}
     >
       <View className={styles.wrapper}>
         <Ball width={25} height={25} />

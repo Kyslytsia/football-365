@@ -1,12 +1,17 @@
 import React from "react";
 import { View, Text } from "react-native";
 
+import { Platform } from "@/hooks";
 import { Trophies } from "@/types/trophies";
 
 import { Wrapper } from "../wrapper";
+import { getStyles } from "./styles";
 import { TrophiesTableProps } from "./types";
 
 export const TrophiesTable = ({ coach, trophies }: TrophiesTableProps) => {
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
+
   const countWins = (trophies: Trophies[]) => {
     const result: Record<string, number> = {};
 
@@ -25,15 +30,15 @@ export const TrophiesTable = ({ coach, trophies }: TrophiesTableProps) => {
     <Wrapper
       childrenClass="p-1"
       title={
-        <Text className="text-white">
+        <Text className={styles.title}>
           {coach ? "coach trophies" : "player trophies"}
         </Text>
       }
     >
       {Object.entries(wins).map(([league, count]) => (
         <View key={league} className="p-1">
-          <Text className="text-Grey text-[12px]">
-            {league}: <Text className="text-white">{count}</Text>
+          <Text className={styles.greyText}>
+            {league}: <Text className={styles.whiteText}>{count}</Text>
           </Text>
         </View>
       ))}

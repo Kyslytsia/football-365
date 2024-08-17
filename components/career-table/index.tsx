@@ -2,18 +2,23 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Image } from "expo-image";
 
+import { Platform } from "@/hooks";
 import { RightArrow } from "@/assets/icon";
-import { CareerTableProps } from "./types";
 
 import { Wrapper } from "../wrapper";
+import { CareerTableProps } from "./types";
+import { getStyles } from "./styles";
 
 export const CareerTable = ({ coach, career, transfers }: CareerTableProps) => {
+  const isAndroid = Platform().android;
+  const styles = getStyles(isAndroid);
+
   return (
     <Wrapper
       wrapperClass="mb-4"
       childrenClass="border-t border-Black"
       title={
-        <Text className="text-white">
+        <Text className={styles.title}>
           {coach ? "coach career" : "player career"}
         </Text>
       }
@@ -24,7 +29,9 @@ export const CareerTable = ({ coach, career, transfers }: CareerTableProps) => {
             key={transfer.date}
             className="flex flex-row items-center justify-between p-2"
           >
-            <Text className="w-1/3 text-Grey">{transfer.date.slice(0, 4)}</Text>
+            <Text className={`${styles.text} text-Grey`}>
+              {transfer.date.slice(0, 4)}
+            </Text>
 
             <View className="flex flex-row items-center justify-between w-[80px]">
               <Image
@@ -44,7 +51,9 @@ export const CareerTable = ({ coach, career, transfers }: CareerTableProps) => {
               />
             </View>
 
-            <Text className="w-1/3 text-white text-right">{transfer.type}</Text>
+            <Text className={`${styles.text} text-white text-right`}>
+              {transfer.type}
+            </Text>
           </View>
         );
       })}
@@ -62,17 +71,17 @@ export const CareerTable = ({ coach, career, transfers }: CareerTableProps) => {
                 className="h-[20px] w-[20px]"
               />
 
-              <Text className="text-white">{el.team.name}</Text>
+              <Text className={styles.teamName}>{el.team.name}</Text>
             </View>
 
             <View className="flex flex-row items-center justify-between w-[110px]">
-              <Text className="text-Grey text-center w-1/3">
+              <Text className={`${styles.text} text-Grey text-center`}>
                 {el.start.slice(0, 4)}
               </Text>
 
-              <Text className="text-Grey text-center w-1/3">-</Text>
+              <Text className="text-Grey text-center">-</Text>
 
-              <Text className="text-Grey w-1/3">
+              <Text className={`${styles.text} text-Grey`}>
                 {el.end?.slice(0, 4) ?? "now"}
               </Text>
             </View>
