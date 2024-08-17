@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  Pressable,
+  TextInput,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { useGlobalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Animated, { withTiming, useSharedValue } from "react-native-reanimated";
@@ -14,14 +21,14 @@ export const Rounds = ({ value, setValue }: RoundsProps) => {
   const [rounds, setRounds] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [initialHeight, setInitialHeight] = useState<number>(0);
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
   const { id, name } = useGlobalSearchParams();
   const ID = Number(id);
   const year = getCurrentSeason(name as string);
-  const heightWrapper = useSharedValue(0);
   const heightScroll = useSharedValue(0);
   const isAndroid = Platform().android;
-  const styles = getStyles({ isAndroid, heightScroll, heightWrapper });
+  const styles = getStyles({ isAndroid, heightScroll });
 
   const newValue = (value?: string) => {
     return value &&
@@ -40,12 +47,11 @@ export const Rounds = ({ value, setValue }: RoundsProps) => {
   };
 
   const toggleOpen = () => {
-    setIsOpen(!isOpen);
+    setIsModalActive(!isOpen);
     heightScroll.value = withTiming(
-      isOpen ? 0 : initialHeight > 300 ? 300 : initialHeight,
+      isModalActive ? 0 : initialHeight > 300 ? 300 : initialHeight,
       { duration: 200 }
     );
-    heightWrapper.value = withTiming(isOpen ? 0 : 700, { duration: 200 });
   };
 
   useEffect(() => {
@@ -75,7 +81,7 @@ export const Rounds = ({ value, setValue }: RoundsProps) => {
   }, [rounds]);
 
   return (
-    <View className={styles.main}>
+    <View className={styles.wrapper}>
       <Pressable onPress={toggleOpen}>
         <TextInput
           readOnly
@@ -85,29 +91,34 @@ export const Rounds = ({ value, setValue }: RoundsProps) => {
         />
       </Pressable>
 
-      <Pressable onPressIn={toggleOpen}>
-        <Animated.View
-          className={styles.wrapper}
-          style={styles.animatedWrapper}
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={isModalActive}
+        onRequestClose={() => setIsModalActive(false)}
+      >
+        <TouchableWithoutFeedback
+          onPress={() => setIsModalActive(!isModalActive)}
         >
-          <Animated.ScrollView
-            className={styles.scroll}
-            style={styles.animatedScroll}
-          >
-            <View>
+          <View className="flex-1 items-center justify-center bg-[#00000080]">
+            <Animated.ScrollView
+              className={styles.scroll}
+              style={styles.animatedScroll}
+              showsVerticalScrollIndicator={false}
+            >
               {rounds.map((round) => (
                 <Text
                   key={round}
-                  onPress={() => change(round)}
                   className={styles.round}
+                  onPress={() => change(round)}
                 >
                   {newValue(round)}
                 </Text>
               ))}
-            </View>
-          </Animated.ScrollView>
-        </Animated.View>
-      </Pressable>
+            </Animated.ScrollView>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </View>
   );
 };

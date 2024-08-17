@@ -4,18 +4,12 @@ import { SharedValue, useAnimatedStyle } from "react-native-reanimated";
 interface StylesProps {
   isAndroid?: boolean;
   heightScroll: SharedValue<number>;
-  heightWrapper: SharedValue<number>;
 }
 
-export const getStyles = ({
-  isAndroid,
-  heightWrapper,
-  heightScroll,
-}: StylesProps) => ({
-  main: clsx("w-[360px] relative mb-4 mx-auto z-50", {
+export const getStyles = ({ isAndroid, heightScroll }: StylesProps) => ({
+  wrapper: clsx("relative mb-4 mx-auto w-[360px] z-50", {
     "w-[340px]": isAndroid,
   }),
-  wrapper: "absolute top-2 h-full",
   inputText: clsx(
     "p-[10px] rounded-[10px] bg-round-bg border border-Black text-white overflow-hidden",
     {
@@ -28,11 +22,7 @@ export const getStyles = ({
   scroll: clsx("w-[360px] rounded-[10px] border border-Black bg-round-bg", {
     "w-[340px]": isAndroid,
   }),
-  animatedWrapper: useAnimatedStyle(() => {
-    return {
-      height: heightWrapper.value,
-    };
-  }),
+
   animatedScroll: useAnimatedStyle(() => {
     return {
       maxHeight: heightScroll.value,
