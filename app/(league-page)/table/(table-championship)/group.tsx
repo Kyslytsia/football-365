@@ -22,6 +22,7 @@ const Groups = ({ leagueName, standingsData }: GroupsProps) => {
 
   useEffect(() => {
     setLoading(true);
+
     (async () => {
       try {
         if (!standingsData) {

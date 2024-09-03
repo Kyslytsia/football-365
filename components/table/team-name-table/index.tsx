@@ -25,9 +25,11 @@ export const TeamNameTable = memo(
         case "(League C)":
           return "text-table-status-ucl";
         case "Europa League":
+        case "UEFA Europa League":
         case "Ranking of third-placed teams":
           return "text-table-status-uel";
         case "Conference League":
+        case "Conference League Qualification":
         case "Europa Conference League":
           return "text-table-status-ecl";
         case "Relegation":
