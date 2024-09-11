@@ -21,9 +21,11 @@ export const RankLogoTable = memo(
         case "(League C)":
           return `bg-table-status-ucl`;
         case "Europa League":
+        case "UEFA Europa League":
         case "Ranking of third-placed teams":
           return `bg-table-status-uel`;
         case "Conference League":
+        case "Conference League Qualification":
         case "Europa Conference League":
           return `bg-table-status-ecl`;
         case "Relegation":
