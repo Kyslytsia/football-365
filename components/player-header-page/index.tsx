@@ -5,6 +5,7 @@ import { Image, ImageBackground } from "expo-image";
 import { Platform } from "@/hooks";
 import { PlayerBg } from "@/assets/img";
 
+import { BackBtn } from "../back-btn";
 import { PlayerHeaderProps } from "./types";
 
 export const PlayerHeader = ({ pos, name, icon }: PlayerHeaderProps) => {
@@ -20,6 +21,8 @@ export const PlayerHeader = ({ pos, name, icon }: PlayerHeaderProps) => {
         isAndroid ? "pt-8" : "pt-4"
       } flex-col items-center justify-center h-[120px]`}
     >
+      <BackBtn />
+
       <Image
         alt="alt"
         source={icon}

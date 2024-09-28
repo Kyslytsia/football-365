@@ -14,6 +14,7 @@ import {
   bundesliga,
   premierleague,
 } from "@/assets/img";
+import { BackBtn } from "@/components";
 
 const Header = ({ icon, leagueName }: HeaderProps) => {
   const isAndroid = Platform().android;
@@ -47,6 +48,8 @@ const Header = ({ icon, leagueName }: HeaderProps) => {
         source={getBackgroundImage()}
         className="flex justify-center items-center w-full h-full"
       >
+        <BackBtn />
+
         <Image
           source={icon}
           alt={leagueName}

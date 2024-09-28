@@ -7,6 +7,7 @@ import { matchBg } from "@/assets/img";
 import { Match } from "@/types/matchPage";
 import { getFormattedDate, MatchTime, Platform } from "@/hooks";
 import { getStyles } from "./styles";
+import { BackBtn } from "@/components";
 
 export const Header = ({ match }: { match?: Match[] | [] }) => {
   const matchData = match?.[0];
@@ -36,6 +37,8 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
       source={matchBg}
       className="relative flex-row justify-around items-center py-2 h-[120px]"
     >
+      <BackBtn />
+
       <View className="flex flex-col justify-around items-center mt-4 w-[120px]">
         <TouchableOpacity
           onPress={() =>

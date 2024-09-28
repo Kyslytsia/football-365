@@ -1,4 +1,5 @@
 export { AllLeaguesMatches } from "./all-league-matches";
+export { BackBtn } from "./back-btn";
 export { CareerTable } from "./career-table";
 export { KnockoutMatch } from "./knockout-match";
 export { KnockoutMatches } from "./knockout-matches";

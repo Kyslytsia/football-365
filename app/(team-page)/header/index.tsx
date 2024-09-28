@@ -5,6 +5,7 @@ import { Image, ImageBackground } from "expo-image";
 
 import { Platform } from "@/hooks";
 import { TeamBg } from "@/assets/img";
+import { BackBtn } from "@/components";
 
 const Header = () => {
   const { name, icon } = useLocalSearchParams();
@@ -18,6 +19,8 @@ const Header = () => {
         isAndroid ? "pt-8" : "pt-3"
       } flex-col items-center justify-center h-[120px] bg-gray-800`}
     >
+      <BackBtn />
+
       <Image
         alt="alt"
         source={icon}
