@@ -10,7 +10,6 @@ export const TeamNameTable = memo(
   ({ standings, isChampion, championship }: TeamNameTableProps) => {
     const navigation = useNavigation<any>();
     const { name } = useGlobalSearchParams();
-    console.log(name);
 
     const teamName = name;
     const isAndroid = Platform().android;

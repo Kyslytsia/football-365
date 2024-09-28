@@ -43,7 +43,7 @@ const CoachPage = () => {
           setNationalityLogo(response?.nationalityLogo);
         }
       } catch (error: any) {
-        console.log(error.message);
+        console.error(error.message);
       } finally {
         setLoading(false);
       }
