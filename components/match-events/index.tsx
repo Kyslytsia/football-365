@@ -48,6 +48,13 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
     }
   }
 
+  const toggleNav = (srt: string) => {
+    setNav(srt);
+    heightView.value = withTiming(srt === "top" ? initialHeight : 1500, {
+      duration: 300,
+    });
+  };
+
   useEffect(() => {
     const firstHalf: Events[] = [];
     const secondHalf: Events[] = [];
@@ -94,13 +101,6 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
     setPenalty(penalty);
   }, [matchData]);
 
-  const toggleNav = (srt: string) => {
-    setNav(srt);
-    heightView.value = withTiming(srt === "top" ? initialHeight : 1500, {
-      duration: 300,
-    });
-  };
-
   useEffect(() => {
     let height = 35;
 
@@ -117,7 +117,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
 
     heightView.value = height;
     setInitialHeight(height);
-  }, [match, initialHeight]);
+  }, [initialHeight]);
 
   return (
     <Wrapper
@@ -156,7 +156,7 @@ export const MatchEvents = ({ match }: { match?: Match[] | [] }) => {
           style={useAnimatedStyle(() => {
             return {
               maxHeight: heightView.value,
-              minHeight: nav === "top" ? heightView.value : undefined,
+              minHeight: initialHeight,
             };
           })}
           className="flex-col"

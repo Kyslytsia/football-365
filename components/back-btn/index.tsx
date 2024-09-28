@@ -9,8 +9,8 @@ export const BackBtn = () => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      className="absolute left-2 top-5 flex justify-center items-center w-[30px] h-[30px] rounded-full"
+      onPressIn={() => navigation.goBack()}
+      className="absolute left-1 top-5 flex justify-center items-center w-[40px] h-[40px] rounded-full z-50"
     >
       <BackArrow />
     </TouchableOpacity>
