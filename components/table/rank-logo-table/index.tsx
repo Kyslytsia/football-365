@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { Image } from "expo-image";
 import { Text, View } from "react-native";
+import { useGlobalSearchParams } from "expo-router";
 
 import { modifyDescription, Platform } from "@/hooks";
 
@@ -9,17 +10,21 @@ import { Crown } from "@/assets/icon";
 
 export const RankLogoTable = memo(
   ({ isChampion, standings }: RankLogoTableProps) => {
+    const { name } = useGlobalSearchParams();
     const isAndroid = Platform().android;
 
     const getStatusStyle = (status: string) => {
       switch (status) {
+        case "Round of 16":
         case "Champions League":
+        case "Champions League Qualification":
         case "Euro":
         case "(League A - Play Offs)":
         case "(League A)":
         case "(League B)":
         case "(League C)":
           return `bg-table-status-ucl`;
+        case "Play Off":
         case "Europa League":
         case "UEFA Europa League":
         case "Ranking of third-placed teams":
@@ -50,7 +55,7 @@ export const RankLogoTable = memo(
           >
             <View
               className={`absolute top-0 left-0 h-full w-0.5
-              ${getStatusStyle(modifyDescription(el))}`}
+              ${getStatusStyle(modifyDescription(el, false, name as string))}`}
             />
 
             {isChampion && el.rank === 1 && (

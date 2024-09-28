@@ -1,6 +1,10 @@
 import { StandingProps } from "@/types/standings";
 
-export const modifyDescription = (el: StandingProps, isChampion?: boolean) => {
+export const modifyDescription = (
+  el: StandingProps,
+  isChampion?: boolean,
+  league?: string
+) => {
   if (el.description) {
     let modifiedDescription = el.description
       .replace("Promotion -", "")
@@ -17,6 +21,16 @@ export const modifyDescription = (el: StandingProps, isChampion?: boolean) => {
       return "Relegation";
     } else if (el.rank === 1 && isChampion) {
       return "Won title";
+    } else if (
+      (league === "UEFA Champions League" || league === "UEFA Europa League") &&
+      el.rank < 9
+    ) {
+      return "Round of 16";
+    } else if (
+      (league === "UEFA Champions League" || league === "UEFA Europa League") &&
+      el.rank > 8
+    ) {
+      return "Play Off";
     } else {
       return modifiedDescription;
     }

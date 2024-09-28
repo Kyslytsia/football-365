@@ -10,13 +10,16 @@ export const TeamNameTable = memo(
   ({ standings, isChampion, championship }: TeamNameTableProps) => {
     const navigation = useNavigation<any>();
     const { name } = useGlobalSearchParams();
+    console.log(name);
 
     const teamName = name;
     const isAndroid = Platform().android;
 
     const getStatusStyle = (status: string) => {
       switch (status) {
+        case "Round of 16":
         case "Champions League":
+        case "Champions League Qualification":
         case "Won title":
         case "Euro":
         case "(League A - Play Offs)":
@@ -24,6 +27,7 @@ export const TeamNameTable = memo(
         case "(League B)":
         case "(League C)":
           return "text-table-status-ucl";
+        case "Play Off":
         case "Europa League":
         case "UEFA Europa League":
         case "Ranking of third-placed teams":
@@ -82,9 +86,11 @@ export const TeamNameTable = memo(
               {team.description !== null && (
                 <Text
                   className={`${isAndroid ? "text-[6px]" : "text-[8px]"} pl-1 
-                  ${getStatusStyle(modifyDescription(team, isChampion))}`}
+                  ${getStatusStyle(
+                    modifyDescription(team, isChampion, name as string)
+                  )}`}
                 >
-                  {modifyDescription(team, isChampion)}
+                  {modifyDescription(team, isChampion, name as string)}
                 </Text>
               )}
             </View>
