@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { Nav } from "@/components";
 import { getMatchId } from "@/api/match";
 import { Match } from "@/types/matchPage";
 
 import { Header } from "./header";
-import { Nav } from "@/components";
 
 const MatchPage = () => {
   const [match, setMatch] = useState<Match[]>([]);
