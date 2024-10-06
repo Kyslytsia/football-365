@@ -69,7 +69,7 @@ const Groups = ({ leagueName, standingsData }: GroupsProps) => {
           showsVerticalScrollIndicator={false}
           keyExtractor={(_, index) => index.toString() + "championship"}
           renderItem={({ item }) => (
-            <View className="flex-col my-2">
+            <View className="flex-col mt-[8px] mb-[14px]">
               <Table championship standings={item} />
             </View>
           )}

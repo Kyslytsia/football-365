@@ -92,7 +92,7 @@ const NationalTable = ({ leagueId, leagueName }: NationalTableProps) => {
   if (loading) return <Loading />;
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} className="mb-4">
       <Nav setValue={setNavValue} />
 
       {leagueName && (
