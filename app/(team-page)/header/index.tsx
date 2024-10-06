@@ -16,8 +16,8 @@ const Header = () => {
       alt="team"
       source={TeamBg}
       className={`${
-        isAndroid ? "pt-8" : "pt-3"
-      } flex-col items-center justify-center h-[120px] bg-gray-800`}
+        isAndroid ? "pt-8 h-[130px]" : "pt-6"
+      } flex-col items-center justify-center h-[140px] bg-gray-800`}
     >
       <BackBtn />
 

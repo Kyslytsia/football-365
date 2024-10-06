@@ -18,8 +18,8 @@ export const PlayerHeader = ({ pos, name, icon }: PlayerHeaderProps) => {
       alt="player"
       source={PlayerBg}
       className={`${
-        isAndroid ? "pt-8" : "pt-4"
-      } flex-col items-center justify-center h-[120px]`}
+        isAndroid ? "pt-8 h-[130px]" : "pt-8"
+      } flex-col items-center justify-center h-[140px]`}
     >
       <BackBtn />
 

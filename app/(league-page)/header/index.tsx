@@ -43,7 +43,7 @@ const Header = ({ icon, leagueName }: HeaderProps) => {
   };
 
   return (
-    <View className={`${isAndroid ? "h-[120px] pt-2" : "h-[100px]"}`}>
+    <View className={`${isAndroid ? "h-[130px] pt-2" : "h-[140px]"}`}>
       <ImageBackground
         source={getBackgroundImage()}
         className="flex justify-center items-center w-full h-full"
@@ -54,7 +54,7 @@ const Header = ({ icon, leagueName }: HeaderProps) => {
           source={icon}
           alt={leagueName}
           contentFit="contain"
-          className="mt-2 w-[60px] h-[60px]"
+          className="mt-8 w-[60px] h-[60px]"
         />
       </ImageBackground>
     </View>

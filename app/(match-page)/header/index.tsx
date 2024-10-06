@@ -35,7 +35,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
   return (
     <ImageBackground
       source={matchBg}
-      className="relative flex-row justify-around items-center py-2 h-[120px]"
+      className="relative flex-row justify-around items-start pt-6 h-[140px]"
     >
       <BackBtn />
 
@@ -64,7 +64,7 @@ export const Header = ({ match }: { match?: Match[] | [] }) => {
         {matchData?.league.name} {matchData?.league.round}
       </Text>
 
-      <View className="relative flex-row justify-center items-center w-fit mx-auto">
+      <View className="relative flex-row justify-center items-center my-6 w-fit mx-auto">
         {matchNotStarted ? (
           <View
             className={`${
