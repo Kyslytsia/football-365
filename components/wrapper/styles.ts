@@ -15,10 +15,7 @@ export const getStyles = ({
     }
   ),
   title: clsx(
-    "p-[10px] rounded-[12px_12px_0_0] bg-wrapper-bgTitle text-3 text-white",
-    {
-      "p-[8px]": isAndroid,
-    }
+    "p-[8px_10px] rounded-[12px_12px_0_0] bg-wrapper-bgTitle text-3 text-white"
   ),
   children: clsx({
     [`${childrenClass}`]: childrenClass,

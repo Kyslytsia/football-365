@@ -109,7 +109,7 @@ const MainPage = () => {
       el.matches.map((el) => {
         matchesPerLeague = matchesPerLeague + el.matches.length;
       });
-      itemHeightsRef.current[index] = leagues * 45 + matchesPerLeague * 50 + 97;
+      itemHeightsRef.current[index] = 97 + leagues * 51 + matchesPerLeague * 50;
     });
 
     matchDayIndex(matches, setIndex);

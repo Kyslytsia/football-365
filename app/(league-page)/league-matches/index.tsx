@@ -107,7 +107,7 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
 
       el.matches.map((el) => (matchesDate = matchesDate + el.matches.length));
 
-      itemHeightsRef.current[index] = 20 + matchesDate * 50 + 27;
+      itemHeightsRef.current[index] = 20 + matchesDate * 50 + 33;
     });
   }, [isMatchesData]);
 

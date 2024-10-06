@@ -4,9 +4,9 @@ import { StylesProps } from "./types";
 
 export const getStyles = ({ status, isAndroid }: StylesProps) => ({
   wrapper: clsx(
-    "relative flex-row justify-center items-center h-[50px] p-[12px] w-[360px] border-t border-Black",
+    "relative flex-row justify-center items-center h-[50px] py-[12px] w-[360px] border-t border-Black",
     {
-      "p-[10px] h-[45px]": isAndroid,
+      "py-[10px] w-[340px] h-[45px]": isAndroid,
     }
   ),
   status: clsx("absolute top-[4px] flex items-center justify-center", {
@@ -20,7 +20,7 @@ export const getStyles = ({ status, isAndroid }: StylesProps) => ({
   logoWrapper: "w-6 h-[20px]",
   logo: "h-[20px] w-[20px]",
   scoreWrapper:
-    "flex-row items-center justify-center w-[15%] font-500 text-white",
+    "flex-row items-center justify-center w-[12%] font-500 text-white",
   score: "flex-row items-center",
   scoreText: clsx("text-white", {
     "text-[10px]": isAndroid,
