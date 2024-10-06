@@ -1,4 +1,4 @@
-You need Expo Go to view the app
+You need Expo Go to view the app.
 You scan this code through the app or your phone
 
 ![image](https://github.com/user-attachments/assets/53f36423-3a67-48e7-99d0-987106633887)
