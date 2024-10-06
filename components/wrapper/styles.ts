@@ -15,9 +15,9 @@ export const getStyles = ({
     }
   ),
   title: clsx(
-    "p-[5px_10px] rounded-[12px_12px_0_0] bg-wrapper-bgTitle text-3 text-white",
+    "p-[10px] rounded-[12px_12px_0_0] bg-wrapper-bgTitle text-3 text-white",
     {
-      "p-[3px_8px]": isAndroid,
+      "p-[8px]": isAndroid,
     }
   ),
   children: clsx({
