@@ -54,7 +54,7 @@ export const StatisticsTable = memo(
       .minDistance(20)
       .onUpdate((e) => {
         offset.value = Math.min(
-          Math.max(e.translationX + startOffset.value, -415),
+          Math.max(e.translationX + startOffset.value, -400),
           -210
         );
       })
@@ -74,7 +74,7 @@ export const StatisticsTable = memo(
                       key={index}
                       className={`flex justify-center items-center h-full bg-table-bg ${
                         header === "Form" ? "w-[140px]" : "w-8"
-                      }`}
+                      } ${index === 2 ? "w-[40px]" : ""}`}
                     >
                       <Text
                         className={`${
@@ -103,7 +103,7 @@ export const StatisticsTable = memo(
                     </Text>
                   </View>
 
-                  <View className={styles.statWrapper}>
+                  <View className={`${styles.statWrapper} w-[40px]`}>
                     <Text className={styles.statText}>
                       {change(team)?.goals.for ?? 0}:
                       {change(team)?.goals.against ?? 0}

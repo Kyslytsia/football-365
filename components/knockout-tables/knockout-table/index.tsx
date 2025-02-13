@@ -2,8 +2,8 @@ import React, { memo } from "react";
 import { ScrollView, View } from "react-native";
 
 import { KnockoutTableProps } from "./types";
-import { KnockoutMatch } from "../knockout-match";
-import { KnockoutMatches } from "../knockout-matches";
+import { KnockoutMatch } from "../../knockout-match";
+import { KnockoutMatches } from "../../knockout-matches";
 import {
   roundOf16Lines,
   quarterFinalsLines,

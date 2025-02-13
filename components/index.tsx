@@ -7,7 +7,7 @@ export { HeaderCoachPage } from "./header-coach-page";
 export { HeaderPlayerPage } from "./header-player-page";
 export { KnockoutMatch } from "./knockout-match";
 export { KnockoutMatches } from "./knockout-matches";
-export { KnockoutTable } from "./knockout-table";
+export { KnockoutTable } from "./knockout-tables/knockout-table";
 export { LineupBench } from "./lineups-bench";
 export { LineupTactics } from "./lineups-tactics";
 export { Loading } from "./loading";

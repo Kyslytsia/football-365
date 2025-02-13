@@ -1,4 +1,4 @@
-import { KnockoutTable } from "../../knockout-table";
+import { KnockoutTable } from "../knockout-table";
 
 import { KnockoutProps } from "../types";
 

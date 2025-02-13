@@ -1,4 +1,4 @@
-import { KnockoutTable } from "../../knockout-table";
+import { KnockoutTable } from "../knockout-table";
 
 import { getMatches } from "../helpers";
 import { KnockoutProps } from "../types";
