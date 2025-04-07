@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import { Platform } from "@/helpers";
 import { field } from "@/assets/img";
@@ -56,7 +56,7 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
   };
 
   return (
-    <View className="relative">
+    <View className="relative flex items-center justify-center">
       <View className="items-center overflow-hidden">
         <Image
           source={field}
@@ -69,7 +69,7 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
         />
       </View>
 
-      <View className="absolute top-0 left-0 right-0 flex flex-col justify-between py-2.5 mx-auto h-[300px] z-2">
+      <View className="absolute top-5 flex flex-col justify-between h-[250px] w-[300px] z-50">
         {startPlayers?.map((players: PlayerData[], index: number) => (
           <View
             key={`startPlayers-${index}`}
@@ -100,6 +100,8 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
                     event.player.id === player.player.id &&
                     event.type === "Goal"
                 );
+
+                console.log(player.player.photo);
 
                 return (
                   <TouchableOpacity
@@ -137,8 +139,10 @@ export const LineupTactics = ({ team, match }: LineupTacticsProps) => {
                     </View>
 
                     <Image
+                      contentFit="contain"
+                      contentPosition="center"
                       source={player.player.photo}
-                      className="flex justify-center items-center w-10 h-10 rounded-full overflow-hidden"
+                      style={{ width: 30, height: 30, borderRadius: 50 }}
                     />
 
                     {playerEvents && playerYellowCard && !playerRedCard && (

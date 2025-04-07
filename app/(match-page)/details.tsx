@@ -77,7 +77,7 @@ const Details = () => {
           </>
         )}
 
-        {/* <MatchInfo match={matchData} /> */}
+        <MatchInfo match={matchData} />
 
         <PreviousMeetings
           matches={headToHead}

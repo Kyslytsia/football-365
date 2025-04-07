@@ -16,6 +16,7 @@ export const LineupsPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [match, setMatch] = useState<Match[]>([]);
   const [team, setTeam] = useState<number>(0);
+
   const homeTeam = match?.[0]?.teams.home.name;
   const awayTeam = match?.[0]?.teams.away.name;
   const tactics = match?.[0]?.lineups[team]?.formation ?? "";
@@ -58,7 +59,7 @@ export const LineupsPage = () => {
       showsVerticalScrollIndicator={false}
       className="flex flex-col gap-y-4 py-2"
     >
-      <View className="flex flex-row items-center justify-center px-1 mx-auto w-[360px]">
+      <View className="flex flex-row items-center justify-center px-1 mx-auto mb-2 w-[360px]">
         <TouchableOpacity
           onPress={() => setTeam(0)}
           className={`${styles.btnWrapper} ${team === 0 && styles.btnActive}`}
