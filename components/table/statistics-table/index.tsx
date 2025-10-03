@@ -54,8 +54,8 @@ export const StatisticsTable = memo(
       .minDistance(20)
       .onUpdate((e) => {
         offset.value = Math.min(
-          Math.max(e.translationX + startOffset.value, -380),
-          -205
+          Math.max(e.translationX + startOffset.value, -385),
+          -215
         );
       })
       .onEnd(() => {

@@ -9,7 +9,7 @@
     "newArchEnabled": true,
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "transparent"
+      "backgroundColor": "#ffffff"
     },
     "packagerOpts": {
       "sourceExts": ["js", "jsx", "svg"],
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "transparent"
+        "backgroundColor": "#ffffff"
       }
     },
     "web": {
