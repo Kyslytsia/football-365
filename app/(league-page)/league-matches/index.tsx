@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { FlashList } from "@shopify/flash-list";
+import { FlashList, FlashListRef } from "@shopify/flash-list";
 import { useGlobalSearchParams } from "expo-router";
 import { GroupedMatches } from "@/types/groupedMatches";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -29,7 +29,7 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
 
   const { id, name } = useGlobalSearchParams();
   const ID = Number(id);
-  const flashListRef = useRef<FlashList<GroupedMatches>>(null);
+  const flashListRef = useRef<FlashListRef<GroupedMatches>>(null);
   const itemHeightsRef = useRef<{ [key: number]: number }>({});
   const year = getCurrentSeason(name as string);
   const isMatches = roundMatches.length !== 0 ? roundMatches : matches;
@@ -123,7 +123,6 @@ const LeagueMatches = ({ matchesData }: { matchesData?: GroupedMatches[] }) => {
       <FlashList
         ref={flashListRef}
         data={isMatchesData}
-        estimatedItemSize={500}
         removeClippedSubviews={false}
         showsVerticalScrollIndicator={false}
         overrideItemLayout={overrideItemLayout}

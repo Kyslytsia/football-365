@@ -3,11 +3,18 @@ import { Stack } from "expo-router";
 
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 
+import { mainTheme } from "@/constants/Colors";
+
 import "../global.css";
 
 export default function RootLayout() {
   return (
-    <ThemeProvider value={DarkTheme}>
+    <ThemeProvider
+      value={{
+        ...DarkTheme,
+        colors: { ...DarkTheme.colors, background: mainTheme },
+      }}
+    >
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
         <Stack.Screen name="(league-page)" />

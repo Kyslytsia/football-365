@@ -68,7 +68,6 @@ const Groups = ({ leagueName, standingsData }: GroupsProps) => {
       ) : (
         <FlashList
           data={isStandingsData}
-          estimatedItemSize={300}
           showsVerticalScrollIndicator={false}
           keyExtractor={(_, index) => index.toString() + "championship"}
           renderItem={({ item }) => (

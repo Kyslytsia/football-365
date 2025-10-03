@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 export const getStyles = (isAndroid?: boolean) => ({
-  league: clsx("absolute top-9 w-full text-[10px] text-white text-center", {
+  league: clsx("absolute top-16 w-full text-[10px] text-white text-center", {
     " top-10 text-[8px]": isAndroid,
   }),
   status: clsx(

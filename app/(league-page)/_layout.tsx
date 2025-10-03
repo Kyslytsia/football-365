@@ -12,7 +12,7 @@ export default function Layout() {
 
       <Nav
         secondRoute="/table"
-        classNameWrapper="p-2"
+        classNameWrapper="p-4"
         secondRouteText="table"
         firstRouteText="matches"
         firstRoute="/league-matches"

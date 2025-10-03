@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { FlashList } from "@shopify/flash-list";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { GroupedMatches } from "@/types/groupedMatches";
@@ -20,6 +19,7 @@ import {
   PremierLeagueAllMatches,
   ChampionsLeagueAllMatches,
 } from "@/api/allMatchesLeague";
+import { FlashList, FlashListRef } from "@shopify/flash-list";
 
 const MainPage = () => {
   const [index, setIndex] = useState<number>(0);
@@ -27,11 +27,16 @@ const MainPage = () => {
   const [matches, setMatches] = useState<GroupedMatches[]>([]);
   const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
 
-  const flashListRef = useRef<FlashList<GroupedMatches>>(null);
+  const flashListRef = useRef<FlashListRef<GroupedMatches>>(null);
   const itemHeightsRef = useRef<{ [key: number]: number }>({});
 
   const loadMatches = useCallback(async () => {
     try {
+      // await AsyncStorage.clear();
+
+      // const allKeys = await AsyncStorage.getAllKeys();
+      // console.log(allKeys);
+
       const storageAllMatches = await AsyncStorage.getItem("allMatches");
       const allMatches: any[] = [];
 
@@ -121,7 +126,6 @@ const MainPage = () => {
         <FlashList
           data={matches}
           ref={flashListRef}
-          estimatedItemSize={500}
           initialScrollIndex={index}
           removeClippedSubviews={false}
           showsVerticalScrollIndicator={false}
@@ -134,7 +138,7 @@ const MainPage = () => {
 
       {showScrollButton && (
         <ScrollToDateBtn
-          wrapperClass="top-10"
+          wrapperClass="top-16"
           onPress={scrollToCurrentMatch}
           date={getFormattedDate(matches[index].date)}
         />

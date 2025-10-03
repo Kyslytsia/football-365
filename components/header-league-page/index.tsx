@@ -47,13 +47,13 @@ export const HeaderLeaguePage = ({ icon, leagueName }: HeaderProps) => {
     <View className={`${isAndroid ? "h-[130px] pt-2" : "h-[140px]"}`}>
       <ImageBackground
         source={getBackgroundImage()}
-        className="flex justify-center items-center w-full h-full"
+        className="flex justify-center items-center pt-8 w-full h-full"
       >
-        <BackBtn />
+        <BackBtn className="mt-8" />
 
         <Image
           source={icon}
-          className="mt-8"
+          className="mt-12"
           alt={leagueName}
           contentFit="contain"
           style={{ width: 60, height: 60 }}
