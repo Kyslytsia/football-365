@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { Image, ImageBackground } from "expo-image";
 
 import { Platform } from "@/helpers";
@@ -14,24 +14,24 @@ export const PlayerHeader = ({ pos, name, icon }: PlayerHeaderProps) => {
   const photo = isAndroid ? "w-10 h-10" : "w-12 h-12";
 
   return (
-    <ImageBackground
-      alt="player"
-      source={PlayerBg}
-      className={`${
-        isAndroid ? "pt-8 h-[130px]" : "pt-8"
-      } flex-col items-center justify-center h-[140px]`}
-    >
-      <BackBtn />
+    <ImageBackground alt="player" source={PlayerBg}>
+      <View
+        className={`${
+          isAndroid ? "pt-8 h-[130px]" : "pt-12"
+        } flex-col items-center justify-center h-[140px]`}
+      >
+        <BackBtn className="mt-8" />
 
-      <Image
-        alt="alt"
-        source={icon}
-        contentFit="contain"
-        className={`${photo} rounded-full`}
-      />
+        <Image
+          alt="alt"
+          source={icon}
+          contentFit="contain"
+          style={{ width: 40, height: 40, borderRadius: 50 }}
+        />
 
-      <Text className={`${text} text-white`}>{name}</Text>
-      <Text className={`${text} text-white`}>{pos}</Text>
+        <Text className={`${text} text-white`}>{name}</Text>
+        <Text className={`${text} text-white`}>{pos}</Text>
+      </View>
     </ImageBackground>
   );
 };

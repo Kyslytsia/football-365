@@ -10,9 +10,6 @@ export const getStyles = (isAndroid?: boolean) => ({
   nation: clsx("text-Grey text-[10px]", {
     "text-[8px]": isAndroid,
   }),
-  photo: clsx("w-8 h-8 rounded-full", {
-    "w-8 h-8": isAndroid,
-  }),
   playerGoal: clsx("text-white text-[8px] text-center", {
     "text-[4px]": isAndroid,
   }),

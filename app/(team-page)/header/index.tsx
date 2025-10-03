@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Image, ImageBackground } from "expo-image";
 
@@ -12,23 +12,23 @@ const Header = () => {
   const isAndroid = Platform().android;
 
   return (
-    <ImageBackground
-      alt="team"
-      source={TeamBg}
-      className={`${
-        isAndroid ? "pt-8 h-[130px]" : "pt-6"
-      } flex-col items-center justify-center h-[140px] bg-gray-800`}
-    >
-      <BackBtn />
+    <ImageBackground alt="team" source={TeamBg}>
+      <View
+        className={`${
+          isAndroid ? "pt-8 h-[130px]" : "pt-8"
+        } flex-col items-center justify-center h-[140px]`}
+      >
+        <BackBtn className="mt-8" />
 
-      <Image
-        alt="alt"
-        source={icon}
-        contentFit="contain"
-        className="w-12 h-12"
-      />
+        <Image
+          alt="alt"
+          source={icon}
+          contentFit="contain"
+          style={{ width: 40, height: 40 }}
+        />
 
-      <Text className="text-white">{name}</Text>
+        <Text className="text-white">{name}</Text>
+      </View>
     </ImageBackground>
   );
 };

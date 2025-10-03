@@ -58,7 +58,11 @@ export const PlayerLineup = ({
       onPress={() => handleNavigate(id, position, name, playerPhoto)}
       className="flex flex-row items-center gap-x-2 p-1 border-t border-table-border"
     >
-      <Image alt={name} source={playerPhoto} className={styles.photo} />
+      <Image
+        alt={name}
+        source={playerPhoto}
+        style={{ width: 40, height: 40, borderRadius: 50 }}
+      />
 
       <View className="flex-1 flex-row justify-between items-center text-sm">
         <View className="flex flex-col leading-4">

@@ -15,6 +15,8 @@ export const LineupBench = ({ team, match }: LineupBenchProps) => {
   const isAndroid = Platform().android;
   const styles = getStyles(isAndroid);
 
+  console.log("match", match);
+
   const getRatingColor = (rating: number) => {
     if (rating > 8.0) return "bg-blue-600";
     if (rating > 7.0) return "bg-green-500";

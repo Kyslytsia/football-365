@@ -45,7 +45,12 @@ export const PlayerSquad = memo(
         className="flex-row items-center justify-between px-2 h-10 border-t border-Black"
       >
         <View className="flex-row gap-x-3">
-          <Image source={photo} alt={name} className="h-8 w-8 rounded-full" />
+          <Image
+            alt={name}
+            source={photo}
+            contentFit="contain"
+            style={{ width: 30, height: 30, borderRadius: 50 }}
+          />
 
           <View>
             <Text className={styles.name}>{name}</Text>

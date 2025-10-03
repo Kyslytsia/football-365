@@ -128,8 +128,9 @@ export const PlayerStat = memo(({ type, playersStats }: PlayerStatProps) => {
               <View className="flex-row gap-x-2">
                 <Image
                   alt={player.name}
+                  contentFit="contain"
                   source={player.photo}
-                  className={styles.photo}
+                  style={{ width: 30, height: 30, borderRadius: 50 }}
                 />
 
                 <View>
